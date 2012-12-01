@@ -7,6 +7,7 @@
 //
 
 #import "Scene_Pratice_2.h"
+#import "Scene_Pratice_3.h"
 #import "AudioManager.h"
 
 
@@ -45,7 +46,7 @@
         [self addChild:barTimer];
         
         CCMenuItemFont *button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
-            //  [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+              [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_3 scene] withColor:ccWHITE]];
         }];
         [button_next setFontName:fontName];
         [button_next setFontSize:48];
