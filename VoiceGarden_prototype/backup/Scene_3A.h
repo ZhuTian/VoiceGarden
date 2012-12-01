@@ -10,7 +10,7 @@
 
 @interface Scene_3A : CCLayer
 {
-@private
+    @private
     CCMenuItemFont *road;
     CCMenuItemFont *wind;
     CCMenuItemImage *key;
@@ -19,14 +19,6 @@
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
     CCLabelTTF *label_5;
-    CCLabelTTF *label_6;
-    CCLabelTTF *label_7;
-    
-    //New for volumn
-    float percentage;
-    bool isLoud;
-    bool isBlowOver;
-    int whichWind;
     
 @public
     int sceneStatus;

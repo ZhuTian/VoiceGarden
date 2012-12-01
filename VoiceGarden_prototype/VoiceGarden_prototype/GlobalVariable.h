@@ -13,6 +13,7 @@
 {
     @public
     bool haveKey;
+    bool keyInThePocket;
     bool isSlience;
     bool isDesolate;
 }
@@ -21,5 +22,6 @@
 @property bool haveKey;
 @property bool isSlience;
 @property bool isDesolate;
+@property bool keyInThePocket;
 
 @end

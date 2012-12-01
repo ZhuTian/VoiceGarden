@@ -18,7 +18,16 @@
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
-
+    
+    CCSprite* footPrintLeft;
+    CCSprite* footPrintRight;
+    CCSprite* rock_1;
+    CCSprite* rock_2;
+    
+    int status;
+    int timer;
+    bool isLeft;
+    
 @public
     int sceneStatus;
 };

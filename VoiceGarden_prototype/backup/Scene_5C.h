@@ -8,10 +8,9 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 
-
 @interface Scene_5C : CCLayer
 {
-@private
+    @private
     CCMenuItemFont *spring;
     CCMenuItemFont *key_button;
     CCLabelTTF *label_1;
@@ -20,16 +19,8 @@
     CCLabelTTF *label_4;
     CCMenuItemImage *key;
     
-    int dominantnote;
-    float flowerTimer[4];
-    bool falling[4];
-    float floweRotation[4];
-    
-    
-@public
+    @public
     int sceneStatus;
-    
-    
 };
 
 +(CCScene *) sceneWithVar: (int)_sceneType;

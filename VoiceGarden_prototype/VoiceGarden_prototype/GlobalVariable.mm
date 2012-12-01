@@ -12,6 +12,9 @@
 @synthesize haveKey;
 @synthesize isDesolate;
 @synthesize isSlience;
+@synthesize keyInThePocket;
+
+
 + (GlobalVariable *)sharedInstance
 {
     // the instance of this class is stored here
@@ -23,6 +26,7 @@
         myInstance.haveKey = false;
         myInstance.isDesolate = true;
         myInstance.isSlience = true;
+        myInstance.keyInThePocket = false;
         // initialize variables here
     }
     // return the instance of this class

@@ -9,7 +9,9 @@
 #import "Scene_3A.h"
 #import "Scene_4A.h"
 #import "Scene_4B.h"
+#import "AudioManager.h"
 #import "GlobalVariable.h"
+#define sceneFontSize 30
 
 @implementation Scene_3A
 @synthesize sceneStatus;
@@ -43,40 +45,44 @@ extern bool haveKey;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"desolate_wind.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
         [self addChild: background];
         
-        
-        label_1 = [CCLabelTTF labelWithString:@"I look to my left. There is a       " fontName:fontName fontSize:48];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
+        label_1 = [CCLabelTTF labelWithString:@"I look to my left." fontName:fontName fontSize:sceneFontSize];
+		label_1.position =  ccp( size.width /2 + 100, size.height/2+200);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:48];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
+        label_6 = [CCLabelTTF labelWithString:@"There is a         sightly concealed by a tangle of shrubs." fontName:fontName fontSize:sceneFontSize];
+		label_6.position =  ccp( size.width /2 + 100, size.height/2+150);
+        label_6.color = ccc3(0, 0, 0);
+		[self addChild: label_6];
+        
+        label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:sceneFontSize];
+		label_2.position =  ccp( size.width /2 - 10 , size.height/2 + 100);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face, my ear." fontName:fontName fontSize:48];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 160);
+        label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face," fontName:fontName fontSize:sceneFontSize];
+		label_3.position =  ccp( size.width /2 + 168 , size.height/2 + 50);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
         
-        label_4 = [CCLabelTTF labelWithString:@"It's like talking to me." fontName:fontName fontSize:48];
-		label_4.position =  ccp( size.width /2 , size.height/2 - 220);
+        label_4 = [CCLabelTTF labelWithString:@"whispering to me in an unfamiliar language." fontName:fontName fontSize:sceneFontSize];
+		label_4.position =  ccp( size.width /2 + 20, size.height/2 + 0);
         label_4.color = ccc3(0, 0, 0);
 		[self addChild: label_4];
         
-        label_5 = [CCLabelTTF labelWithString:@"I start to run to chace its word." fontName:fontName fontSize:48];
-		label_5.position =  ccp( size.width /2 , size.height/2 - 280);
+        label_5 = [CCLabelTTF labelWithString:@"I start to run to chase its word." fontName:fontName fontSize:sceneFontSize];
+		label_5.position =  ccp( size.width /2 + 110, size.height/2 - 50);
         label_5.color = ccc3(0, 0, 0);
 		[self addChild: label_5];
 		
         
-        road = [CCMenuItemFont itemWithString:@"road" block:^(id sender){
+        road = [CCMenuItemFont itemWithString:@"path" block:^(id sender){
             if(self.sceneStatus == 3)
             {
                 [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4A sceneWithVar:2 preScene:self.sceneStatus] withColor:ccWHITE]];
@@ -87,8 +93,8 @@ extern bool haveKey;
             }
         }];
         [road setFontName:fontName];
-        [road setFontSize:48];
-        [road setPosition:ccp( size.width/2 + 310, size.height/2 - 40)];
+        [road setFontSize:sceneFontSize];
+        [road setPosition:ccp( size.width/2 - 110, size.height/2 + 150)];
         [road setIsEnabled:true];
         [road setColor:ccc3(100,100,100)];
         
@@ -96,7 +102,7 @@ extern bool haveKey;
             if([GlobalVariable sharedInstance].haveKey)
             {
                 [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:2] withColor:ccWHITE]];
-
+                
             }
             else
             {
@@ -104,8 +110,8 @@ extern bool haveKey;
             }
         }];
         [wind setFontName:fontName];
-        [wind setFontSize:48];
-        [wind setPosition:ccp( size.width/2 - 130, size.height/2 - 160)];
+        [wind setFontSize:sceneFontSize];
+        [wind setPosition:ccp( size.width/2 + 140, size.height/2 + 50)];
         [wind setIsEnabled:false];
         [wind setColor:ccc3(0,0,0)];
         
@@ -120,11 +126,11 @@ extern bool haveKey;
         
         key = [CCMenuItemImage itemWithNormalImage:@"key.png" selectedImage:@"key.png" block:^(id sender) {
             //            [jump setString:@"Forward"];
-                    }];
+        }];
         [key setPosition:ccp(size.width/2, size.height - 150)];
         [key setScale:0.3f];
         key.visible = false;
-
+        
         
         CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
             if(self.sceneStatus == 1)
@@ -148,9 +154,63 @@ extern bool haveKey;
 		// Add the menu to the layer
 		[self addChild:menu];
         
+        
+        isLoud = false;
+        isBlowOver = false;
+        whichWind = 1;
+        [self initWinds];
+        [self scheduleUpdate];
+        
 	}
 	return self;
 }
+
+-(void)initWinds
+{
+    
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    CCSprite* wind1Sprite = [CCSprite spriteWithFile:@"wind1.png"];
+    CCSprite* wind2Sprite = [CCSprite spriteWithFile:@"wind2.png"];
+    CCSprite* wind3Sprite = [CCSprite spriteWithFile:@"wind3.png"];
+    CCSprite* wind4Sprite = [CCSprite spriteWithFile:@"wind4.png"];
+    
+    CCProgressTimer* wind1 = [CCProgressTimer progressWithSprite:wind1Sprite];
+    wind1.type = kCCProgressTimerTypeBar;
+    wind1.barChangeRate = ccp(1,0);
+    wind1.midpoint = ccp(0.0f,0.0f);
+    wind1.percentage = 25;
+    
+    CCProgressTimer* wind2 = [CCProgressTimer progressWithSprite:wind2Sprite];
+    wind2.type = kCCProgressTimerTypeBar;
+    wind2.barChangeRate = ccp(1,0);
+    wind2.midpoint = ccp(0.0f,0.0f);
+    wind2.percentage = 53;
+    
+    CCProgressTimer* wind3 = [CCProgressTimer progressWithSprite:wind3Sprite];
+    wind3.type = kCCProgressTimerTypeBar;
+    wind3.barChangeRate = ccp(1,0);
+    wind3.midpoint = ccp(0.0f,0.0f);
+    wind3.percentage = 58;
+    
+    CCProgressTimer* wind4 = [CCProgressTimer progressWithSprite:wind4Sprite];
+    wind4.type = kCCProgressTimerTypeBar;
+    wind4.barChangeRate = ccp(1,0);
+    wind4.midpoint = ccp(1024.0f,0.0f);
+    wind4.percentage = 5;
+    
+    [wind1 setPosition:ccp(size.width/2,size.height/2)];
+    [wind2 setPosition:ccp(size.width/2,size.height/2)];
+    [wind3 setPosition:ccp(size.width/2,size.height/2)];
+    [wind4 setPosition:ccp(size.width/2,size.height/2)];
+    
+    [self addChild:wind1 z:10 tag:21];
+    [self addChild:wind2 z:10 tag:22];
+    [self addChild:wind3 z:10 tag:23];
+    [self addChild:wind4 z:10 tag:24];
+    
+}
+
 
 -(void)updateScene{
     if(self.sceneStatus == 1)
@@ -166,5 +226,106 @@ extern bool haveKey;
     
     key.visible = [GlobalVariable sharedInstance].haveKey;
 }
+
+
+-(void)update:(ccTime)dt
+{
+    float volumn = [[AudioManager sharedInstance] getAverageVolume];
+    if (volumn>-30.0f)
+        isLoud = true;
+    else
+        isLoud = false;
+    
+    CCProgressTimer* wind1 = (CCProgressTimer*)[self getChildByTag:21];
+    CCProgressTimer* wind2 = (CCProgressTimer*)[self getChildByTag:22];
+    CCProgressTimer* wind3 = (CCProgressTimer*)[self getChildByTag:23];
+    CCProgressTimer* wind4 = (CCProgressTimer*)[self getChildByTag:24];
+    
+    if(whichWind == 1){
+        if (isLoud)
+            wind1.percentage+=dt*10;
+        else if(!isBlowOver)
+            wind1.percentage-=dt*10;
+        
+        if(wind1.percentage<25)
+            wind1.percentage=25;
+        
+        if(wind1.percentage>55){
+            wind1.percentage=55;
+            isBlowOver = true;
+        }
+        
+        if(isBlowOver&&volumn<-45.0f){
+            whichWind++;
+            isBlowOver = false;
+        }
+    }
+    else if(whichWind == 2)
+    {
+        if(isLoud)
+            wind2.percentage+=dt*10;
+        else if(!isBlowOver)
+            wind2.percentage-=dt*10;
+        
+        if(wind2.percentage<50)
+            wind2.percentage=50;
+        if(wind2.percentage>80){
+            wind2.percentage=80;
+            isBlowOver = true;
+        }
+        
+        if(isBlowOver&&volumn<-45.0f){
+            whichWind++;
+            isBlowOver = false;
+        }
+    }
+    else if(whichWind == 3)
+    {
+        if(isLoud)
+            wind3.percentage+=dt*10;
+        else if(!isBlowOver)
+            wind3.percentage-=dt*10;
+        
+        if(wind3.percentage<58)
+            wind3.percentage=58;
+        if(wind3.percentage>88){
+            wind3.percentage=88;
+            isBlowOver=true;
+        }
+        if(isBlowOver&&volumn<-45.0f){
+            whichWind++;
+            isBlowOver = false;
+        }
+    }
+    else if(whichWind == 4)
+    {
+        if(isLoud)
+            wind4.percentage+=dt*10;
+        else if(!isBlowOver)
+            wind4.percentage-=dt*10;
+        
+        if(wind4.percentage<5)
+            wind4.percentage=5;
+        if(wind4.percentage>30){
+            wind4.percentage=30;
+            isBlowOver=true;
+            if(self.sceneStatus==1){
+                self.sceneStatus = 2;
+                [self updateScene];
+            }
+        }
+        if(isBlowOver&&volumn<-45.0f){
+            whichWind++;
+            isBlowOver = false;
+        }
+    }
+}
+
+
+-(void)dealloc
+{
+    [super dealloc];
+}
+
 
 @end
