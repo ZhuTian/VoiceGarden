@@ -58,7 +58,7 @@
         [self addChild: background2];
         
         int xOffset = 150, yOffset = 250;
-        int _fontSize = 32;
+        int _fontSize = 30;
         
         
         label_1 = [CCLabelTTF labelWithString:@"I follow the footprint." fontName:fontName fontSize:_fontSize];
@@ -204,11 +204,26 @@
 }
 
 - (void)levelTimerCallback:(NSTimer *)timer {
-    [footprintManager addFoot:[[AudioManager sharedInstance] getAverageVolume]];
+    //NSLog([[AudioManager sharedInstance] getNote]);
+    NSString* note = [[AudioManager sharedInstance] getNote];
+    if([note isEqualToString:@"Do"] || [note isEqualToString:@"Re"] || [note isEqualToString:@"Mi"])
+    {
+        [footprintManager addFoot:[footprintManager getLowVolume]];
+    }
+    else if([note isEqualToString:@"Fa"] || [note isEqualToString:@"So"])
+    {
+        [footprintManager addFoot:[footprintManager getMidVolume]];
+    }
+    else if([note isEqualToString:@"La"] || [note isEqualToString:@"Si"] || [note isEqualToString:@"Do+"])
+    {
+        [footprintManager addFoot:[footprintManager getHighVolume]];
+    }
+    else
+    {
+        NSLog(note);
+    }
+    
     [self detectCollision];
-    float temp = [[AudioManager sharedInstance] getFundamentalFrequency];
-    NSLog(@"%f", temp);
-    NSLog([[AudioManager sharedInstance] getNote]);
 }
 
 - (void)scrollCallback:(ccTime)dt {

@@ -51,6 +51,9 @@
 -(void)addFoot :(float)audioLevel;
 -(CGPoint)getLatestPosition;
 -(void)updateOpacity:(ccTime)dt;
+-(float)getLowVolume;
+-(float)getMidVolume;
+-(float)getHighVolume;
 
 @property(assign) NSMutableArray *footArray;
 @property(assign) CCLayer* scene;

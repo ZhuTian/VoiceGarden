@@ -154,4 +154,18 @@
     return CGPointMake(400, previousY);
 }
 
+-(float)getLowVolume
+{
+    return low_mid - 0.1f;
+}
+
+-(float)getMidVolume
+{
+    return low_mid + 0.1f;
+}
+
+-(float)getHighVolume
+{
+    return mid_high + 0.1f;
+}
 @end

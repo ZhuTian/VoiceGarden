@@ -63,20 +63,25 @@
         // add the label as a child to this Layer
         [self addChild: background];
         
+        int _fontSize = 30;
         
-        CCLabelTTF *label_1 = [CCLabelTTF labelWithString:@"I open my eyes." fontName:fontName fontSize:48];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 100);
+        
+        CCLabelTTF *label_1 = [CCLabelTTF labelWithString:@"I open my eyes." fontName:fontName fontSize:_fontSize];
+		label_1.position =  ccp( size.width /2 - 250, size.height/2 - 50);
         label_1.color = ccc3(0, 0, 0);
+        label_1.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_1];
         
-        CCLabelTTF *label_2 = [CCLabelTTF labelWithString:@"I see a              garden." fontName:fontName fontSize:48];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 160);
+        CCLabelTTF *label_2 = [CCLabelTTF labelWithString:@"I see a              garden." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 - 250, size.height/2 - 100);
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_2];
         
-        CCLabelTTF *label_3 = [CCLabelTTF labelWithString:@"I am surrounded by the sound of          ." fontName:fontName fontSize:48];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 220);
+        CCLabelTTF *label_3 = [CCLabelTTF labelWithString:@"I am surrounded by the sound of          ." fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 250, size.height/2 - 150);
         label_3.color = ccc3(0, 0, 0);
+        label_3.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_3];
 		
         
@@ -91,9 +96,10 @@
             }
         }];
         [desolate_beautiful setFontName:fontName];
-        [desolate_beautiful setFontSize:48];
-        [desolate_beautiful setPosition:ccp( size.width/2 - 5, size.height/2 - 160)];
+        [desolate_beautiful setFontSize:_fontSize];
+        [desolate_beautiful setPosition:ccp( size.width/2 - 89, size.height/2 - 100)];
         [desolate_beautiful setColor:ccc3(100,100,100)];
+        
         
         slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
             if(self.sceneStatus == 1)
@@ -106,15 +112,31 @@
             }
         }];
         [slience_XXX setFontName:fontName];
-        [slience_XXX setFontSize:48];
-        [slience_XXX setPosition:ccp( size.width/2 + 350, size.height/2 - 220)];
+        [slience_XXX setFontSize:_fontSize];
+        [slience_XXX setPosition:ccp( size.width/2 + 250, size.height/2 - 150)];
         [slience_XXX setColor:ccc3(100,100,100)];
+        
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [desolate_beautiful runAction: [CCSequence actions:action, action2, nil]];
+        [desolate_beautiful runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
+        id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
+        id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
+        [slience_XXX runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [slience_XXX runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
             //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         

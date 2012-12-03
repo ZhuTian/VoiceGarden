@@ -37,25 +37,37 @@
         CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
         background.position = ccp(size.width/2, size.height/2);
         
+        int _fontSize = 30;
+        
         // add the label as a child to this Layer
         [self addChild: background];
         
         
         
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"I am in a          ." fontName:fontName fontSize:48];
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"I am in a            ." fontName:fontName fontSize:_fontSize];
         
 		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 - 100);
+		label.position =  ccp( size.width /2 - 100, size.height/2 - 50);
         label.color = ccc3(0, 0, 0);
+        label.anchorPoint = ccp(0, 0.5);
         [self addChild:label];
+        
+        
         
         CCMenuItemFont *button_garden = [CCMenuItemFont itemWithString:@"garden" block:^(id sender){
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
         }];
         [button_garden setFontName:fontName];
-        [button_garden setFontSize:48];
-        [button_garden setPosition:ccp( size.width/2 + 90, size.height/2 - 100)];
+        [button_garden setFontSize:_fontSize];
+        [button_garden setPosition:ccp( size.width/2 + 85, size.height/2 - 50)];
         [button_garden setColor:ccc3(100,100,100)];
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [button_garden runAction: [CCSequence actions:action, action2, nil]];
+        [button_garden runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
         
         CCMenuItem *menu = [CCMenu menuWithItems:button_garden, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
