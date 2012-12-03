@@ -13,6 +13,10 @@
     CCProgressTimer* barTimer;
     CCSprite* indicator;
     CCSprite*  barSprite;
+    CCMenuItemFont *button_next;
+    
+    bool isDone;
+   // bool isSceneOneDone;
 }
 
 +(CCScene* )scene;

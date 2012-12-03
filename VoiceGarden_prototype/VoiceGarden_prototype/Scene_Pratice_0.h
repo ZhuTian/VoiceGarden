@@ -14,6 +14,8 @@
     CCSprite*  barSprite;
     int livePoints;
     bool isNoisy;
+    bool isDone;
+    CCMenuItemFont* button_next;
 }
 
 +(CCScene*)scene;

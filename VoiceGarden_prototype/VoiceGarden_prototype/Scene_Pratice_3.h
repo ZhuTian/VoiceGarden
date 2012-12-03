@@ -14,6 +14,11 @@
     CCSprite* slider;
     CCSprite* indicator;
     CCSprite* barSprite;
+    float target;
+    
+    CCMenuItemFont *button_next;
+    bool isDone;
+    int timer;
 }
 
 +(CCScene* )scene;

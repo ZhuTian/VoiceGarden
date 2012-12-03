@@ -71,13 +71,14 @@
         indicator.position = ccp(size.width/2, size.height/2-17);
         [self addChild:indicator];
   
-        CCMenuItemFont *button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
+        button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
               [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_3 scene] withColor:ccWHITE]];
         }];
         [button_next setFontName:fontName];
         [button_next setFontSize:30];
         [button_next setPosition:ccp( size.width/2 + 220, size.height/2 - 20)];
         [button_next setColor:ccc3(100,100,100)];
+        [button_next setVisible:false];
         
         CCSprite* talkBubble = [CCSprite spriteWithFile:@"talkBubble.png"];
         talkBubble.position = ccp(size.width/2, size.height/2 + 50);
@@ -98,6 +99,8 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
+        isDone = false;
+        
         [self scheduleUpdate];
     }
     
@@ -108,31 +111,46 @@
 {
     float volume = [[AudioManager sharedInstance] getAverageVolume];
 
-    if (volume>-25) {
-        barTimer.percentage+=dt*10;
-    }
-    else{
-        barTimer.percentage-=dt*5;
-    }
+    if (isDone==false) {
+        if (volume>-25) {
+            barTimer.percentage+=dt*10;
+        }
+        else{
+            barTimer.percentage-=dt*5;
+        }
         
-    if (barTimer.percentage<35) {
-        barTimer.percentage=35.0f;
+        if (barTimer.percentage<35) {
+            barTimer.percentage=35.0f;
+        }
+        else if(barTimer.percentage>=64){
+            barTimer.percentage = 64.0f;
+            isDone = true;
+            [self updateScene];
+        }
+    
+        float per = (barTimer.percentage - 35.0f)/29.0f;
+    
+        CGPoint position = barTimer.position;
+        CGSize barSize = barTimer.contentSize;
+        float barWidth = barSize.width * 0.29f;
+        float startPosition = position.x - barWidth/2;
+        float indicatorPosition = startPosition + barWidth*per;
+        indicator.position = ccp(indicatorPosition, indicator.position.y);
     }
-    else if(barTimer.percentage>64){
-        barTimer.percentage = 64.0f;
-    }
+
     
-    float per = (barTimer.percentage - 35.0f)/29.0f;
+}
+
+-(void) updateScene
+{
+    [button_next setVisible:true];
+    id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+    id action = [CCEaseIn actionWithAction:move rate:1];
+    id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+    id action2 = [CCEaseOut actionWithAction:move2 rate:1];
     
-    CGPoint position = barTimer.position;
-    CGSize barSize = barTimer.contentSize;
-    float barWidth = barSize.width * 0.29f;
-    float startPosition = position.x - barWidth/2;
-    float indicatorPosition = startPosition + barWidth*per;
-    indicator.position = ccp(indicatorPosition, indicator.position.y);
-    
-    NSLog(@"%f", per);
-    
+    [button_next runAction: [CCSequence actions:action, action2, nil]];
+    [button_next runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
 }
 
 @end

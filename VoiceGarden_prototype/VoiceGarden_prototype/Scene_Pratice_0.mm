@@ -68,13 +68,15 @@
         barTimer.position = ccp(size.width/2, size.height/2);
         [self addChild:barTimer];
         
-        CCMenuItemFont *button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
+        button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_1 scene] withColor:ccWHITE]];
         }];
         [button_next setFontName:fontName];
         [button_next setFontSize:30];
         [button_next setPosition:ccp( size.width/2 + 220, size.height/2 - 20)];
         [button_next setColor:ccc3(100,100,100)];
+        
+        [button_next setVisible:false];
         
         CCSprite* talkBubble = [CCSprite spriteWithFile:@"talkBubble.png"];
         talkBubble.position = ccp(size.width/2, size.height/2 + 50);
@@ -97,6 +99,7 @@
         
         livePoints = 0;
         isNoisy = false;
+        isDone = false;
         
         [self scheduleUpdate];
     }
@@ -138,10 +141,11 @@
                 break;
             case 7:
                 per = 67.0f;
+                [self updateScene];
+                
                 break;
-                
-                
             default:
+                per = 67.0f;
                 break;
         }
         
@@ -150,13 +154,26 @@
         
     }
     
-    if (volume<-50) {
+    if (volume<-40) {
         isNoisy = false;
     }
     
-    NSLog(@"%d,%f",livePoints,barTimer.percentage);
+    
+    
+   // NSLog(@"%d,%f",livePoints,barTimer.percentage);
     
 }
 
+-(void) updateScene
+{
+    [button_next setVisible:true];
+    id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+    id action = [CCEaseIn actionWithAction:move rate:1];
+    id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+    id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+    
+    [button_next runAction: [CCSequence actions:action, action2, nil]];
+    [button_next runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+}
 
 @end

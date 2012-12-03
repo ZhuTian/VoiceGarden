@@ -26,6 +26,8 @@
 #import "Scene_7A.h"
 #import "Scene_8A.h"
 #import "Scene_Pratice_0.h"
+#import "Scene_Pratice_3.h"
+
 
 
 #pragma mark - IntroLayer
@@ -76,6 +78,6 @@
 
 -(void) makeTransition:(ccTime)dt
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_0 scene] withColor:ccWHITE]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_3 scene] withColor:ccWHITE]];
 }
 @end

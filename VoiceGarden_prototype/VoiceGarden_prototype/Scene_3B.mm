@@ -177,7 +177,7 @@
             hasSpawn = true;
             
             //Word transition effect
-            int i;
+//            int i;
 //            for(i = 0; i < 7; i++)
 //            {
 //                [spawnWord[i] runAction:[CCFadeOut actionWithDuration:1]];

@@ -61,13 +61,14 @@
         slider.position = ccp(size.width/2+26, size.height/2);
         [self addChild:slider];
         
-        CCMenuItemFont *button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
+        button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
               //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_2 scene] withColor:ccWHITE]];
         }];
         [button_next setFontName:fontName];
         [button_next setFontSize:30];
         [button_next setPosition:ccp( size.width/2 + 170, size.height/2 - 20)];
         [button_next setColor:ccc3(100,100,100)];
+        [button_next setVisible:false];
         
         CCMenuItem *menu = [CCMenu menuWithItems:button_next, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
@@ -87,6 +88,10 @@
         label_5.color = ccc3(0, 0, 0);
 		[self addChild: label_5];
         
+        target = 0;
+        timer=0;
+        
+        
         [self scheduleUpdate];
     }
     
@@ -95,23 +100,55 @@
 
 -(void)update:(ccTime)dt
 {
-    float fre = [[AudioManager sharedInstance] getFundamentalFrequency];
-    float volume = [[AudioManager sharedInstance] getAverageVolume];
-    NSLog(@"frequency: %f",fre);
+    if (isDone==false)
+    {
+        float fre = [[AudioManager sharedInstance] getFundamentalFrequency];
+        float volume = [[AudioManager sharedInstance] getAverageVolume];
+        NSLog(@"frequency: %f",fre);
     
-    float startY = 768.0f * 0.29;
-    float longY = 768.0f * 0.28;
+        float startY = 768.0f * 0.29;
+        float longY = 768.0f * 0.28;
+    
+        CGPoint position = slider.position;
+    
+        if (volume<-40) {
+            fre = 0;
+        }
+    
+        if (fre>650&&fre<800) {
+            timer++;
+            if (timer>300) {
+                isDone = true;
+                [self updateScene];
+            }
+        }
+        else
+            timer = 0;
     
     
-    if (volume<-40) {
-        fre = 0;
+        if (fre>1000) {
+            fre = 1000.0f;
+        }
+    
+        float cubePositionY = fre*longY/1000.0f;
+        target = startY+cubePositionY;
+    
+        slider.position = ccp(slider.position.x, position.y+(target-position.y)/3);
     }
     
-    if (fre>1000) {
-        fre = 1000.0f;
-    }
-    float cubePositionY = fre*longY/1000.0f;
-    slider.position = ccp(slider.position.x, startY+cubePositionY);
+    
+}
+
+-(void) updateScene
+{
+    [button_next setVisible:true];
+    id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+    id action = [CCEaseIn actionWithAction:move rate:1];
+    id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+    id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+    
+    [button_next runAction: [CCSequence actions:action, action2, nil]];
+    [button_next runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
 }
 
 @end
