@@ -11,6 +11,8 @@
 
 @interface Scene_Pratice_1 : CCLayer {
     CCProgressTimer* barTimer;
+    CCSprite* indicator;
+    CCSprite*  barSprite;
 }
 
 +(CCScene* )scene;

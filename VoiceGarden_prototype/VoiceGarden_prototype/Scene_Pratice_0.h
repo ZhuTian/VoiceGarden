@@ -1,19 +1,21 @@
 //
-//  Scene_Pratice_2.h
+//  Scene_Pratice_0.h
 //  VoiceGarden_prototype
 //
-//  Created by Fangzhou Lu on 11/30/12.
+//  Created by Fangzhou Lu on 12/2/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface Scene_Pratice_2 : CCNode {
+@interface Scene_Pratice_0 : CCLayer {
     CCProgressTimer* barTimer;
-    CCSprite* indicator;
     CCSprite*  barSprite;
+    int livePoints;
+    bool isNoisy;
 }
 
-+(CCScene* )scene;
++(CCScene*)scene;
+
 @end

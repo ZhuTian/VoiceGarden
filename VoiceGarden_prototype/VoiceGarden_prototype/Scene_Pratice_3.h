@@ -12,6 +12,8 @@
 @interface Scene_Pratice_3 : CCNode {
     CCSprite* bar;
     CCSprite* slider;
+    CCSprite* indicator;
+    CCSprite* barSprite;
 }
 
 +(CCScene* )scene;
