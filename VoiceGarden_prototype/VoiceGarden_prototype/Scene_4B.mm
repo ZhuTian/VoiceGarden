@@ -46,23 +46,24 @@
         // add the label as a child to this Layer
         [self addChild: background];
         
+        int _fontSize = 30;
         
-        label_1 = [CCLabelTTF labelWithString:@"The wind tells me a message." fontName:fontName fontSize:48];
+        label_1 = [CCLabelTTF labelWithString:@"The wind tells me a message." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"\"I came from far away. I have seen much." fontName:fontName fontSize:48];
+        label_2 = [CCLabelTTF labelWithString:@"\"I came from far away. I have seen much." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@"There is a door beyond the path." fontName:fontName fontSize:48];
+        label_3 = [CCLabelTTF labelWithString:@"There is a door beyond the path." fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 , size.height/2 - 160);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
         
-        label_4 = [CCLabelTTF labelWithString:@"But you need to back to find a key. \"" fontName:fontName fontSize:48];
+        label_4 = [CCLabelTTF labelWithString:@"But you need to back to find a key. \"" fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 , size.height/2 - 220);
         label_4.color = ccc3(0, 0, 0);
 		[self addChild: label_4];
@@ -73,7 +74,7 @@
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3A sceneWithVar:3] withColor:ccWHITE]];
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -82,7 +83,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         

@@ -11,7 +11,7 @@
 #import "Scene_4B.h"
 #import "AudioManager.h"
 #import "GlobalVariable.h"
-#define sceneFontSize 30
+#define sceneFontSize 24
 
 @implementation Scene_3A
 @synthesize sceneStatus;
@@ -52,33 +52,39 @@ extern bool haveKey;
         [self addChild: background];
         
         label_1 = [CCLabelTTF labelWithString:@"I look to my left." fontName:fontName fontSize:sceneFontSize];
-		label_1.position =  ccp( size.width /2 + 100, size.height/2+200);
+		label_1.position =  ccp( size.width /2 - 120, size.height/2+200);
         label_1.color = ccc3(0, 0, 0);
+        label_1.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_1];
         
         label_6 = [CCLabelTTF labelWithString:@"There is a         sightly concealed by a tangle of shrubs." fontName:fontName fontSize:sceneFontSize];
-		label_6.position =  ccp( size.width /2 + 100, size.height/2+150);
+		label_6.position =  ccp( size.width /2 - 120, size.height/2+150);
         label_6.color = ccc3(0, 0, 0);
+        label_6.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_6];
         
         label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:sceneFontSize];
-		label_2.position =  ccp( size.width /2 - 10 , size.height/2 + 100);
+		label_2.position =  ccp( size.width /2 - 120, size.height/2 + 100);
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_2];
         
         label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face," fontName:fontName fontSize:sceneFontSize];
-		label_3.position =  ccp( size.width /2 + 168 , size.height/2 + 50);
+		label_3.position =  ccp( size.width /2 - 120, size.height/2 + 50);
         label_3.color = ccc3(0, 0, 0);
+        label_3.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_3];
         
         label_4 = [CCLabelTTF labelWithString:@"whispering to me in an unfamiliar language." fontName:fontName fontSize:sceneFontSize];
-		label_4.position =  ccp( size.width /2 + 20, size.height/2 + 0);
+		label_4.position =  ccp( size.width /2 - 120, size.height/2 + 0);
         label_4.color = ccc3(0, 0, 0);
+        label_4.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_4];
         
         label_5 = [CCLabelTTF labelWithString:@"I start to run to chase its word." fontName:fontName fontSize:sceneFontSize];
-		label_5.position =  ccp( size.width /2 + 110, size.height/2 - 50);
+		label_5.position =  ccp( size.width /2 - 120, size.height/2 - 50);
         label_5.color = ccc3(0, 0, 0);
+        label_5.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_5];
 		
         
@@ -94,9 +100,16 @@ extern bool haveKey;
         }];
         [road setFontName:fontName];
         [road setFontSize:sceneFontSize];
-        [road setPosition:ccp( size.width/2 - 110, size.height/2 + 150)];
+        [road setPosition:ccp( size.width/2 + 20, size.height/2 + 150)];
         [road setIsEnabled:true];
         [road setColor:ccc3(100,100,100)];
+        
+        id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
+        id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
+        [road runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [road runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
         wind = [CCMenuItemFont itemWithString:@"wind" block:^(id sender){
             if([GlobalVariable sharedInstance].haveKey)
@@ -111,7 +124,7 @@ extern bool haveKey;
         }];
         [wind setFontName:fontName];
         [wind setFontSize:sceneFontSize];
-        [wind setPosition:ccp( size.width/2 + 140, size.height/2 + 50)];
+        [wind setPosition:ccp( size.width/2 + 35, size.height/2 + 50)];
         [wind setIsEnabled:false];
         [wind setColor:ccc3(0,0,0)];
         
@@ -222,6 +235,12 @@ extern bool haveKey;
         [wind setIsEnabled: true];
         [wind setColor:ccc3(100, 100, 100)];
         label_5.string = @"I start to run to catch its word";
+        id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
+        id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
+        [wind runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [wind runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
     }
     
     key.visible = [GlobalVariable sharedInstance].haveKey;

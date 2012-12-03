@@ -45,31 +45,37 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        background = [CCSprite spriteWithFile:@"bg1.jpg"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
         [self addChild: background];
         
+        int _fontSize = 30;
         
-        label_1 = [CCLabelTTF labelWithString:@"The fear of unknown " fontName:fontName fontSize:48];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
+        
+        label_1 = [CCLabelTTF labelWithString:@"The fear of unknown " fontName:fontName fontSize:_fontSize];
+		label_1.position =  ccp( size.width /2 - 160, size.height/2 + 70);
         label_1.color = ccc3(0, 0, 0);
+        label_1.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"keeps me from moving forward." fontName:fontName fontSize:48];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
+        label_2 = [CCLabelTTF labelWithString:@"keeps me from moving forward." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 - 160, size.height/2 + 20);
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@"Should I make                       ?" fontName:fontName fontSize:48];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 160);
+        label_3 = [CCLabelTTF labelWithString:@"Should I make                   ?" fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 160, size.height/2 - 30);
         label_3.color = ccc3(0, 0, 0);
+        label_3.anchorPoint = ccp(0, 0.5);
 		//[self addChild: label_3];
         
-        label_4 = [CCLabelTTF labelWithString:@"Should I look for               ?" fontName:fontName fontSize:48];
-		label_4.position =  ccp( size.width /2 , size.height/2 - 220);
+        label_4 = [CCLabelTTF labelWithString:@"Should I look for               ?" fontName:fontName fontSize:_fontSize];
+		label_4.position =  ccp( size.width /2 - 160, size.height/2 - 80);
         label_4.color = ccc3(0, 0, 0);
+        label_4.anchorPoint = ccp(0, 0.5);
 		//[self addChild: label_2];
 		
         
@@ -77,8 +83,8 @@
            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5D sceneWithVar:1] withColor:ccWHITE]];
         }];
         [my setFontName:fontName];
-        [my setFontSize:48];
-        [my setPosition:ccp( size.width/2 + 120, size.height/2 - 160)];
+        [my setFontSize:_fontSize];
+        [my setPosition:ccp( size.width/2 + 130, size.height/2 - 30)];
         [my setIsEnabled:false];
         [my setColor:ccc3(100,100,100)];
         my.visible = false;
@@ -88,28 +94,43 @@
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5A sceneWithVar:1] withColor:ccWHITE]];
         }];
         [company setFontName:fontName];
-        [company setFontSize:48];
-        [company setPosition:ccp( size.width/2 + 160, size.height/2 - 220)];
+        [company setFontSize:_fontSize];
+        [company setPosition:ccp( size.width/2 + 150, size.height/2 - 80)];
         [company setIsEnabled:false];
         [company setColor:ccc3(100,100,100)];
         company.visible = false;
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [my runAction: [CCSequence actions:action, action2, nil]];
+        [my runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
+        id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
+        id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
+        [company runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [company runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3A sceneWithVar:self.preSceneStatus] withColor:ccWHITE]];
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
-            self.sceneStatus = 2;
-            [self updateScene];
-        }];
-        [action setFontName:fontName];
-        [action setFontSize:48];
-        [action setPosition:ccp( size.width - 100, 30)];
-        [action setColor:ccc3(100,100,100)];
+//        CCMenuItemFont *actionButton = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
+//            self.sceneStatus = 2;
+//            [self updateScene];
+//        }];
+//        [action setFontName:fontName];
+//        [action setFontSize:_fontSize];
+//        [action setPosition:ccp( size.width - 100, 30)];
+//        [action setColor:ccc3(100,100,100)];
         
         CCMenuItem *menu = [CCMenu menuWithItems:back, my, company, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
@@ -141,6 +162,7 @@
         [company setIsEnabled:true];
         company.visible = true;
         [company setColor:ccc3(100,100,100)];
+        [background setTexture:[[CCTextureCache sharedTextureCache] addImage:@"road_bg.png"]];
     }
 }
 @end

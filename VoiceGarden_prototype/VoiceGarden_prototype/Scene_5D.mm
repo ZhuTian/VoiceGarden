@@ -40,39 +40,44 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"onMyWay_bg.jpg"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
         [self addChild: background];
         
+        int _fontSize = 30;
         
-        label_1 = [CCLabelTTF labelWithString:@"     alone decide my path." fontName:fontName fontSize:48];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
+        label_1 = [CCLabelTTF labelWithString:@"     alone decide my path." fontName:fontName fontSize:_fontSize];
+		label_1.position =  ccp( size.width /2 - 300, size.height/2 + 100);
         label_1.color = ccc3(0, 0, 0);
+        label_1.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"The lily has overtaken the pond." fontName:fontName fontSize:48];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
+        label_2 = [CCLabelTTF labelWithString:@"The lily has overtaken the pond." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 - 300, size.height/2 + 50);
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@"     want to see what's hiding." fontName:fontName fontSize:48];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 160);
+        label_3 = [CCLabelTTF labelWithString:@"     want to see what's hiding." fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 300, size.height/2 - 0);
         label_3.color = ccc3(0, 0, 0);
+        label_3.anchorPoint = ccp(0, 0.5);
         [self addChild:label_3];
         
-        label_4 = [CCLabelTTF labelWithString:@"     need to see for myself" fontName:fontName fontSize:48];
-		label_4.position =  ccp( size.width /2 , size.height/2 - 220);
+        label_4 = [CCLabelTTF labelWithString:@"     need to see for myself" fontName:fontName fontSize:_fontSize];
+		label_4.position =  ccp( size.width /2 - 300, size.height/2 - 50);
         label_4.color = ccc3(0, 0, 0);
+        label_4.anchorPoint = ccp(0, 0.5);
 		[self addChild:label_4];
 		
         I_1 = [CCMenuItemFont itemWithString:@"I" block:^(id sender){
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_6B sceneWithVar:1] withColor:ccWHITE]];
         }];
         [I_1 setFontName:fontName];
-        [I_1 setFontSize:48];
-        [I_1 setPosition:ccp( size.width/2 - 230, size.height/2 - 40)];
+        [I_1 setFontSize:_fontSize];
+        [I_1 setPosition:ccp( size.width/2 - 230, size.height/2 + 100)];
         [I_1 setIsEnabled:false];
         [I_1 setColor:ccc3(0,0,0)];
         
@@ -80,8 +85,8 @@
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_6B sceneWithVar:1] withColor:ccWHITE]];
         }];
         [I_2 setFontName:fontName];
-        [I_2 setFontSize:48];
-        [I_2 setPosition:ccp( size.width/2 - 280, size.height/2 - 160)];
+        [I_2 setFontSize:_fontSize];
+        [I_2 setPosition:ccp( size.width/2 - 280, size.height/2 - 0)];
         [I_2 setIsEnabled:false];
         [I_2 setColor:ccc3(0,0,0)];
         
@@ -89,8 +94,8 @@
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_6B sceneWithVar:1] withColor:ccWHITE]];
         }];
         [I_3 setFontName:fontName];
-        [I_3 setFontSize:48];
-        [I_3 setPosition:ccp( size.width/2 - 230, size.height/2 - 220)];
+        [I_3 setFontSize:_fontSize];
+        [I_3 setPosition:ccp( size.width/2 - 230, size.height/2 - 50)];
         [I_3 setIsEnabled:false];
         [I_3 setColor:ccc3(0,0,0)];
         
@@ -99,7 +104,7 @@
             ;
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -108,7 +113,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         

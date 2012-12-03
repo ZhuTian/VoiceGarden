@@ -17,6 +17,7 @@
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
+    CCSprite* background;
     
 @public
     int sceneStatus;
