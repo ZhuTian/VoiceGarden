@@ -43,29 +43,35 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"Spring_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
         [self addChild: background];
         
-        int xOffset = 150, yOffset = 250;
-        int _fontSize = 32;
+        int yOffset = 50;
+        int _fontSize = 26;
         
         label_1 = [CCLabelTTF labelWithString:@"It's April." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 + xOffset, size.height/2 - 40 + yOffset);
+		label_1.position =  ccp( size.width /2 - 170, size.height/2 + yOffset);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"But where are the signs of spring?" fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 + xOffset, size.height/2 - 100 + yOffset);
+		label_2.position =  ccp( size.width /2 - 20, size.height/2 - 40 + yOffset);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@"The flowers have shrunken and the tree leaves are falling to the ground." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 + xOffset, size.height/2 - 160 + yOffset);
+        label_3 = [CCLabelTTF labelWithString:@"The flowers have shrunken" fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 70, size.height/2 - 80 + yOffset);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
+        
+        label_4 = [CCLabelTTF labelWithString:@"and the tree leaves are falling." fontName:fontName fontSize:_fontSize];
+		label_4.position =  ccp( size.width /2 - 40, size.height/2 - 120 + yOffset);
+        label_4.color = ccc3(0, 0, 0);
+		[self addChild: label_4];
+        
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
             if(self.preScene == 1 || self.preScene == 3)
@@ -85,7 +91,7 @@
         }];
         
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:30];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -94,7 +100,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:30];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
@@ -115,13 +121,13 @@
         swayCollected = false;
         
         bloomPosition = CGPointMake(200, footprintManager->midY),
-        bloomLabel = [CCLabelTTF labelWithString:@"blooming" fontName:fontName fontSize:40];
+        bloomLabel = [CCLabelTTF labelWithString:@"blooming" fontName:fontName fontSize:26];
 		bloomLabel.position =  bloomPosition;
         bloomLabel.color = ccc3(0, 0, 0);
 		[self addChild: bloomLabel];
         
         swayPosition = CGPointMake(400, footprintManager->lowY),
-        swayLabel = [CCLabelTTF labelWithString:@"swaying" fontName:fontName fontSize:40];
+        swayLabel = [CCLabelTTF labelWithString:@"swaying" fontName:fontName fontSize:26];
 		swayLabel.position =  swayPosition;
         swayLabel.color = ccc3(0, 0, 0);
 		[self addChild: swayLabel];
@@ -147,9 +153,13 @@
 
 -(void)updateScene
 {
+    CGSize size = [[CCDirector sharedDirector] winSize];
     if(self.sceneStatus == 2)
     {
-        label_3.string = @"The flowers have blooming and the tree leaves are swaying.";
+        label_3.string = @"The flowers have blooming";
+        label_3.position = ccp(size.width /2 - 75, label_3.position.y);
+        label_4.string = @"and the tree leaves are swaying.";
+        label_4.position = ccp(size.width /2 - 40+ 10, label_4.position.y);
     }
 }
 

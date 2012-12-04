@@ -26,6 +26,7 @@
 		0748D9E91669CC3500F07649 /* Scene_Pratice_3.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0748D9E81669CC3500F07649 /* Scene_Pratice_3.mm */; };
 		0748D9EB1669CE1600F07649 /* vg_512_48_Time_Bar_Shell_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0748D9EA1669CE1600F07649 /* vg_512_48_Time_Bar_Shell_2.png */; };
 		0748D9ED1669CE4C00F07649 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 0748D9EC1669CE4B00F07649 /* cube.png */; };
+		07A601ED166EB1730010EC48 /* Spring_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 07A601EC166EB1730010EC48 /* Spring_bg.png */; };
 		07B409E2166C1798007E267B /* Scene_Pratice_0.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07B409E1166C1798007E267B /* Scene_Pratice_0.mm */; };
 		07C3580E16699B48005014FB /* wind1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C3580A16699B48005014FB /* wind1.png */; };
 		07C3580F16699B48005014FB /* wind2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C3580B16699B48005014FB /* wind2.png */; };
@@ -215,6 +216,7 @@
 		0748D9E81669CC3500F07649 /* Scene_Pratice_3.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene_Pratice_3.mm; sourceTree = "<group>"; };
 		0748D9EA1669CE1600F07649 /* vg_512_48_Time_Bar_Shell_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_512_48_Time_Bar_Shell_2.png; sourceTree = "<group>"; };
 		0748D9EC1669CE4B00F07649 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
+		07A601EC166EB1730010EC48 /* Spring_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spring_bg.png; sourceTree = "<group>"; };
 		07B409E0166C1798007E267B /* Scene_Pratice_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene_Pratice_0.h; sourceTree = "<group>"; };
 		07B409E1166C1798007E267B /* Scene_Pratice_0.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene_Pratice_0.mm; sourceTree = "<group>"; };
 		07C3580A16699B48005014FB /* wind1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind1.png; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 		0EB7E1A8164193D60050F56C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07A601EC166EB1730010EC48 /* Spring_bg.png */,
 				0EB18A78166C432E00D27341 /* onMyWay_bg.jpg */,
 				0EB18A75166C3D9600D27341 /* road_bg.png */,
 				072B1E77166BD388004EACCB /* tutorial */,
@@ -1219,6 +1222,7 @@
 				072B1E75166BD378004EACCB /* volume1_bar_top.png in Resources */,
 				0EB18A76166C3D9600D27341 /* road_bg.png in Resources */,
 				0EB18A79166C432E00D27341 /* onMyWay_bg.jpg in Resources */,
+				07A601ED166EB1730010EC48 /* Spring_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

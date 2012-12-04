@@ -8,6 +8,7 @@
 #import "Scene_2.h"
 #import "Scene_6A.h"
 #import "GlobalVariable.h"
+#define _fontSize 30
 
 @implementation Scene_6A
 +(CCScene *) sceneWithVar: (int)_sceneType
@@ -43,12 +44,12 @@
         [self addChild: background];
         
         
-        label_1 = [CCLabelTTF labelWithString:@"I hear some sound from this garden." fontName:fontName fontSize:48];
+        label_1 = [CCLabelTTF labelWithString:@"I hear faint sounds in the garden." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 , size.height/2 - 100);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"It's        ." fontName:fontName fontSize:48];
+        label_2 = [CCLabelTTF labelWithString:@"It's  the echos of         returning." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 , size.height/2 - 160);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
@@ -58,8 +59,8 @@
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:2] withColor:ccWHITE]];
         }];
         [XXX setFontName:fontName];
-        [XXX setFontSize:48];
-        [XXX setPosition:ccp( size.width/2 + 40, size.height/2 - 160)];
+        [XXX setFontSize:_fontSize];
+        [XXX setPosition:ccp( size.width/2 + 50, size.height/2 - 160)];
         [XXX setIsEnabled:true];
         [XXX setColor:ccc3(100,100,100)];
         
@@ -67,7 +68,7 @@
             //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:2] withColor:ccWHITE]];
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -75,7 +76,7 @@
             //
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         

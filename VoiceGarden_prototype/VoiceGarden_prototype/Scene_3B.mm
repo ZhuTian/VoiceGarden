@@ -9,6 +9,8 @@
 #import "Scene_4C.h"
 #import "Scene_3B.h"
 #import "AudioManager.h"
+#define _fontSize 30
+
 
 @implementation Scene_3B
 @synthesize sceneStatus;
@@ -45,14 +47,14 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
         background.position = ccp(size.width/2, size.height/2);
-        int _fontSize = 24;
+        //int _fontSize = 30;
         
         // add the label as a child to this Layer
         [self addChild: background];
         
         
         label_1 = [CCLabelTTF labelWithString:@"I tried to talk but realize." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 + 60);
+		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 60);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
@@ -62,7 +64,7 @@
 		[self addChild: label_2];
         
         label_3 = [CCLabelTTF labelWithString:@"I am              ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 60);
+		label_3.position =  ccp( size.width /2 - 125, size.height/2 - 60);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
 		
@@ -88,7 +90,7 @@
         }];
         [waiting setFontName:fontName];
         [waiting setFontSize:_fontSize];
-        [waiting setPosition:ccp( size.width/2 + 30, size.height/2 - 60)];
+        [waiting setPosition:ccp( size.width/2 - 100, size.height/2 - 60)];
         [waiting setIsEnabled:false];
         [waiting setColor:ccc3(0,0,0)];
         
@@ -159,7 +161,7 @@
         //Spawn new word
         if(spawnIndex < 7)
         {
-            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"Hewow" fontName:fontName fontSize:24];
+            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"Hewow" fontName:fontName fontSize:_fontSize];
             spawnWord[spawnIndex].position =  spawnPosition[spawnIndex];
             spawnWord[spawnIndex].color = ccc3(0, 0, 0);
             [self addChild: spawnWord[spawnIndex]];
@@ -169,7 +171,7 @@
         }
         else if(spawnIndex == 7)
         {
-            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"openning" fontName:fontName fontSize:24];
+            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"openning" fontName:fontName fontSize:_fontSize];
             spawnWord[spawnIndex].position =  spawnPosition[spawnIndex];
             spawnWord[spawnIndex].color = ccc3(0, 0, 0);
             [self addChild: spawnWord[spawnIndex]];

@@ -17,6 +17,7 @@
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
+    CCLabelTTF *label_4;
     
     FootprintManager_old* footprintManager;
     

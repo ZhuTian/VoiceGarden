@@ -9,6 +9,8 @@
 #import "Scene_4C.h"
 #import "Scene_5B.h"
 #import "Scene_5C.h"
+#define _fontSize 30
+
 
 @implementation Scene_4C
 
@@ -49,18 +51,18 @@
         [self addChild: background];
         
         
-        label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:48];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 100);
+        label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:_fontSize];
+		label_1.position =  ccp( size.width /2 , size.height/2 - 50);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"with the           taken away by the bird." fontName:fontName fontSize:48];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 160);
+        label_2 = [CCLabelTTF labelWithString:@"with the           taken away by the bird." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 + 15, size.height/2 - 100);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
           
-        label_3 = [CCLabelTTF labelWithString:@"The bird will come back in         ." fontName:fontName fontSize:48];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 220);
+        label_3 = [CCLabelTTF labelWithString:@"The bird will come back in         ." fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 40, size.height/2 - 150);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
 		
@@ -76,8 +78,8 @@
             }
         }];
         [spring setFontName:fontName];
-        [spring setFontSize:48];
-        [spring setPosition:ccp( size.width/2 + 270, size.height/2 - 220)];
+        [spring setFontSize:_fontSize];
+        [spring setPosition:ccp( size.width/2 + 125, size.height/2 - 150)];
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
         
@@ -92,8 +94,8 @@
             }
         }];
         [key setFontName:fontName];
-        [key setFontSize:48];
-        [key setPosition:ccp( size.width/2 - 177, size.height/2 - 160)];
+        [key setFontSize:_fontSize];
+        [key setPosition:ccp( size.width/2 - 92, size.height/2 - 100)];
         [key setIsEnabled:false];
         [key setColor:ccc3(0,0,0)];
         
@@ -118,7 +120,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
