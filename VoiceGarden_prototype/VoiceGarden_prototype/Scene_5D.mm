@@ -77,7 +77,7 @@
         }];
         [I_1 setFontName:fontName];
         [I_1 setFontSize:_fontSize];
-        [I_1 setPosition:ccp( size.width/2 - 230, size.height/2 + 100)];
+        [I_1 setPosition:ccp( size.width/2 - 270, size.height/2 + 100)];
         [I_1 setIsEnabled:false];
         [I_1 setColor:ccc3(0,0,0)];
         
@@ -86,7 +86,7 @@
         }];
         [I_2 setFontName:fontName];
         [I_2 setFontSize:_fontSize];
-        [I_2 setPosition:ccp( size.width/2 - 280, size.height/2 - 0)];
+        [I_2 setPosition:ccp( size.width/2 - 270, size.height/2 - 0)];
         [I_2 setIsEnabled:false];
         [I_2 setColor:ccc3(0,0,0)];
         
@@ -95,7 +95,7 @@
         }];
         [I_3 setFontName:fontName];
         [I_3 setFontSize:_fontSize];
-        [I_3 setPosition:ccp( size.width/2 - 230, size.height/2 - 50)];
+        [I_3 setPosition:ccp( size.width/2 - 270, size.height/2 - 50)];
         [I_3 setIsEnabled:false];
         [I_3 setColor:ccc3(0,0,0)];
         
@@ -145,6 +145,28 @@
         [I_2 setColor:ccc3(100,100,100)];
         [I_3 setIsEnabled:true];
         [I_3 setColor:ccc3(100,100,100)];
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [I_1 runAction: [CCSequence actions:action, action2, nil]];
+        [I_1 runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
+        id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
+        id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
+        [I_2 runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [I_2 runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
+        
+        id move_3 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action_3 = [CCEaseIn actionWithAction:move_3 rate:1];
+        id move2_3 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2_3 = [CCEaseOut actionWithAction:move2_3 rate:1];
+        [I_3 runAction: [CCSequence actions:action_3, action2_3, nil]];
+        [I_3 runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_3, action2_3, nil]]];
     }
 }
 @end

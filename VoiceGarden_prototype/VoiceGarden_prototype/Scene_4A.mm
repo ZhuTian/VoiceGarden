@@ -123,14 +123,6 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-//        CCMenuItemFont *actionButton = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
-//            self.sceneStatus = 2;
-//            [self updateScene];
-//        }];
-//        [action setFontName:fontName];
-//        [action setFontSize:_fontSize];
-//        [action setPosition:ccp( size.width - 100, 30)];
-//        [action setColor:ccc3(100,100,100)];
         
         CCMenuItem *menu = [CCMenu menuWithItems:back, my, company, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];

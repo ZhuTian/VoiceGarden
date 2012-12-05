@@ -43,7 +43,7 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"I_bg.png"];
+        CCSprite* background = [CCSprite spriteWithFile:@"I.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer

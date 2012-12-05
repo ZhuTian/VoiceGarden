@@ -40,7 +40,7 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"wind_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
@@ -49,23 +49,27 @@
         int _fontSize = 30;
         
         label_1 = [CCLabelTTF labelWithString:@"The wind tells me a message." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
+		label_1.position =  ccp( size.width /2 - 250, size.height/2 + 50);
         label_1.color = ccc3(0, 0, 0);
+        label_1.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"\"I came from far away. I have seen much." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
+		label_2.position =  ccp( size.width /2 -250, size.height/2 );
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_2];
         
         label_3 = [CCLabelTTF labelWithString:@"There is a door beyond the path." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 , size.height/2 - 160);
+		label_3.position =  ccp( size.width /2 - 250, size.height/2 - 50);
         label_3.color = ccc3(0, 0, 0);
+        label_3.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_3];
         
         label_4 = [CCLabelTTF labelWithString:@"But you need to back to find a key. \"" fontName:fontName fontSize:_fontSize];
-		label_4.position =  ccp( size.width /2 , size.height/2 - 220);
+		label_4.position =  ccp( size.width /2 - 250, size.height/2 - 100);
         label_4.color = ccc3(0, 0, 0);
+        label_4.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_4];
 		
         
