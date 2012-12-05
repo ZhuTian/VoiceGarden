@@ -31,7 +31,7 @@
     }
     else
     {
-        layer.sceneStatus = 1;
+        layer.sceneStatus = 2;
     }
     [layer updateScene];
 	
