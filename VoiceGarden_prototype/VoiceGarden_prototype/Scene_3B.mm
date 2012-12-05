@@ -45,7 +45,7 @@
         
         fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"silence_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         //int _fontSize = 30;
         
@@ -113,9 +113,6 @@
         [action setColor:ccc3(100,100,100)];
         
         CCMenuItem *menu = [CCMenu menuWithItems:withered, waiting, action, nil];
-        //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		//[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer

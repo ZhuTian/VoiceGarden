@@ -111,45 +111,109 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
-        levelTimer = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(levelTimerCallback:) userInfo: nil repeats: YES];
         
-        //Initiate footprint manager
-        footprintManager = [FootprintManager_old initManager:self];
-        
-        //Initiate collectable items;
-        bloomCollected = false;
-        swayCollected = false;
-        
-        bloomPosition = CGPointMake(200, footprintManager->midY),
-        bloomLabel = [CCLabelTTF labelWithString:@"blooming" fontName:fontName fontSize:26];
-		bloomLabel.position =  bloomPosition;
+        bloomLabel = [CCLabelTTF labelWithString:@"blooming." fontName:fontName fontSize:_fontSize];
+		bloomLabel.position =  ccp(500, 600);
         bloomLabel.color = ccc3(0, 0, 0);
 		[self addChild: bloomLabel];
+        bloomPosition = bloomLabel.position;
         
-        swayPosition = CGPointMake(400, footprintManager->lowY),
-        swayLabel = [CCLabelTTF labelWithString:@"swaying" fontName:fontName fontSize:26];
-		swayLabel.position =  swayPosition;
+        swayLabel = [CCLabelTTF labelWithString:@"swaying." fontName:fontName fontSize:_fontSize];
+		swayLabel.position =  ccp(200, 700);
         swayLabel.color = ccc3(0, 0, 0);
 		[self addChild: swayLabel];
+        swayPosition = swayLabel.position;        
         
-        collisionThreshold = 40;
+        CCSpriteFrameCache *cache =[CCSpriteFrameCache sharedSpriteFrameCache];
+        [cache addSpriteFramesWithFile:@"butterfly.plist"];
         
-        [self schedule:@selector(updateFootOpacity:) interval:0.03];
+        //frame array
+        NSMutableArray *framesArray=[NSMutableArray array];
+        
+        NSString *frameName=[NSString stringWithFormat:@"butterfly.png"];
+        id frameObject =[cache spriteFrameByName:frameName];
+        [framesArray addObject:frameObject];
+        
+        NSString * frameName_2 = [NSString stringWithFormat:@"butterfly_2.png"];
+        id frameObject_2 = [cache spriteFrameByName:frameName_2];
+        [framesArray addObject:frameObject_2];
+        
+        //animation object
+        id animObject=[CCAnimation animationWithSpriteFrames:framesArray delay:0.1];
+        
+        //animation action
+        id animAction =[CCAnimate actionWithAnimation:animObject];
+        animAction = [CCRepeatForever actionWithAction:animAction];
+        
+        CCSprite* butterflySprite = [CCSprite spriteWithSpriteFrameName:@"butterfly.png"];
+        butterflySprite.position = ccp(100, 500);
+        [butterflySprite runAction:animAction];
+        
+        [self addChild:butterflySprite z:10 tag:10];
+        
+        [self scheduleUpdate];
+        
 	}
 	return self;
 }
 
-- (void)levelTimerCallback:(NSTimer *)timer {
-    [footprintManager addFoot:[[AudioManager sharedInstance] getAverageVolume]];
+- (void)dealloc {
+
+  	[super dealloc];
+}
+
+-(void)update:(ccTime)dt
+{
+    CCSprite* butterfly = (CCSprite* )[self getChildByTag:10];
+    CGPoint position = butterfly.position;
+    if (position.x > 1024) {
+        position.x = 0;
+    }
+    
+    float fre = [[AudioManager sharedInstance] getFundamentalFrequency];
+    float volume = [[AudioManager sharedInstance] getAverageVolume];
+    
+    if (volume>-40) {
+    
+        if (fre>0&&fre<300) {
+            if (position.y> 500) {
+                position.y -= 3;
+            }
+            if (position.y<500) {
+                position.y = 500;
+            }
+        }
+        else if(fre >= 300&&fre<700){
+            if (position.y>600) {
+                position.y-=3;
+            }
+            else if(position.y<600){
+                position.y+=10;
+            }
+        }
+        else if(fre >= 700){
+            if (position.y<700) {
+                position.y+=3;
+            }
+            else
+                position.y = 700;
+        }
+    
+    }
+    else {
+        if (position.y > 500) {
+            position.y -=3;
+        }
+        if (position.y<=500) {
+            position.y = 500;
+        }
+    }
+    
+    butterfly.position = ccp(position.x+2, position.y);
+    
     [self detectCollision];
 }
 
-- (void)dealloc {
-    [levelTimer invalidate];
-    levelTimer = nil;
-	[levelTimer release];
-  	[super dealloc];
-}
 
 -(void)updateScene
 {
@@ -160,22 +224,26 @@
         label_3.position = ccp(size.width /2 - 75, label_3.position.y);
         label_4.string = @"and the tree leaves are swaying.";
         label_4.position = ccp(size.width /2 - 40+ 10, label_4.position.y);
+        CCSprite* butterfly = (CCSprite*)[self getChildByTag:10];
+        [butterfly setVisible:false];
+        [bloomLabel setVisible:false];
+        [swayLabel setVisible:false];
     }
 }
 
 -(void)detectCollision
 {
-    CGPoint footPosition = [footprintManager getLatestPosition];
-    
-    //For faith
-    if(footPosition.y == bloomPosition.y && abs(footPosition.x - bloomPosition.x) <= collisionThreshold)
+    //CGPoint footPosition = [footprintManager getLatestPosition];
+    CCSprite* butterfly = (CCSprite*)[self getChildByTag:10];
+    CGPoint position = butterfly.position;
+
+    if(position.y == bloomPosition.y && abs(position.x - bloomPosition.x) <= 20)
     {
         bloomCollected = true;
         bloomLabel.visible = false;
     }
     
-    //For courage
-    if(footPosition.y == swayPosition.y && abs(footPosition.x - swayPosition.x) <= collisionThreshold)
+    if(position.y == swayPosition.y && abs(position.x - swayPosition.x) <= 20)
     {
         swayCollected = true;
         swayLabel.visible = false;
@@ -188,8 +256,4 @@
     }
 }
 
--(void)updateFootOpacity:(ccTime)dt
-{
-    [footprintManager updateOpacity:dt];
-}
 @end

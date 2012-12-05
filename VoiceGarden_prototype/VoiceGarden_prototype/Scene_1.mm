@@ -34,7 +34,7 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"garden_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         int _fontSize = 30;
