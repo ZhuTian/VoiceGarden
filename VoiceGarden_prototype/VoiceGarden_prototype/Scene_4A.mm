@@ -10,6 +10,7 @@
 #import "Scene_3A.h"
 #import "Scene_5A.h"
 #import "Scene_5D.h"
+#import "GlobalVariable.h"
 
 @implementation Scene_4A
 @synthesize sceneStatus;
@@ -132,6 +133,13 @@
 		
 		// Add the menu to the layer
 		[self addChild:menu];
+        
+        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+            keySprite.scale = 0.3;
+            keySprite.position = ccp(900, 100);
+            [self addChild:keySprite];
+        }
         
 	}
 	return self;

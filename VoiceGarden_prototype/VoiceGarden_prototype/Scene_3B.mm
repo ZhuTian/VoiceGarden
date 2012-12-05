@@ -9,6 +9,7 @@
 #import "Scene_4C.h"
 #import "Scene_3B.h"
 #import "AudioManager.h"
+#import "GlobalVariable.h"
 #define _fontSize 30
 
 
@@ -146,6 +147,13 @@
         
         spawnPosition[7].x = size.width/2 ;
         spawnPosition[7].y = size.height/2 - 200 ;
+        
+        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+            keySprite.scale = 0.3;
+            keySprite.position = ccp(900, 100);
+            [self addChild:keySprite];
+        }
         
 	}
 	return self;

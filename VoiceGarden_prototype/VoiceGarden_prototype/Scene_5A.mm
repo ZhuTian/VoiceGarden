@@ -9,6 +9,7 @@
 #import "Scene_5A.h"
 #import "Scene_7A.h"
 #import "AudioManager.h"
+#import "GlobalVariable.h"
 
 @implementation Scene_5A
 @synthesize sceneStatus;
@@ -256,6 +257,13 @@
     friendshipLabel.position = ccp(temp, friendshipLabel.position.y);
     
     [self detectCollision];
+    
+    if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+        CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+        keySprite.scale = 0.3;
+        keySprite.position = ccp(900, 100);
+        [self addChild:keySprite];
+    }
 
     
 }

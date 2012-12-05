@@ -50,12 +50,12 @@
         [self addChild: background];
         
         label_1 = [CCLabelTTF labelWithString:@"I see a shimmering reflection of myself." fontName:fontName fontSize:sceneFontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
+		label_1.position =  ccp( size.width /2  , size.height/2 + 60);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"I am ready to               ." fontName:fontName fontSize:sceneFontSize];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
+		label_2.position =  ccp( size.width /2 - 100, size.height/2 );
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
 		
@@ -64,7 +64,7 @@
         }];
         [go setFontName:fontName];
         [go setFontSize:sceneFontSize];
-        [go setPosition:ccp( size.width/2 + 70, size.height/2 - 100)];
+        [go setPosition:ccp( size.width/2  - 10, size.height/2)];
         [go setIsEnabled:false];
         [go setColor:ccc3(0,0,0)];
         
@@ -72,7 +72,7 @@
             ;
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:sceneFontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -81,7 +81,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:sceneFontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
@@ -115,18 +115,17 @@
         footPrintRight.position = ccp(100, 135);
         [self addChild:footPrintRight z:2 tag:2];
         
-        rock_1 = [CCSprite spriteWithFile:@"I_rock.png"];
-        rock_1.position = ccp(230, 180);
-        [self addChild:rock_1];
-        
-        rock_2 = [CCSprite spriteWithFile:@"I_rock.png"];
-        rock_2.position = ccp(700, 240);
-        [self addChild:rock_2];
-        
         status = 1;
         timer = 30;
         isLeft = false;
         [self scheduleUpdate];
+        
+        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+            keySprite.scale = 0.3;
+            keySprite.position = ccp(900, 100);
+            [self addChild:keySprite];
+        }
         
 	}
 	return self;
@@ -142,6 +141,15 @@
     {
         [go setIsEnabled:true];
         [go setColor:ccc3(100, 100, 100)];
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [go runAction: [CCSequence actions:action, action2, nil]];
+        [go runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
     }
     
     key.visible = [GlobalVariable sharedInstance].haveKey;
@@ -156,22 +164,7 @@
             status = 2;
         }
     }
-    else if(status == 2){
-        CGPoint orig_position = rock_1.position;
-        if(rock_1.position.y>120){
-            if(orig_position.x<270){
-                rock_1.position = ccp(orig_position.x+dt*20, orig_position.y);
-            }
-            else{
-                rock_1.position = ccp(orig_position.x+dt*80, orig_position.y-dt*120);
-            }
-            rock_1.rotation = rock_1.rotation+dt*50;
-        }
-        else{
-            status = 3;
-        }
-    }
-    else if (status== 3){
+    else if (status== 2){
         timer -- ;
         if(timer==0){
             if(isLeft==false){
@@ -203,26 +196,6 @@
         }
     }
     else if(status == 4){
-        if(volumn>-20){
-            status = 5;
-        }
-    }
-    else if(status ==5){
-        CGPoint orig_position = rock_2.position;
-        if(rock_2.position.y>200){
-            if(orig_position.x<750){
-                rock_2.position = ccp(orig_position.x+dt*20, orig_position.y);
-            }
-            else{
-                rock_2.position = ccp(orig_position.x+dt*80, orig_position.y-dt*120);
-            }
-            rock_2.rotation = rock_2.rotation+dt*50;
-        }
-        else{
-            status = 6;
-        }
-    }
-    else if(status == 6){
         timer -- ;
         if(timer==0){
             if(isLeft==false){

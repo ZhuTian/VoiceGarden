@@ -9,7 +9,7 @@
 #import "Scene_5B.h"
 #import "Scene_4C.h"
 #import "AudioManager.h"
-
+#import "GlobalVariable.h"
 
 @implementation Scene_5B
 @synthesize sceneStatus;
@@ -152,6 +152,13 @@
         [self addChild:butterflySprite z:10 tag:10];
         
         [self scheduleUpdate];
+        
+        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+            keySprite.scale = 0.3;
+            keySprite.position = ccp(900, 100);
+            [self addChild:keySprite];
+        }
         
 	}
 	return self;

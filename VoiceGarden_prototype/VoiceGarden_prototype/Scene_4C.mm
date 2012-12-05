@@ -9,8 +9,8 @@
 #import "Scene_4C.h"
 #import "Scene_5B.h"
 #import "Scene_5C.h"
+#import "GlobalVariable.h"
 #define _fontSize 30
-
 
 @implementation Scene_4C
 
@@ -83,6 +83,15 @@
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
         
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id actionMove = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id actionMove2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [spring runAction: [CCSequence actions:actionMove, actionMove2, nil]];
+        [spring runAction:[CCRepeatForever actionWithAction:[CCSequence actions:actionMove, actionMove2, nil]]];
+        
+        
         key = [CCMenuItemFont itemWithString:@"secret" block:^(id sender){
             if(self.sceneStatus == 2)
             {
@@ -134,6 +143,13 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
+        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+            keySprite.scale = 0.3;
+            keySprite.position = ccp(900, 100);
+            [self addChild:keySprite];
+        }
+        
 	}
 	return self;
 }
@@ -151,6 +167,15 @@
         [key setIsEnabled:true];
         [key setString:@"key"];
         [key setColor:ccc3(100, 100, 100)];
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [key runAction: [CCSequence actions:action, action2, nil]];
+        [key runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+            
     }
     else if(self.sceneStatus == 3)
     {
@@ -163,6 +188,16 @@
         [key setIsEnabled:true];
         [key setString:@"key"];
         [key setColor:ccc3(100, 100, 100)];
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [key runAction: [CCSequence actions:action, action2, nil]];
+        [key runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
+        
     }
 }
 

@@ -24,7 +24,7 @@
 	
 	// 'layer' is an autorelease object.
 	Scene_5C *layer;
-    //layer.sceneType = _sceneType;
+    
     layer= [Scene_5C node];
     layer.sceneStatus = _sceneType;
     [layer updateScene];
@@ -44,15 +44,18 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"key_bg.png"];
+  /*      CCSprite* background;
+            background = [CCSprite spriteWithFile:@"key_bg_fall.png"];
+        
+            background = [CCSprite spriteWithFile:@"key_spring_bg.png"];
+       
+        
         background.position = ccp(size.width/2, size.height/2);
-        background.scaleX = 0.5;
-        background.scaleY = 0.5;
         
         // add the label as a child to this Layer
         [self addChild: background z:0 tag:10];
         
-        label_1 = [CCLabelTTF labelWithString:@"It looks like autumn in the garden." fontName:fontName fontSize:sceneFontSize];
+ */      label_1 = [CCLabelTTF labelWithString:@"It looks like autumn in the garden." fontName:fontName fontSize:sceneFontSize];
 		label_1.position =  ccp( size.width /2 - 15 , size.height/2+100);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
@@ -88,6 +91,7 @@
             //[GlobalVariable sharedInstance].haveKey = true;
             //[self updateScene];
         }];
+        
         [key_button setFontName:fontName];
         [key_button setFontSize:sceneFontSize];
         [key_button setPosition:ccp( size.width/2 + 75, size.height/2 + 50)];
@@ -166,15 +170,29 @@
 {
     if(self.sceneStatus == 1)
     {
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        CCSprite* background;
+        background = [CCSprite spriteWithFile:@"key_bg_fall.png"];
+        background.position = ccp(size.width/2, size.height/2);
         
+        // add the label as a child to this Layer
+        [self addChild: background z:-1 tag:10];
     }
     else if(self.sceneStatus == 2)
     {
+        
         CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        CCSprite* background;
+        background = [CCSprite spriteWithFile:@"key_spring_bg.png"];
+        background.position = ccp(size.width/2, size.height/2);
+        
+        // add the label as a child to this Layer
+        [self addChild: background z:-1 tag:10];
         
         label_1.string = @"It's         .";
         label_2.string = @"The bird remembers the garden with blooming flowers.";
-        label_3.string = @"She is back with the       .";
+        label_3.string = @"She is back with the key  .";
         label_4.string = @"I need to save the garden.";
         label_3.visible = true;
         label_4.visible = true;
@@ -183,6 +201,15 @@
         label_2.position =  ccp( size.width /2 + 130, size.height/2+100);
         
         spring.visible = true;
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [spring runAction: [CCSequence actions:action, action2, nil]];
+        [spring runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
+        
         
         CCSprite* flower_1 = [CCSprite spriteWithFile:@"key_flower.png"];
         CCSprite* flower_2 = [CCSprite spriteWithFile:@"key_flower.png"];
@@ -209,7 +236,7 @@
             floweRotation[i] = 0;
         }
         
-        [key_button setVisible:true];
+        [key_button setVisible:false];
         
         if([GlobalVariable sharedInstance].haveKey == true){
             [flower_1 setVisible:false];

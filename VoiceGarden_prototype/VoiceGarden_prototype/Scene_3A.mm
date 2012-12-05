@@ -174,6 +174,13 @@ extern bool haveKey;
         [self initWinds];
         [self scheduleUpdate];
         
+        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+            keySprite.scale = 0.3;
+            keySprite.position = ccp(900, 100);
+            [self addChild:keySprite];
+        }
+        
 	}
 	return self;
 }
