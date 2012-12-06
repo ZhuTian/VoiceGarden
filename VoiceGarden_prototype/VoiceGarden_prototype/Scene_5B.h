@@ -8,7 +8,6 @@
 
 #import "cocos2d.h"
 #import "CCLayer.h"
-#import "FootprintManager_old.h"
 
 @interface Scene_5B : CCLayer
 {
@@ -18,8 +17,6 @@
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
-    
-    FootprintManager_old* footprintManager;
     
     CGPoint bloomPosition;
     CGPoint swayPosition;

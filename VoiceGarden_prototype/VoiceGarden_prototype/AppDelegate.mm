@@ -10,8 +10,6 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
-#import "Layer_2.h"
-#import "HelloWorldLayer.h"
 #import "AudioManager.h"
 
 @implementation AppController

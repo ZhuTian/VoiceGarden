@@ -9,7 +9,6 @@
 
 // Import the interfaces
 #import "IntroLayer.h"
-#import "HelloWorldLayer.h"
 #import "Scene_1.h"
 #import "Scene_2.h"
 #import "Scene_3B.h"
