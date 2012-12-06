@@ -12,6 +12,7 @@
 #import "Scene_5D.h"
 #import "GlobalVariable.h"
 
+
 @implementation Scene_4A
 @synthesize sceneStatus;
 @synthesize preSceneStatus;
@@ -46,7 +47,7 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        background = [CCSprite spriteWithFile:@"path_fear_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer

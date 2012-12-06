@@ -37,7 +37,7 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"bg1.jpg"];
+        CCSprite* background = [CCSprite spriteWithFile:@"life_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
@@ -63,6 +63,15 @@
         [XXX setPosition:ccp( size.width/2 + 50, size.height/2 - 160)];
         [XXX setIsEnabled:true];
         [XXX setColor:ccc3(100,100,100)];
+        
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id actionXXX = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id actionXXX2 = [CCEaseOut actionWithAction:move2 rate:1];
+        
+        [XXX runAction: [CCSequence actions:actionXXX, actionXXX2, nil]];
+        [XXX runAction:[CCRepeatForever actionWithAction:[CCSequence actions:actionXXX, actionXXX2, nil]]];
+        
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
             //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:2] withColor:ccWHITE]];

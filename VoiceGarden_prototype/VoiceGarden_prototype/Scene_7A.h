@@ -14,7 +14,6 @@
 @private
     CCMenuItemFont *secret;
     CCMenuItemFont *open;
-    CCMenuItemImage *key;
     CCMenuItemFont *action_button;
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;

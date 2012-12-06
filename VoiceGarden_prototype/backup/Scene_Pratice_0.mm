@@ -9,7 +9,6 @@
 #import "Scene_Pratice_0.h"
 #import "Scene_Pratice_1.h"
 #import "AudioManager.h"
-#import "StartScene.h"
 #define sceneFontSize 20
 
 @implementation Scene_Pratice_0
@@ -88,16 +87,8 @@
         label_5.color = ccc3(0, 0, 0);
 		[self addChild: label_5];
         
-        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
-        }];
-        [back setFontName:fontName];
-        [back setFontSize:sceneFontSize];
-        [back setPosition:ccp(100, 30)];
-        [back setColor:ccc3(100,100,100)];
         
-        
-        CCMenuItem *menu = [CCMenu menuWithItems:button_next, back, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:button_next, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];

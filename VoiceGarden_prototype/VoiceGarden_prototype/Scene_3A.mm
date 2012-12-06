@@ -45,7 +45,7 @@ extern bool haveKey;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"desolate_wind.png"];
+        CCSprite* background = [CCSprite spriteWithFile:@"desolate_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
@@ -137,14 +137,6 @@ extern bool haveKey;
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        key = [CCMenuItemImage itemWithNormalImage:@"key.png" selectedImage:@"key.png" block:^(id sender) {
-            //            [jump setString:@"Forward"];
-        }];
-        [key setPosition:ccp(size.width/2, size.height - 150)];
-        [key setScale:0.3f];
-        key.visible = false;
-        
-        
         CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
             if(self.sceneStatus == 1)
             {
@@ -158,7 +150,7 @@ extern bool haveKey;
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:road, action, wind, key, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:road, action, wind, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -250,7 +242,6 @@ extern bool haveKey;
         [wind runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
     }
     
-    key.visible = [GlobalVariable sharedInstance].haveKey;
 }
 
 

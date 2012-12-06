@@ -85,15 +85,7 @@
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
-        
-        key = [CCMenuItemImage itemWithNormalImage:@"key.png" selectedImage:@"key.png" block:^(id sender) {
-            //            [jump setString:@"Forward"];
-        }];
-        [key setPosition:ccp(size.width/2, size.height - 150)];
-        [key setScale:0.3f];
-        key.visible = false;
-        
-        CCMenuItem *menu = [CCMenu menuWithItems:go, action, key, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:go, action, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -151,22 +143,15 @@
         [go runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
         
     }
-    
-    key.visible = [GlobalVariable sharedInstance].haveKey;
 }
 
 -(void)update:(ccTime)dt
 {
-    float volumn = [[AudioManager sharedInstance] getAverageVolume];
-    NSLog(@"%f",volumn);
-    if (status == 1) {
-        if(volumn>-20){
-            status = 2;
-        }
-    }
-    else if (status== 2){
-        timer -- ;
-        if(timer==0){
+    float volume = [[AudioManager sharedInstance] getAverageVolume];
+    //NSLog(@"%f",volumn);
+    if (volume>-20&&status !=7) {
+        timer--;
+        if (timer==0) {
             if(isLeft==false){
                 if(footPrintRight.position.x<350){
                     footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y);
@@ -176,6 +161,15 @@
                     footPrintRight.rotation = -15;
                     footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
                     isLeft = true;
+                }
+                else if(footPrintRight.position.x<900&&footPrintRight.position.x>550){
+                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
+                    isLeft = true;
+                }
+                else{
+                    self.sceneStatus = 2;
+                    [self updateScene];
+                    status = 7;
                 }
             }
             else{
@@ -188,29 +182,7 @@
                     footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y+10);
                     isLeft = false;
                 }
-                else{
-                    status = 4;
-                }
-            }
-            timer = 30;
-        }
-    }
-    else if(status == 4){
-        timer -- ;
-        if(timer==0){
-            if(isLeft==false){
-                if(footPrintRight.position.x<900){
-                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
-                    isLeft = true;
-                }
-                else{
-                    self.sceneStatus = 2;
-                    [self updateScene];
-                    status = 7;
-                }
-            }
-            else{
-                if(footPrintLeft.position.x<900){
+                else if(footPrintLeft.position.x<900&&footPrintLeft.position.x>550){
                     footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y+10);
                     isLeft = false;
                 }

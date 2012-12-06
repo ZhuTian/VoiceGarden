@@ -117,15 +117,7 @@
         [action_button setPosition:ccp( size.width - 100, 30)];
         [action_button setColor:ccc3(100,100,100)];
         
-        
-        key = [CCMenuItemImage itemWithNormalImage:@"key.png" selectedImage:@"key.png" block:^(id sender) {
-            //            [jump setString:@"Forward"];
-        }];
-        [key setPosition:ccp(size.width/2, size.height - 150)];
-        [key setScale:0.3f];
-        key.visible = false;
-        
-        CCMenuItem *menu = [CCMenu menuWithItems:open, key, secret, action_button, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:open, secret, action_button, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -149,10 +141,24 @@
 {
     if(self.sceneStatus == 1)
     {
-        ;
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        CCSprite* background = [CCSprite spriteWithFile:@"door_bg.png"];
+        background.position = ccp(size.width/2, size.height/2);
+        
+        // add the label as a child to this Layer
+        [self addChild: background z:-1];
+        
+
     }
     else if(self.sceneStatus == 2)
     {
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        CCSprite* background = [CCSprite spriteWithFile:@"door_bg.png"];
+        background.position = ccp(size.width/2, size.height/2);
+        
+        // add the label as a child to this Layer
+        [self addChild: background z:-1];
+        
         [open setIsEnabled:false];
         open.visible = false;
         secret.visible = true;
@@ -175,6 +181,15 @@
     }
     else if(self.sceneStatus == 3)
     {
+        
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        CCSprite* background = [CCSprite spriteWithFile:@"door_open.png"];
+        background.position = ccp(size.width/2, size.height/2);
+        
+        // add the label as a child to this Layer
+        [self addChild: background z:-1];
+        
+        
         [open setIsEnabled:true];
         [open setColor:ccc3(100, 100, 100)];
         id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
@@ -185,7 +200,5 @@
         [open runAction: [CCSequence actions:action, action2, nil]];
         [open runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
     }
-    
-    key.visible = [GlobalVariable sharedInstance].haveKey;
 }
 @end

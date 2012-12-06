@@ -8,6 +8,8 @@
 
 #import "StartScene.h"
 #import "Scene_1.h"
+#import "L1_Scene_1.h"
+#import "Scene_Pratice_0.h"
 
 @implementation StartScene
 
@@ -55,7 +57,7 @@
         
         
         CCMenuItemFont *button_tutorial = [CCMenuItemFont itemWithString:@"Tutorial" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_0 scene] withColor:ccWHITE]];
         }];
         [button_tutorial setFontName:fontName];
         [button_tutorial setFontSize:_fontSize];
@@ -63,7 +65,7 @@
         [button_tutorial setColor:ccc3(0,0,0)];
         
         CCMenuItemFont *button_level1 = [CCMenuItemFont itemWithString:@"Level 1" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[L1_Scene_1 sceneWithPreviousScene:nil PreviousStatus:0 SceneStatus:0] withColor:ccWHITE]];
         }];
         [button_level1 setFontName:fontName];
         [button_level1 setFontSize:_fontSize];
@@ -71,7 +73,7 @@
         [button_level1 setColor:ccc3(0,0,0)];
         
         CCMenuItemFont *button_level2 = [CCMenuItemFont itemWithString:@"Level 2" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_1 scene] withColor:ccWHITE]];
         }];
         [button_level2 setFontName:fontName];
         [button_level2 setFontSize:_fontSize];

@@ -13,7 +13,6 @@
 @private
     CCMenuItemFont *road;
     CCMenuItemFont *wind;
-    CCMenuItemImage *key;
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;

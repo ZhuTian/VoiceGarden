@@ -13,7 +13,6 @@
 {
 @private
     CCMenuItemFont *go;
-    CCMenuItemImage *key;
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
@@ -21,8 +20,6 @@
     
     CCSprite* footPrintLeft;
     CCSprite* footPrintRight;
-    CCSprite* rock_1;
-    CCSprite* rock_2;
     
     int status;
     int timer;

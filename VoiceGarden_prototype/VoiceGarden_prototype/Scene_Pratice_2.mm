@@ -1,23 +1,23 @@
 //
-//  Scene_Pratice_0.m
+//  Scene_Pratice_1.m
 //  VoiceGarden_prototype
 //
-//  Created by Fangzhou Lu on 12/2/12.
+//  Created by Fangzhou Lu on 11/30/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Scene_Pratice_0.h"
-#import "Scene_Pratice_1.h"
+#import "Scene_Pratice_2.h"
+#import "Scene_Pratice_3.h"
 #import "AudioManager.h"
 #import "StartScene.h"
 #define sceneFontSize 20
 
-@implementation Scene_Pratice_0
+@implementation Scene_Pratice_2
 +(CCScene*)scene
 {
     CCScene *scene = [CCScene node];
     
-    Scene_Pratice_0 *layer = [Scene_Pratice_0 node];
+    Scene_Pratice_2 *layer = [Scene_Pratice_2 node];
     
     [scene addChild:layer];
     
@@ -55,35 +55,37 @@
         label_4.color = ccc3(0, 0, 0);
 		[self addChild: label_4];
         
-        
-        CCSprite* barBgSprite = [CCSprite spriteWithFile:@"volume1_bar_bg.png"];
+        CCSprite* barBgSprite = [CCSprite spriteWithFile:@"duration_bar_bg.png"];
         barBgSprite.position = ccp(size.width/2, size.height/2);
         [self addChild:barBgSprite];
         
-        barSprite = [CCSprite spriteWithFile:@"volume1_bar_top.png"];
+        barSprite = [CCSprite spriteWithFile:@"duration_bar_top.png"];
         barTimer = [CCProgressTimer progressWithSprite:barSprite];
         barTimer.type = kCCProgressTimerTypeBar;
         barTimer.barChangeRate = ccp(1, 0);
         barTimer.midpoint = ccp(0.0f, 0.0f);
-        barTimer.percentage = 33;
+        barTimer.percentage = 36;
         barTimer.position = ccp(size.width/2, size.height/2);
         [self addChild:barTimer];
         
+        indicator = [CCSprite spriteWithFile:@"horizontalIndicator.png"];
+        indicator.position = ccp(size.width/2, size.height/2-17);
+        [self addChild:indicator];
+  
         button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_1 scene] withColor:ccWHITE]];
+              [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_3 scene] withColor:ccWHITE]];
         }];
         [button_next setFontName:fontName];
         [button_next setFontSize:30];
         [button_next setPosition:ccp( size.width/2 + 220, size.height/2 - 20)];
         [button_next setColor:ccc3(100,100,100)];
-        
         [button_next setVisible:false];
         
         CCSprite* talkBubble = [CCSprite spriteWithFile:@"talkBubble.png"];
         talkBubble.position = ccp(size.width/2, size.height/2 + 50);
         [self addChild:talkBubble];
         
-        CCLabelTTF* label_5 = [CCLabelTTF labelWithString:@"Expirement with your voice. Any sound will do." fontName:fontName fontSize:17];
+        CCLabelTTF* label_5 = [CCLabelTTF labelWithString:@"Sustain your voice to fill the bar." fontName:fontName fontSize:17];
 		label_5.position =  ccp(size.width /2 , size.height/2 - 175);
         label_5.color = ccc3(0, 0, 0);
 		[self addChild: label_5];
@@ -106,8 +108,6 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
-        livePoints = 0;
-        isNoisy = false;
         isDone = false;
         
         [self scheduleUpdate];
@@ -119,57 +119,34 @@
 -(void)update:(ccTime)dt
 {
     float volume = [[AudioManager sharedInstance] getAverageVolume];
-    
-    if (volume>-15&&isNoisy==false) {
-        isNoisy=true;
-        livePoints++;
-    
-        float per=0;
-    
-        switch (livePoints) {
-            case 0:
-                per = 35.0f;
-                break;
-            case 1:
-                per = 39.0f;
-                break;
-            case 2:
-                per = 43.0f;
-                break;
-            case 3:
-                per = 47.0f;
-                break;
-            case 4:
-                per = 51.0f;
-                break;
-            case 5:
-                per = 57.0f;
-                break;
-            case 6:
-                per = 61.0f;
-                break;
-            case 7:
-                per = 67.0f;
-                [self updateScene];
-                
-                break;
-            default:
-                per = 67.0f;
-                break;
+
+    if (isDone==false) {
+        if (volume>-25) {
+            barTimer.percentage+=dt*10;
+        }
+        else{
+            barTimer.percentage-=dt*5;
         }
         
-        barTimer.percentage = per;
-                
-        
+        if (barTimer.percentage<35) {
+            barTimer.percentage=35.0f;
+        }
+        else if(barTimer.percentage>=64){
+            barTimer.percentage = 64.0f;
+            isDone = true;
+            [self updateScene];
+        }
+    
+        float per = (barTimer.percentage - 35.0f)/29.0f;
+    
+        CGPoint position = barTimer.position;
+        CGSize barSize = barTimer.contentSize;
+        float barWidth = barSize.width * 0.29f;
+        float startPosition = position.x - barWidth/2;
+        float indicatorPosition = startPosition + barWidth*per;
+        indicator.position = ccp(indicatorPosition, indicator.position.y);
     }
-    
-    if (volume<-40) {
-        isNoisy = false;
-    }
-    
-    
-    
-   // NSLog(@"%d,%f",livePoints,barTimer.percentage);
+
     
 }
 

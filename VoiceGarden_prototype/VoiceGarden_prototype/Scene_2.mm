@@ -10,6 +10,7 @@
 #import "Scene_3B.h"
 #import "GlobalVariable.h"
 #import "Scene_3A.h"
+#import "StartScene.h"
 
 @implementation Scene_2
 @synthesize sceneStatus;
@@ -57,7 +58,7 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        background = [CCSprite spriteWithFile:@"garden_bg.png"];
+        background = [CCSprite spriteWithFile:@"openeyes_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer
@@ -132,15 +133,16 @@
         [slience_XXX runAction: [CCSequence actions:action_2, action2_2, nil]];
         [slience_XXX runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
-        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+        back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
         }];
         [back setFontName:fontName];
         [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
+        [back setVisible:false];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:desolate_beautiful, slience_XXX, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:desolate_beautiful, slience_XXX, back, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -153,7 +155,7 @@
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
             keySprite.scale = 0.3;
             keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
+            [self addChild:keySprite z: 10 tag:20];
         }
         
 	}
@@ -177,8 +179,21 @@
     else if(self.sceneStatus == 4)
     {
         [slience_XXX setString:@"life"];
+        [slience_XXX stopAllActions];
+        [slience_XXX setIsEnabled:false];
+        [slience_XXX setColor:ccc3(0, 0, 0)];
+        
         [desolate_beautiful setString:@"thriving"];
-        [background setTexture:[[CCTextureCache sharedTextureCache] addImage:@"bg5.jpg"]];
+        [desolate_beautiful stopAllActions];
+        [desolate_beautiful setIsEnabled:false];
+        [desolate_beautiful setColor:ccc3(0, 0, 0)];
+        
+        [background setTexture:[[CCTextureCache sharedTextureCache] addImage:@"garden_life.png"]];
+        
+        CCSprite* key = (CCSprite*)[self getChildByTag:20];
+        [key setVisible:false];
+     
+        [back setVisible:true];
     }
 }
 

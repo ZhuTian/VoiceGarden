@@ -13,6 +13,7 @@
     @private
     CCMenuItemFont *desolate_beautiful;
     CCMenuItemFont *slience_XXX;
+    CCMenuItemFont *back;
     CCSprite* background;
     
     @public

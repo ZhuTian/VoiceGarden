@@ -9,6 +9,7 @@
 #import "Scene_Pratice_3.h"
 #import "AudioManager.h"
 #import "StartScene.h"
+
 #define sceneFontSize  20
 
 @implementation Scene_Pratice_3
@@ -62,8 +63,8 @@
         slider.position = ccp(size.width/2+26, size.height/2);
         [self addChild:slider];
         
-        button_next = [CCMenuItemFont itemWithString:@"I'm ready" block:^(id sender){
-              //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_Pratice_2 scene] withColor:ccWHITE]];
+        button_next = [CCMenuItemFont itemWithString:@"next" block:^(id sender){
+              [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
         }];
         [button_next setFontName:fontName];
         [button_next setFontSize:30];
@@ -71,15 +72,7 @@
         [button_next setColor:ccc3(100,100,100)];
         [button_next setVisible:false];
         
-        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
-        }];
-        [back setFontName:fontName];
-        [back setFontSize:sceneFontSize];
-        [back setPosition:ccp(100, 30)];
-        [back setColor:ccc3(100,100,100)];
-        
-        CCMenuItem *menu = [CCMenu menuWithItems:button_next, back, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:button_next, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -92,7 +85,7 @@
         talkBubble.position = ccp(size.width/2, size.height/2 - 10);
         [self addChild:talkBubble];
         
-        CCLabelTTF* label_5 = [CCLabelTTF labelWithString:@"Explore with different tones. Make sure to hold it." fontName:fontName fontSize:17];
+        CCLabelTTF* label_5 = [CCLabelTTF labelWithString:@"Sustain your voice to fill the bar." fontName:fontName fontSize:17];
 		label_5.position =  ccp(size.width /2 , size.height/2 - 235);
         label_5.color = ccc3(0, 0, 0);
 		[self addChild: label_5];
@@ -124,9 +117,9 @@
             fre = 0;
         }
     
-        if (fre>325&&fre<400) {
+        if (fre>650&&fre<800) {
             timer++;
-            if (timer>90) {
+            if (timer>180) {
                 isDone = true;
                 [self updateScene];
             }
@@ -135,11 +128,11 @@
             timer = 0;
     
     
-        if (fre>500) {
-            fre = 500.0f;
+        if (fre>1000) {
+            fre = 1000.0f;
         }
     
-        float cubePositionY = fre*longY/500.0f;
+        float cubePositionY = fre*longY/1000.0f;
         target = startY+cubePositionY;
     
         slider.position = ccp(slider.position.x, position.y+(target-position.y)/3);
