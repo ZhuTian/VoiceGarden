@@ -52,12 +52,12 @@
         
         
         label_1 = [CCLabelTTF labelWithString:@"Life comes into my garden." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 40);
+		label_1.position =  ccp( size.width /2 , size.height/2 - 120);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"The garden is            again." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 100);
+		label_2.position =  ccp( size.width /2 , size.height/2 - 180);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
         
@@ -69,7 +69,7 @@
         }];
         [thriving setFontName:fontName];
         [thriving setFontSize:_fontSize];
-        [thriving setPosition:ccp( size.width/2 + 40, size.height/2 - 100)];
+        [thriving setPosition:ccp( size.width/2 + 40, size.height/2 - 180)];
         [thriving setIsEnabled:true];
         [thriving setColor:ccc3(100, 100, 100)];
         
