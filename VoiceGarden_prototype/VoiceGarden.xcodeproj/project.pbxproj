@@ -1511,6 +1511,7 @@
 					"-lz",
 					"-lfmodex_iphoneos",
 				);
+				PRODUCT_NAME = VoiceGarden;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1535,6 +1536,7 @@
 					"-lz",
 					"-lfmodex_iphoneos",
 				);
+				PRODUCT_NAME = VoiceGarden;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
