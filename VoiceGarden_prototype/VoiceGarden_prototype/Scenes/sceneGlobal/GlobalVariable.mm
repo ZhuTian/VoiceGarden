@@ -13,6 +13,8 @@
 @synthesize isDesolate;
 @synthesize isSlience;
 @synthesize keyInThePocket;
+@synthesize SceneStack;
+@synthesize SceneStatusStack;
 
 
 + (GlobalVariable *)sharedInstance
@@ -27,7 +29,8 @@
         myInstance.isDesolate = true;
         myInstance.isSlience = true;
         myInstance.keyInThePocket = false;
-        // initialize variables here
+        myInstance.SceneStack = [[NSMutableArray alloc] init];
+        myInstance.SceneStatusStack = [[NSMutableArray alloc] init];
     }
     // return the instance of this class
     return myInstance;

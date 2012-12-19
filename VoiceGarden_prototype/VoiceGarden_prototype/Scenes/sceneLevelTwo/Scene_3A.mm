@@ -45,11 +45,8 @@ extern bool haveKey;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"desolate_bg.png"];
-        background.position = ccp(size.width/2, size.height/2);
         
-        // add the label as a child to this Layer
-        [self addChild: background];
+        [self initSprites];
         
         label_1 = [CCLabelTTF labelWithString:@"I look to my left." fontName:fontName fontSize:sceneFontSize];
 		label_1.position =  ccp( size.width /2 - 120, size.height/2+200);
@@ -111,7 +108,7 @@ extern bool haveKey;
         [road runAction: [CCSequence actions:action_2, action2_2, nil]];
         [road runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
-        wind = [CCMenuItemFont itemWithString:@"wind" block:^(id sender){
+        wind_button = [CCMenuItemFont itemWithString:@"wind" block:^(id sender){
             if([GlobalVariable sharedInstance].haveKey)
             {
                 [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:2] withColor:ccWHITE]];
@@ -122,18 +119,18 @@ extern bool haveKey;
                 [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:1] withColor:ccWHITE]];
             }
         }];
-        [wind setFontName:fontName];
-        [wind setFontSize:sceneFontSize];
-        [wind setPosition:ccp( size.width/2 + 35, size.height/2 + 50)];
-        [wind setIsEnabled:false];
-        [wind setColor:ccc3(0,0,0)];
+        [wind_button setFontName:fontName];
+        [wind_button setFontSize:sceneFontSize];
+        [wind_button setPosition:ccp( size.width/2 + 35, size.height/2 + 50)];
+        [wind_button setIsEnabled:false];
+        [wind_button setColor:ccc3(0,0,0)];
         
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+            
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:sceneFontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -146,24 +143,24 @@ extern bool haveKey;
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:sceneFontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:road, action, wind, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:road, action, wind_button, back, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z];
         
         
         isLoud = false;
         isBlowOver = false;
         whichWind = 1;
-        [self initWinds];
+        //[self initWinds];
         [self scheduleUpdate];
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
@@ -231,15 +228,15 @@ extern bool haveKey;
     }
     else if(self.sceneStatus == 2 || self.sceneStatus == 3)
     {
-        [wind setIsEnabled: true];
-        [wind setColor:ccc3(100, 100, 100)];
+        [wind_button setIsEnabled: true];
+        [wind_button setColor:ccc3(100, 100, 100)];
         label_5.string = @"I start to run to catch its word";
         id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
         id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
-        [wind runAction: [CCSequence actions:action_2, action2_2, nil]];
-        [wind runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
+        [wind_button runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [wind_button runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
     }
     
 }
@@ -336,6 +333,60 @@ extern bool haveKey;
             isBlowOver = false;
         }
     }
+}
+
+
+-(void)SceneTransition: (int)nextScene
+{
+    [[GlobalVariable sharedInstance].SceneStack addObject:[self class]];
+    [[GlobalVariable sharedInstance].SceneStatusStack addObject:[NSNumber numberWithInt:1]];
+    if(nextScene == 1)
+    {
+        //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+    }
+}
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    
+    //Add common background
+    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background z:BACKGROUND_Z];
+    
+    //Add Scene Sprites
+    
+    wind = [CCSprite spriteWithFile:@"wind.png"];
+    wind.position = ccp(size.width/2 + 50, size.height/2 - 50);
+    wind.scale = 0.8f;
+    wind.opacity = 255;
+    [self addChild: wind z:SCENE_Z];
+    
+    //id windAction = [CCFadeTo actionWithDuration:transitionTime opacity:150];
+    //[wind runAction:windAction];
+    
+    path = [CCSprite spriteWithFile:@"path.png"];
+    path.position = ccp(size.width/2 - 430, size.height/2 + 180);
+    path.scale = 0.5f;
+    path.opacity = 255;
+    [self addChild: path z:SCENE_Z];
+    
+    //id pathAction = [CCFadeTo actionWithDuration:transitionTime opacity:150];
+    //[path runAction:pathAction];
+    
+    desolate = [CCSprite spriteWithFile:@"desolate.png"];
+    desolate.position = ccp(size.width/2 - 150, size.height/2 - 50);
+    [self addChild: desolate z:SCENE_Z];
+    
+    garden = [CCSprite spriteWithFile:@"garden.png"];
+    garden.position = ccp(size.width/2 - 120, 120);
+    garden.scale = 1.0f;
+    garden.opacity = 255;
+    [self addChild: garden z:SCENE_Z];
+
+    
 }
 
 

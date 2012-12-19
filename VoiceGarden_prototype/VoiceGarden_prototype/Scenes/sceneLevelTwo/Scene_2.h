@@ -7,6 +7,7 @@
 //
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SceneCommon.h"
 
 @interface Scene_2 : CCLayer
 {
@@ -14,7 +15,20 @@
     CCMenuItemFont *desolate_beautiful;
     CCMenuItemFont *slience_XXX;
     CCMenuItemFont *back;
-    CCSprite* background;
+    CCSprite *desolate;
+    CCSprite *garden;
+    CCSprite *path;
+    CCSprite *silence;
+    CCSprite *wind;
+    CCSprite *background;
+    
+    float transitionTime;
+    int _nextScene;
+    
+    CCLabelTTF *label_1;
+    CCLabelTTF *label_2;
+    CCLabelTTF *label_3;
+    
     
     @public
     int sceneStatus;

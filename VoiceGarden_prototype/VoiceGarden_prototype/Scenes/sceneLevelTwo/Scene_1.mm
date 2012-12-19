@@ -47,7 +47,7 @@
         [self addChild:label];
        
         CCMenuItemFont *button_garden = [CCMenuItemFont itemWithString:@"garden" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+            [self SceneTransition:1];
         }];
         [button_garden setFontName:fontName];
         [button_garden setFontSize:_fontSize];
@@ -61,7 +61,15 @@
         [button_garden runAction: [CCSequence actions:action, action2, nil]];
         [button_garden runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:button_garden, nil];
+        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
+            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
+        }];
+        [back setFontName:fontName];
+        [back setFontSize:_fontSize];
+        [back setPosition:ccp(100, 30)];
+        [back setColor:ccc3(100,100,100)];
+        
+        CCMenuItem *menu = [CCMenu menuWithItems:button_garden, back, nil];
 		[menu setPosition:ccp( 0, 0)];
 		[self addChild:menu];
         
@@ -69,8 +77,24 @@
 	return self;
 }
 
+-(void)SceneTransition: (int)nextScene
+{
+    [[GlobalVariable sharedInstance].SceneStack addObject:[self class]];
+    [[GlobalVariable sharedInstance].SceneStatusStack addObject:[NSNumber numberWithInt:1]];
+    if(nextScene == 1)
+    {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+    }
+}
+
+-(void)initSprites
+{
+    ;
+}
+
 -(void)dealloc
 {
+    
     [super dealloc];
 }
 

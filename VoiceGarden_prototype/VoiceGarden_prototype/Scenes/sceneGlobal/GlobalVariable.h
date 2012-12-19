@@ -16,6 +16,9 @@
     bool keyInThePocket;
     bool isSlience;
     bool isDesolate;
+    
+    NSMutableArray *SceneStack;
+    NSMutableArray *SceneStatusStack;
 }
 
 +(GlobalVariable *)sharedInstance;
@@ -23,5 +26,7 @@
 @property bool isSlience;
 @property bool isDesolate;
 @property bool keyInThePocket;
+@property(assign) NSMutableArray *SceneStack;
+@property(assign) NSMutableArray *SceneStatusStack;
 
 @end

@@ -7,6 +7,7 @@
 //
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SceneCommon.h"
 
 @interface Scene_1 : CCLayer
 {
