@@ -8,6 +8,7 @@
 
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SceneCommon.h"
 
 @interface Scene_5D : CCLayer
 {
@@ -19,6 +20,16 @@
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
+    CCLabelTTF *label_5;
+    
+    CCSprite *background;
+    CCSprite *path;
+    CCSprite *pond;
+    
+    //For next scene
+    CCSprite *door;
+    
+    int transitionTime;
     
 @public
     int sceneStatus;

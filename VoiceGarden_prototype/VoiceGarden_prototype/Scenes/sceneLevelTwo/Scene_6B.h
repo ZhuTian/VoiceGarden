@@ -8,6 +8,7 @@
 
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SceneCommon.h"
 
 @interface Scene_6B : CCLayer
 {
@@ -20,6 +21,13 @@
     
     CCSprite* footPrintLeft;
     CCSprite* footPrintRight;
+    
+    CCSprite *background;
+    CCSprite *pond;
+    CCSprite *door;
+    CCSprite *path;
+    
+    int transitionTime;
     
     int status;
     int timer;

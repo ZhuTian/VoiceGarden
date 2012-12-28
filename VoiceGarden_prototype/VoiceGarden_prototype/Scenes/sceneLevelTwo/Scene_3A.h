@@ -27,12 +27,18 @@
     CCSprite *path;
     CCSprite *garden;
     CCSprite *background;
+    CCSprite *footprint_path;
+    
+    //For wind message scene
+    CCSprite *wind_message;
     
     //New for volumn
     float percentage;
     bool isLoud;
     bool isBlowOver;
     int whichWind;
+    int transitionTime;
+    int _nextScene;
     
 @public
     int sceneStatus;

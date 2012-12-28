@@ -16,6 +16,11 @@
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;
     
+    CCSprite *background;
+    CCSprite *door;
+    
+    int transitionTime;
+    
 @public
     int sceneStatus;
 };

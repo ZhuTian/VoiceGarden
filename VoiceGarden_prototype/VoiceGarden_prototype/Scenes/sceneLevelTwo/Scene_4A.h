@@ -8,16 +8,33 @@
 
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SceneCommon.h"
 
 @interface Scene_4A : CCLayer
 {    @private
     CCMenuItemFont *my;
     CCMenuItemFont *company;
+    CCMenuItemFont *back;
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
+    
     CCSprite* background;
+    CCSprite *desolate;
+    CCSprite *path;
+    CCSprite *footprint_path;
+    CCSprite *fear;
+    
+    //For previous scene
+    CCSprite *wind;
+    CCSprite *garden;
+    
+    //For own way scene
+    CCSprite *pond;
+    
+    int transitionTime;
+    int _nextScene;
     
 @public
     int sceneStatus;

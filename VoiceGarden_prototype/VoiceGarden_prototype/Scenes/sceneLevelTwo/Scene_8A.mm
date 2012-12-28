@@ -44,22 +44,29 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"door_open.png"];
-        background.position = ccp(size.width/2, size.height/2);
         
-        // add the label as a child to this Layer
-        [self addChild: background];
+        [self initSprites];
+        transitionTime = 2.0f;
         
         
         label_1 = [CCLabelTTF labelWithString:@"Life comes into my garden." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 120);
+		label_1.position = ccp( size.width /2 - 450, size.height/2 + 100);
         label_1.color = ccc3(0, 0, 0);
+        label_1.opacity = 0;
+        label_1.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"The garden is            again." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 180);
+		label_2.position =  ccp( size.width /2 - 450, size.height/2 + 50);
         label_2.color = ccc3(0, 0, 0);
+        label_2.opacity = 0;
+        label_2.anchorPoint = ccp(0, 0.5);
 		[self addChild: label_2];
+        
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
         
         
         
@@ -69,16 +76,18 @@
         }];
         [thriving setFontName:fontName];
         [thriving setFontSize:_fontSize];
-        [thriving setPosition:ccp( size.width/2 + 40, size.height/2 - 180)];
+        [thriving setPosition:ccp( size.width/2 - 215, size.height/2 + 50)];
         [thriving setIsEnabled:true];
         [thriving setColor:ccc3(100, 100, 100)];
+        thriving.opacity = 0;
         
+        id fadein = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id actionTh = [CCEaseIn actionWithAction:move rate:1];
         id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id actionTh2 = [CCEaseOut actionWithAction:move2 rate:1];
         
-        [thriving runAction: [CCSequence actions:actionTh, actionTh2, nil]];
+        [thriving runAction: [CCSequence actions:fadein, actionTh, actionTh2, nil]];
         [thriving runAction:[CCRepeatForever actionWithAction:[CCSequence actions:actionTh, actionTh2, nil]]];
         
         
@@ -109,6 +118,25 @@
         
 	}
 	return self;
+}
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    
+    //Add common background
+    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background z:BACKGROUND_Z];
+    
+    
+    door = [CCSprite spriteWithFile:@"door.png"];
+    door.position = ccp(size.width/2, size.height/2);
+    door.scale = 1.0f;
+    [self addChild: door z:SCENE_Z];
+    
+    
 }
 
 -(void)updateScene

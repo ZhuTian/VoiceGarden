@@ -62,19 +62,29 @@
 		label_1.position =  ccp( size.width /2 - 250, size.height/2 - 30);
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
+        label_1.opacity = 0;
 		[self addChild: label_1 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"I see a              garden." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 250, size.height/2 - 80);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
+        label_2.opacity = 0;
 		[self addChild: label_2 z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"I am surrounded by the sound of          ." fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 - 250, size.height/2 - 130);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
+        label_3.opacity = 0;
 		[self addChild: label_3 z:TEXT_Z];
+        
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
+        id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_3 runAction:label3Action];
 		
         
         desolate_beautiful = [CCMenuItemFont itemWithString:@"desolate" block:^(id sender){
@@ -85,6 +95,7 @@
         [desolate_beautiful setFontSize:_fontSize];
         [desolate_beautiful setPosition:ccp( size.width/2 - 89, size.height/2 - 80)];
         [desolate_beautiful setColor:ccc3(100,100,100)];
+        desolate_beautiful.opacity = 0;
         
         slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
             if(self.sceneStatus == 1)
@@ -100,20 +111,23 @@
         [slience_XXX setFontSize:_fontSize];
         [slience_XXX setPosition:ccp( size.width/2 + 250, size.height/2 - 130)];
         [slience_XXX setColor:ccc3(100,100,100)];
+        slience_XXX.opacity = 0;
         
+        id fadein = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id action = [CCEaseIn actionWithAction:move rate:1];
         id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id action2 = [CCEaseOut actionWithAction:move2 rate:1];
         
-        [desolate_beautiful runAction: [CCSequence actions:action, action2, nil]];
+        [desolate_beautiful runAction: [CCSequence actions:fadein, action, action2, nil]];
         [desolate_beautiful runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
         
+        id fadein_2 = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
         id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
-        [slience_XXX runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [slience_XXX runAction: [CCSequence actions:fadein_2, action_2, action2_2, nil]];
         [slience_XXX runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
         back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){

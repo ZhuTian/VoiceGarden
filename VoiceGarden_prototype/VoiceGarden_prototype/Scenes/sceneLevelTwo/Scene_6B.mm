@@ -43,30 +43,60 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"I.png"];
-        background.position = ccp(size.width/2, size.height/2);
         
-        // add the label as a child to this Layer
-        [self addChild: background];
+        [self initSprites];
+        transitionTime = 2.0f;
         
         label_1 = [CCLabelTTF labelWithString:@"I see a shimmering reflection of myself." fontName:fontName fontSize:sceneFontSize];
-		label_1.position =  ccp( size.width /2  , size.height/2 + 60);
+		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 300);
+        label_1.anchorPoint = ccp(0,0.5);
         label_1.color = ccc3(0, 0, 0);
+        label_1.opacity = 0;
 		[self addChild: label_1];
         
+        label_3 = [CCLabelTTF labelWithString:@"A little bit more confidently." fontName:fontName fontSize:sceneFontSize];
+		label_3.position =  ccp( size.width /2 - 50, size.height/2 + 250);
+        label_3.anchorPoint = ccp(0,0.5);
+        label_3.color = ccc3(0, 0, 0);
+        label_3.opacity = 0;
+		[self addChild: label_3];
+        
+        label_4 = [CCLabelTTF labelWithString:@"I step forward with the power of voice." fontName:fontName fontSize:sceneFontSize];
+		label_4.position =  ccp( size.width /2 - 50, size.height/2 + 200);
+        label_4.anchorPoint = ccp(0,0.5);
+        label_4.color = ccc3(0, 0, 0);
+        label_4.opacity = 0;
+		[self addChild: label_4];
+        
         label_2 = [CCLabelTTF labelWithString:@"I am ready to               ." fontName:fontName fontSize:sceneFontSize];
-		label_2.position =  ccp( size.width /2 - 100, size.height/2 );
+		label_2.position =  ccp( size.width /2 - 50, size.height/2 + 150);
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
+        label_2.opacity = 0;
 		[self addChild: label_2];
+        
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
+        id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_3 runAction:label3Action];
+        id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_4 runAction:label4Action];
 		
         go = [CCMenuItemFont itemWithString:@"move on" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_7A sceneWithVar:1] withColor:ccWHITE]];
+            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_7A sceneWithVar:1] withColor:ccWHITE]];
+            [self SceneTransition];
         }];
         [go setFontName:fontName];
         [go setFontSize:sceneFontSize];
-        [go setPosition:ccp( size.width/2  - 10, size.height/2)];
+        [go setPosition:ccp( size.width/2 + 200, size.height/2 + 150)];
         [go setIsEnabled:false];
         [go setColor:ccc3(0,0,0)];
+        go.opacity = 0;
+        
+        id goButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [go runAction:goButtonAction];
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
             ;
@@ -92,7 +122,7 @@
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z];
         
         
         //new
@@ -100,17 +130,17 @@
         footPrintLeft = [CCSprite spriteWithFile:@"foot_L.png"];
         footPrintLeft.scale = 0.3f;
         footPrintLeft.position = ccp(125, 170);
-        [self addChild:footPrintLeft z:2 tag:1];
+        //[self addChild:footPrintLeft z:2 tag:1];
         
         footPrintRight = [CCSprite spriteWithFile:@"foot_R.png"];
         footPrintRight.scale = 0.3f;
         footPrintRight.position = ccp(100, 135);
-        [self addChild:footPrintRight z:2 tag:2];
+        //[self addChild:footPrintRight z:2 tag:2];
         
         status = 1;
         timer = 30;
         isLeft = false;
-        [self scheduleUpdate];
+        //[self scheduleUpdate];
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
@@ -121,6 +151,80 @@
         
 	}
 	return self;
+}
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    
+    //Add common background
+    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background z:BACKGROUND_Z];
+    
+    path = [CCSprite spriteWithFile:@"path.png"];
+    path.position = ccp(size.width/2 + 900, size.height/2 - 300);
+    [self addChild: path z:SCENE_Z];
+    
+    pond = [CCSprite spriteWithFile:@"I_pond.png"];
+    pond.position = ccp(size.width/2 + 470, size.height/2);
+    pond.scale = 0.8f;
+    [self addChild: pond z:SCENE_Z];
+    
+    door = [CCSprite spriteWithFile:@"door.png"];
+    door.position = ccp(size.width/2 - 400, size.height/2 + 100);
+    door.scale = 0.6f;
+    [self addChild: door z:SCENE_Z];
+
+    
+}
+
+-(void)SceneTransition
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    //Fade out scripts
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_3 runAction:label3Action];
+    id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_4 runAction:label4Action];
+    
+    //Fade out button
+    id goButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [go runAction:goButtonAction];
+    
+    //Transition animation
+    id _pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 900 + 400, size.height/2 - 300 - 300)],
+                      [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                      [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                      nil];
+    id pathAction = [CCSequence actions:_pathAction,
+                     [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
+                     nil];
+    [path runAction:pathAction];
+    
+    
+    id pondAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 470 + 400, size.height/2 - 300)],
+                     [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                     [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                     nil];
+    [pond runAction:pondAction];
+    
+    id doorAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+                     [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                     [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                     nil];
+    [door runAction:doorAction];
+}
+
+-(void)nextScene
+{
+    [[CCDirector sharedDirector] replaceScene:[Scene_7A sceneWithVar:1]];
 }
 
 -(void)updateScene

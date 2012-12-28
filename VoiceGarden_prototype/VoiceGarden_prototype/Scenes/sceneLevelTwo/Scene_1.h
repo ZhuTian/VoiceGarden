@@ -11,7 +11,16 @@
 
 @interface Scene_1 : CCLayer
 {
+    CCSprite *background;
+    CCSprite *silence;
+    CCSprite *desolate;
+    CCSprite *garden;
     
+    CCLabelTTF *label;
+    CCMenuItemFont *button_garden;
+    
+    int transitionTime;
+    int _nextScene;
 }
 +(CCScene *) scene;
 

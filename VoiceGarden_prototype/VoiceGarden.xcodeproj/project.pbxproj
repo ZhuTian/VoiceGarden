@@ -204,6 +204,9 @@
 		0EB7E31E164193D80050F56C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7E31D164193D80050F56C /* main.m */; };
 		0EB7E321164193D80050F56C /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7E320164193D80050F56C /* AppDelegate.mm */; };
 		0EB7E327164193D80050F56C /* IntroLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0EB7E326164193D80050F56C /* IntroLayer.mm */; };
+		0EC072F1168DC13A000789B6 /* wind_top1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC072EE168DC12A000789B6 /* wind_top1.png */; };
+		0EC072F2168DC13A000789B6 /* wind_top2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC072EF168DC12E000789B6 /* wind_top2.png */; };
+		0EC072F3168DC13A000789B6 /* wind.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EC072F0168DC133000789B6 /* wind.png */; };
 		0EE416EC168208DE007226CA /* cat_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416BD168208DE007226CA /* cat_down.png */; };
 		0EE416ED168208DE007226CA /* cat_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416BE168208DE007226CA /* cat_up.png */; };
 		0EE416EE168208DE007226CA /* desolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416BF168208DE007226CA /* desolate.png */; };
@@ -246,7 +249,6 @@
 		0EE41713168208DE007226CA /* tree_nest.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416E4168208DE007226CA /* tree_nest.png */; };
 		0EE41714168208DE007226CA /* tree_nest_egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416E5168208DE007226CA /* tree_nest_egg.png */; };
 		0EE41715168208DE007226CA /* tutorial_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416E6168208DE007226CA /* tutorial_bg.png */; };
-		0EE41716168208DE007226CA /* wind.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416E7168208DE007226CA /* wind.png */; };
 		0EE41717168208DE007226CA /* wind_all.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416E8168208DE007226CA /* wind_all.jpg */; };
 		0EE41718168208DE007226CA /* wind_message.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416E9168208DE007226CA /* wind_message.png */; };
 		0EE41719168208DE007226CA /* withard_all.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0EE416EA168208DE007226CA /* withard_all.jpg */; };
@@ -621,6 +623,9 @@
 		0EB7E320164193D80050F56C /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		0EB7E325164193D80050F56C /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		0EB7E326164193D80050F56C /* IntroLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IntroLayer.mm; sourceTree = "<group>"; };
+		0EC072EE168DC12A000789B6 /* wind_top1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind_top1.png; sourceTree = "<group>"; };
+		0EC072EF168DC12E000789B6 /* wind_top2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind_top2.png; sourceTree = "<group>"; };
+		0EC072F0168DC133000789B6 /* wind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind.png; sourceTree = "<group>"; };
 		0EE416BD168208DE007226CA /* cat_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat_down.png; sourceTree = "<group>"; };
 		0EE416BE168208DE007226CA /* cat_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat_up.png; sourceTree = "<group>"; };
 		0EE416BF168208DE007226CA /* desolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desolate.png; sourceTree = "<group>"; };
@@ -663,7 +668,6 @@
 		0EE416E4168208DE007226CA /* tree_nest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree_nest.png; sourceTree = "<group>"; };
 		0EE416E5168208DE007226CA /* tree_nest_egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree_nest_egg.png; sourceTree = "<group>"; };
 		0EE416E6168208DE007226CA /* tutorial_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_bg.png; sourceTree = "<group>"; };
-		0EE416E7168208DE007226CA /* wind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind.png; sourceTree = "<group>"; };
 		0EE416E8168208DE007226CA /* wind_all.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wind_all.jpg; sourceTree = "<group>"; };
 		0EE416E9168208DE007226CA /* wind_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind_message.png; sourceTree = "<group>"; };
 		0EE416EA168208DE007226CA /* withard_all.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = withard_all.jpg; sourceTree = "<group>"; };
@@ -1380,7 +1384,9 @@
 				0EE416E4168208DE007226CA /* tree_nest.png */,
 				0EE416E5168208DE007226CA /* tree_nest_egg.png */,
 				0EE416E6168208DE007226CA /* tutorial_bg.png */,
-				0EE416E7168208DE007226CA /* wind.png */,
+				0EC072EE168DC12A000789B6 /* wind_top1.png */,
+				0EC072EF168DC12E000789B6 /* wind_top2.png */,
+				0EC072F0168DC133000789B6 /* wind.png */,
 				0EE416E8168208DE007226CA /* wind_all.jpg */,
 				0EE416E9168208DE007226CA /* wind_message.png */,
 				0EE416EA168208DE007226CA /* withard_all.jpg */,
@@ -1537,11 +1543,13 @@
 				0EE41713168208DE007226CA /* tree_nest.png in Resources */,
 				0EE41714168208DE007226CA /* tree_nest_egg.png in Resources */,
 				0EE41715168208DE007226CA /* tutorial_bg.png in Resources */,
-				0EE41716168208DE007226CA /* wind.png in Resources */,
 				0EE41717168208DE007226CA /* wind_all.jpg in Resources */,
 				0EE41718168208DE007226CA /* wind_message.png in Resources */,
 				0EE41719168208DE007226CA /* withard_all.jpg in Resources */,
 				0EE4171A168208DE007226CA /* witherd_all.jpg in Resources */,
+				0EC072F1168DC13A000789B6 /* wind_top1.png in Resources */,
+				0EC072F2168DC13A000789B6 /* wind_top2.png in Resources */,
+				0EC072F3168DC13A000789B6 /* wind.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

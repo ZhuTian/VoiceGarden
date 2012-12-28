@@ -25,7 +25,7 @@
     // check to see if an instance already exists
     if (nil == myInstance) {
         myInstance  = [[[self class] alloc] init];
-        myInstance.haveKey = false;
+        myInstance.haveKey = true;
         myInstance.isDesolate = true;
         myInstance.isSlience = true;
         myInstance.keyInThePocket = false;

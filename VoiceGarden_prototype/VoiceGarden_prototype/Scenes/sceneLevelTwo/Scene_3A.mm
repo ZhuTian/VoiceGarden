@@ -45,6 +45,7 @@ extern bool haveKey;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
+        transitionTime = 2.0f;
         
         [self initSprites];
         
@@ -52,78 +53,101 @@ extern bool haveKey;
 		label_1.position =  ccp( size.width /2 - 120, size.height/2+200);
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
+        label_1.opacity = 0;
 		[self addChild: label_1];
         
         label_6 = [CCLabelTTF labelWithString:@"There is a         sightly concealed by a tangle of shrubs." fontName:fontName fontSize:sceneFontSize];
 		label_6.position =  ccp( size.width /2 - 120, size.height/2+150);
         label_6.color = ccc3(0, 0, 0);
         label_6.anchorPoint = ccp(0, 0.5);
+        label_6.opacity = 0;
 		[self addChild: label_6];
         
         label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:sceneFontSize];
 		label_2.position =  ccp( size.width /2 - 120, size.height/2 + 100);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
+        label_2.opacity = 0;
 		[self addChild: label_2];
         
         label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face," fontName:fontName fontSize:sceneFontSize];
 		label_3.position =  ccp( size.width /2 - 120, size.height/2 + 50);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
+        label_3.opacity = 0;
 		[self addChild: label_3];
         
         label_4 = [CCLabelTTF labelWithString:@"whispering to me in an unfamiliar language." fontName:fontName fontSize:sceneFontSize];
 		label_4.position =  ccp( size.width /2 - 120, size.height/2 + 0);
         label_4.color = ccc3(0, 0, 0);
         label_4.anchorPoint = ccp(0, 0.5);
+        label_4.opacity = 0;
 		[self addChild: label_4];
         
         label_5 = [CCLabelTTF labelWithString:@"I start to run to chase its word." fontName:fontName fontSize:sceneFontSize];
 		label_5.position =  ccp( size.width /2 - 120, size.height/2 - 50);
         label_5.color = ccc3(0, 0, 0);
         label_5.anchorPoint = ccp(0, 0.5);
+        label_5.opacity = 0;
 		[self addChild: label_5];
+        
+        //Fade in the scripts
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
+        id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_3 runAction:label3Action];
+        id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_4 runAction:label4Action];
+        id label5Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_5 runAction:label5Action];
+        id label6Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_6 runAction:label6Action];
+        
 		
         
         road = [CCMenuItemFont itemWithString:@"path" block:^(id sender){
-            if(self.sceneStatus == 3)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4A sceneWithVar:2 preScene:self.sceneStatus] withColor:ccWHITE]];
-            }
-            else
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4A sceneWithVar:1 preScene:self.sceneStatus] withColor:ccWHITE]];
-            }
+            _nextScene = 1;
+            [self SceneTransition];
         }];
         [road setFontName:fontName];
         [road setFontSize:sceneFontSize];
         [road setPosition:ccp( size.width/2 + 20, size.height/2 + 150)];
         [road setIsEnabled:true];
         [road setColor:ccc3(100,100,100)];
+        road.opacity = 0;
         
+        id roadLabelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
         id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
-        [road runAction: [CCSequence actions:action_2, action2_2, nil]];
+        [road runAction: [CCSequence actions:roadLabelAction, action_2, action2_2, nil]];
         [road runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
         wind_button = [CCMenuItemFont itemWithString:@"wind" block:^(id sender){
-            if([GlobalVariable sharedInstance].haveKey)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:2] withColor:ccWHITE]];
-                
-            }
-            else
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:1] withColor:ccWHITE]];
-            }
+//            if([GlobalVariable sharedInstance].haveKey)
+//            {
+//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:2] withColor:ccWHITE]];
+//                
+//            }
+//            else
+//            {
+//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:1] withColor:ccWHITE]];
+//            }
+            _nextScene = 2;
+            [self SceneTransition];
         }];
         [wind_button setFontName:fontName];
         [wind_button setFontSize:sceneFontSize];
         [wind_button setPosition:ccp( size.width/2 + 35, size.height/2 + 50)];
         [wind_button setIsEnabled:false];
         [wind_button setColor:ccc3(0,0,0)];
+        wind_button.opacity = 0;
+        
+        id windLabelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [wind_button runAction:windLabelAction];
         
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
@@ -160,7 +184,7 @@ extern bool haveKey;
         isLoud = false;
         isBlowOver = false;
         whichWind = 1;
-        //[self initWinds];
+        [self initWinds];
         [self scheduleUpdate];
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
@@ -179,10 +203,14 @@ extern bool haveKey;
     
     CGSize size = [[CCDirector sharedDirector] winSize];
     
-    CCSprite* wind1Sprite = [CCSprite spriteWithFile:@"wind1.png"];
-    CCSprite* wind2Sprite = [CCSprite spriteWithFile:@"wind2.png"];
-    CCSprite* wind3Sprite = [CCSprite spriteWithFile:@"wind3.png"];
-    CCSprite* wind4Sprite = [CCSprite spriteWithFile:@"wind4.png"];
+    CCSprite* wind1Sprite = [CCSprite spriteWithFile:@"wind_top1.png"];
+    //wind1Sprite.position = ccp(size.width/2 + 50, size.height/2 - 50);
+    //wind1Sprite.scale = 0.8f;
+    CCSprite* wind2Sprite = [CCSprite spriteWithFile:@"wind_top2.png"];
+    //wind2Sprite.position = ccp(size.width/2 + 50, size.height/2 - 50);
+   // wind2Sprite.scale = 0.8f;
+    //CCSprite* wind3Sprite = [CCSprite spriteWithFile:@"wind3.png"];
+    //CCSprite* wind4Sprite = [CCSprite spriteWithFile:@"wind4.png"];
     
     CCProgressTimer* wind1 = [CCProgressTimer progressWithSprite:wind1Sprite];
     wind1.type = kCCProgressTimerTypeBar;
@@ -194,9 +222,9 @@ extern bool haveKey;
     wind2.type = kCCProgressTimerTypeBar;
     wind2.barChangeRate = ccp(1,0);
     wind2.midpoint = ccp(0.0f,0.0f);
-    wind2.percentage = 53;
+    wind2.percentage = 50;
     
-    CCProgressTimer* wind3 = [CCProgressTimer progressWithSprite:wind3Sprite];
+    /*CCProgressTimer* wind3 = [CCProgressTimer progressWithSprite:wind3Sprite];
     wind3.type = kCCProgressTimerTypeBar;
     wind3.barChangeRate = ccp(1,0);
     wind3.midpoint = ccp(0.0f,0.0f);
@@ -206,17 +234,19 @@ extern bool haveKey;
     wind4.type = kCCProgressTimerTypeBar;
     wind4.barChangeRate = ccp(1,0);
     wind4.midpoint = ccp(1024.0f,0.0f);
-    wind4.percentage = 5;
+    wind4.percentage = 5;*/
     
-    [wind1 setPosition:ccp(size.width/2,size.height/2)];
-    [wind2 setPosition:ccp(size.width/2,size.height/2)];
-    [wind3 setPosition:ccp(size.width/2,size.height/2)];
-    [wind4 setPosition:ccp(size.width/2,size.height/2)];
+    [wind1 setPosition:ccp(size.width/2 + 50, size.height/2 - 50)];
+    [wind1 setScale:0.8f];
+    [wind2 setPosition:ccp(size.width/2 + 50, size.height/2 - 50)];
+    [wind2 setScale:0.8f];
+    //[wind3 setPosition:ccp(size.width/2,size.height/2)];
+    //[wind4 setPosition:ccp(size.width/2,size.height/2)];
     
-    [self addChild:wind1 z:10 tag:21];
-    [self addChild:wind2 z:10 tag:22];
-    [self addChild:wind3 z:10 tag:23];
-    [self addChild:wind4 z:10 tag:24];
+    [self addChild:wind1 z:SCENE_Z tag:21];
+    [self addChild:wind2 z:SCENE_Z tag:22];
+    //[self addChild:wind3 z:10 tag:23];
+    //[self addChild:wind4 z:10 tag:24];
     
 }
 
@@ -245,15 +275,16 @@ extern bool haveKey;
 -(void)update:(ccTime)dt
 {
     float volumn = [[AudioManager sharedInstance] getAverageVolume];
-    if (volumn>-30.0f)
+    //NSLog(@"%f", volumn);
+    if (volumn>-40.0f)
         isLoud = true;
     else
         isLoud = false;
     
     CCProgressTimer* wind1 = (CCProgressTimer*)[self getChildByTag:21];
     CCProgressTimer* wind2 = (CCProgressTimer*)[self getChildByTag:22];
-    CCProgressTimer* wind3 = (CCProgressTimer*)[self getChildByTag:23];
-    CCProgressTimer* wind4 = (CCProgressTimer*)[self getChildByTag:24];
+    //CCProgressTimer* wind3 = (CCProgressTimer*)[self getChildByTag:23];
+    //CCProgressTimer* wind4 = (CCProgressTimer*)[self getChildByTag:24];
     
     if(whichWind == 1){
         if (isLoud)
@@ -286,6 +317,10 @@ extern bool haveKey;
         if(wind2.percentage>80){
             wind2.percentage=80;
             isBlowOver = true;
+            if(self.sceneStatus==1){
+                self.sceneStatus = 2;
+                [self updateScene];
+            }
         }
         
         if(isBlowOver&&volumn<-45.0f){
@@ -293,7 +328,7 @@ extern bool haveKey;
             isBlowOver = false;
         }
     }
-    else if(whichWind == 3)
+    /*else if(whichWind == 3)
     {
         if(isLoud)
             wind3.percentage+=dt*10;
@@ -332,7 +367,7 @@ extern bool haveKey;
             whichWind++;
             isBlowOver = false;
         }
-    }
+    }*/
 }
 
 
@@ -378,6 +413,7 @@ extern bool haveKey;
     
     desolate = [CCSprite spriteWithFile:@"desolate.png"];
     desolate.position = ccp(size.width/2 - 150, size.height/2 - 50);
+    desolate.scale = 1.0f;
     [self addChild: desolate z:SCENE_Z];
     
     garden = [CCSprite spriteWithFile:@"garden.png"];
@@ -387,6 +423,118 @@ extern bool haveKey;
     [self addChild: garden z:SCENE_Z];
 
     
+    wind_message = [CCSprite spriteWithFile:@"wind_message.png"];
+    wind_message.position = ccp(size.width/2 + 700, size.height/2);
+    wind_message.scale = 1.0f;
+    wind_message.opacity = 0;
+    [self addChild: wind_message z:SCENE_Z];
+    
+}
+
+-(void)SceneTransition
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    //Fade out scripts
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_3 runAction:label3Action];
+    id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_4 runAction:label4Action];
+    id label5Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_5 runAction:label5Action];
+    id label6Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_6 runAction:label6Action];
+    id roadButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [road runAction:roadButtonAction];
+    id windButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [wind_button runAction:windButtonAction];
+    
+    
+    if(_nextScene == 1)
+    {
+        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50 + 600, size.height/2 - 50 - 600)],
+                         [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         nil];
+        [wind runAction:windAction];
+        
+        id _pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2)],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                         [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                         nil];
+        id pathAction = [CCSequence actions:_pathAction,
+                         [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
+                         nil];
+        [path runAction:pathAction];
+        
+        id desolateAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 150, size.height/2 - 300)],
+                             [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                             nil];
+        [desolate runAction:desolateAction];
+        
+        id gardenAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120, 120 - 600)],
+                           [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                           nil];
+        [garden runAction:gardenAction];
+    }
+    else if(_nextScene == 2)
+    {
+        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 700, size.height/2 - 50)],
+                         [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                         nil];
+        [wind runAction:windAction];
+        
+        id _windMessageAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+                                 [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                 nil];
+        id windMessageAction = [CCSequence actions:_windMessageAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
+        [wind_message runAction:windMessageAction];
+        
+        id pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430 - 1200, size.height/2 + 180)],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         nil];
+        [path runAction:pathAction];
+        
+        id desolateAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150 - 1200, size.height/2 - 50)],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         nil];
+        [desolate runAction:desolateAction];
+        
+        id gardenAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120 - 1200, 120)],
+                             [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                             nil];
+        [garden runAction:gardenAction];
+    }
+}
+
+-(void)nextScene
+{
+    if(_nextScene == 1)
+    {
+        if(sceneStatus == 3)
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_4A sceneWithVar:2 preScene:self.sceneStatus]];
+        }
+        else
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_4A sceneWithVar:1 preScene:self.sceneStatus]];
+        }
+    }
+    else if(_nextScene == 2)
+    {
+        if([GlobalVariable sharedInstance].haveKey)
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_4B sceneWithVar:2]];
+        }
+        else
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_4B sceneWithVar:1]];
+        }
+    }
 }
 
 
