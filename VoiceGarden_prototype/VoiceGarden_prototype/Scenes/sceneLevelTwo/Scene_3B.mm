@@ -41,18 +41,14 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-        
-        
-        
         fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"silence_bg.png"];
+        CCSprite* background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         //int _fontSize = 30;
         
         // add the label as a child to this Layer
         [self addChild: background];
-        
         
         label_1 = [CCLabelTTF labelWithString:@"I tried to talk but realize." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 60);
@@ -155,15 +151,38 @@
             [self addChild:keySprite];
         }
         
+        [self initSprites];
+        
 	}
 	return self;
+}
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 - 620, size.height/2 - 20);
+    silence.opacity = 255;
+    [self addChild:silence];
+    
+    silence_light = [CCSprite spriteWithFile:@"silence_light.png"];
+    silence_light.position = ccp(size.width/2 + 20, size.height/2);
+    silence_light.opacity = 255;
+    [self addChild:silence_light];
+    
+    tree = [CCSprite spriteWithFile:@"key_tree_right.png"];
+    tree.position = ccp(size.width/2 + 300, size.height/2 - 500);
+    tree.opacity = 255;
+    tree.scale = 0.5;
+    [self addChild:tree];
+    
 }
 
 - (void)levelTimerCallback:(NSTimer *)timer {
     float currentVolume = [[AudioManager sharedInstance] getAverageVolume];
     if(currentVolume >= spawnThreshold && !hasSpawn)
     {
-        //Spawn new word
         if(spawnIndex < 7)
         {
             spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"Hewow" fontName:fontName fontSize:_fontSize];
@@ -183,12 +202,6 @@
             spawnIndex++;
             hasSpawn = true;
             
-            //Word transition effect
-//            int i;
-//            for(i = 0; i < 7; i++)
-//            {
-//                [spawnWord[i] runAction:[CCFadeOut actionWithDuration:1]];
-//            }
             [waiting runAction:[CCFadeOut actionWithDuration:2]];
             [spawnWord[7] runAction:[CCMoveTo actionWithDuration:2 position:waiting.position]];
         }
@@ -218,10 +231,6 @@
         NSLog(@"Bounce");
         [withered setIsEnabled:true];
         [withered setColor:ccc3(100,100,100)];
-//        id move = [CCMoveBy actionWithDuration:0.5 position:ccp(0, 10)];
-//        id action = [CCEaseElasticInOut actionWithAction:move period:0.3f];
-//        id move2 = [CCMoveBy actionWithDuration:0.5 position:ccp(0, -10)];
-//        id action2 = [CCEaseElasticInOut actionWithAction:move2 period:0.3f];
         id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id action = [CCEaseIn actionWithAction:move rate:1];
         id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
@@ -229,8 +238,6 @@
 
         [withered runAction: [CCSequence actions:action, action2, nil]];
         [withered runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
-        //label_3.string = @"I am opening";
-        //[waiting setString:@"openning"];
     }
 }
 

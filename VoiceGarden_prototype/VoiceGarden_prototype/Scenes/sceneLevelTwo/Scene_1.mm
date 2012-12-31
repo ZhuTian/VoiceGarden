@@ -47,8 +47,6 @@
         [self addChild:label];
         id labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [label runAction:labelAction];
-        
-        
        
         button_garden = [CCMenuItemFont itemWithString:@"garden" block:^(id sender){
             [self SceneTransition];
@@ -94,8 +92,6 @@
     [self addChild: background z:BACKGROUND_Z];
     
     //Add Scene Sprites
-    
-    
     silence = [CCSprite spriteWithFile:@"silence.png"];
     silence.position = ccp(size.width/2 + 50, size.height/2 + 150);
     silence.scale = 0.8f;
@@ -115,7 +111,6 @@
 
 -(void)SceneTransition
 {
-    //CGSize size = [[CCDirector sharedDirector] winSize];
     id labelFadeout = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     id transitionAction = [CCSequence actions:labelFadeout, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
     [label runAction:transitionAction];

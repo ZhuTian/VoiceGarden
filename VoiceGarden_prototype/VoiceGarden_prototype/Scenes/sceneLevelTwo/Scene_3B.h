@@ -25,6 +25,11 @@
     CCLabelTTF* spawnWord[8];
     NSString *fontName;
     
+    CCSprite* tree;
+    CCSprite* silence;
+    CCSprite* silence_light;
+    
+    
 @public
     int sceneStatus;
 };
