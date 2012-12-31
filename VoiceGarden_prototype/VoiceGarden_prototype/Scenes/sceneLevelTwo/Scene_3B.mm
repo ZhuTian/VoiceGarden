@@ -51,17 +51,17 @@
         [self addChild: background];
         
         label_1 = [CCLabelTTF labelWithString:@"I tried to talk but realize." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 60);
+		label_1.position =  ccp( size.width /2 + 100, size.height/2 - 200);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"My voice               as the garden." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 , size.height/2);
+        label_2 = [CCLabelTTF labelWithString:@"that my voice has               as the garden." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 + 210, size.height/2 - 240);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
         
         label_3 = [CCLabelTTF labelWithString:@"I am              ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 125, size.height/2 - 60);
+		label_3.position =  ccp( size.width /2 + 20, size.height/2 - 280);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
 		
@@ -78,7 +78,7 @@
         }];
         [withered setFontName:fontName];
         [withered setFontSize:_fontSize];
-        [withered setPosition:ccp( size.width/2 - 42, size.height/2)];
+        [withered setPosition:ccp( size.width/2 + 230, size.height/2 - 240)];
         [withered setIsEnabled:false];
         [withered setColor:ccc3(0,0,0)];
         
@@ -87,7 +87,7 @@
         }];
         [waiting setFontName:fontName];
         [waiting setFontSize:_fontSize];
-        [waiting setPosition:ccp( size.width/2 - 100, size.height/2 - 60)];
+        [waiting setPosition:ccp( size.width/2 + 40 , size.height/2 - 280)];
         [waiting setIsEnabled:false];
         [waiting setColor:ccc3(0,0,0)];
         
