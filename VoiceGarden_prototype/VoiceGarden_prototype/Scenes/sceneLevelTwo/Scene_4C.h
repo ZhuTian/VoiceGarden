@@ -17,6 +17,10 @@
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     
+    CCSprite* silence;
+    CCSprite* silence_light;
+    CCSprite* tree;
+    
     @public
     int sceneStatus;
 };

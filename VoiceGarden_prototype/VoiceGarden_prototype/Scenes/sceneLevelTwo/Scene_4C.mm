@@ -44,25 +44,24 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"garden_bg.png"];
+        CCSprite* background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
-        
-        // add the label as a child to this Layer
         [self addChild: background];
         
+        [self initSprites];
         
-        label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 50);
+        label_1 = [CCLabelTTF labelWithString:@"All Colors and sounds of life are gone" fontName:fontName fontSize:_fontSize];
+		label_1.position =  ccp( size.width /2 - 140, size.height/2 - 200);
         label_1.color = ccc3(0, 0, 0);
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"with the           taken away by the bird." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 + 15, size.height/2 - 100);
+        label_2 = [CCLabelTTF labelWithString:@"along with the           taken away by the bird." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 - 85, size.height/2 - 250);
         label_2.color = ccc3(0, 0, 0);
 		[self addChild: label_2];
           
-        label_3 = [CCLabelTTF labelWithString:@"The bird will come back in         ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 40, size.height/2 - 150);
+        label_3 = [CCLabelTTF labelWithString:@"The bird will come back in the         ." fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 150, size.height/2 - 300);
         label_3.color = ccc3(0, 0, 0);
 		[self addChild: label_3];
 		
@@ -79,7 +78,7 @@
         }];
         [spring setFontName:fontName];
         [spring setFontSize:_fontSize];
-        [spring setPosition:ccp( size.width/2 + 125, size.height/2 - 150)];
+        [spring setPosition:ccp( size.width/2 + 45, size.height/2 - 300)];
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
         
@@ -104,7 +103,7 @@
         }];
         [key setFontName:fontName];
         [key setFontSize:_fontSize];
-        [key setPosition:ccp( size.width/2 - 92, size.height/2 - 100)];
+        [key setPosition:ccp( size.width/2 - 152, size.height/2 - 250)];
         [key setIsEnabled:false];
         [key setColor:ccc3(0,0,0)];
         
@@ -152,6 +151,30 @@
         
 	}
 	return self;
+}
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 - 520, size.height/2 + 80);
+    silence.opacity = 255;
+    silence.scale = 0.5;
+    [self addChild:silence];
+    
+    silence_light = [CCSprite spriteWithFile:@"silence_light.png"];
+    silence_light.position = ccp(size.width/2 - 200, size.height/2 + 100);
+    silence_light.opacity = 255;
+    silence_light.scale = 0.5;
+    [self addChild:silence_light];
+    
+    tree = [CCSprite spriteWithFile:@"key_tree_right.png"];
+    tree.position = ccp(size.width/2 + 250, size.height/2 );
+    tree.opacity = 255;
+    tree.scale = 0.7;
+    [self addChild:tree];
+    
 }
 
 -(void)updateScene

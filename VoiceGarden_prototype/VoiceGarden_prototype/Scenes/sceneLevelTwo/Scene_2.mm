@@ -97,7 +97,7 @@
         [desolate_beautiful setColor:ccc3(100,100,100)];
         desolate_beautiful.opacity = 0;
         
-        slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
+        slience_XXX = [CCMenuItemFont itemWithString:@"silence" block:^(id sender){
             if(self.sceneStatus == 1)
             {
                 [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:1] withColor:ccWHITE]];
