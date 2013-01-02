@@ -21,6 +21,7 @@
     CCSprite *silence;
     CCSprite *wind;
     CCSprite *background;
+    CCSprite *light;
     
     float transitionTime;
     int _nextScene;

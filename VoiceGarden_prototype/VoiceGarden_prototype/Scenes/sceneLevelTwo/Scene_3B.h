@@ -7,6 +7,7 @@
 //
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SceneCommon.h"
 
 @interface Scene_3B : CCLayer
 {
@@ -24,6 +25,14 @@
     int spawnIndex;
     CCLabelTTF* spawnWord[8];
     NSString *fontName;
+    
+    CCSprite *background;
+    CCSprite *silence;
+    CCSprite *light;
+    CCSprite *tree_nest;
+    
+    int transitionTime;
+    
     
 @public
     int sceneStatus;

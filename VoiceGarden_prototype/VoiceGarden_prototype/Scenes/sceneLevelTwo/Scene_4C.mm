@@ -44,27 +44,40 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"garden_bg.png"];
-        background.position = ccp(size.width/2, size.height/2);
         
-        // add the label as a child to this Layer
-        [self addChild: background];
+        [self initSprites];
+        
+        transitionTime = 1.0f;
         
         
         label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 50);
+		label_1.position =  ccp( size.width /2 - 400, size.height/2 - 200);
         label_1.color = ccc3(0, 0, 0);
+        label_1.anchorPoint = ccp(0, 0.5);
+        label_1.opacity = 0;
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"with the           taken away by the bird." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 + 15, size.height/2 - 100);
+		label_2.position =  ccp( size.width /2 - 400, size.height/2 - 250);
         label_2.color = ccc3(0, 0, 0);
+        label_2.anchorPoint = ccp(0, 0.5);
+        label_2.opacity = 0;
 		[self addChild: label_2];
           
         label_3 = [CCLabelTTF labelWithString:@"The bird will come back in         ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 40, size.height/2 - 150);
+		label_3.position =  ccp( size.width /2 - 400, size.height/2 - 300);
         label_3.color = ccc3(0, 0, 0);
+        label_3.anchorPoint = ccp(0, 0.5);
+        label_3.opacity = 0;
 		[self addChild: label_3];
+        
+        //Fade in scripts
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
+        id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_3 runAction:label3Action];
 		
         
         spring = [CCMenuItemFont itemWithString:@"spring" block:^(id sender){
@@ -79,16 +92,18 @@
         }];
         [spring setFontName:fontName];
         [spring setFontSize:_fontSize];
-        [spring setPosition:ccp( size.width/2 + 125, size.height/2 - 150)];
+        [spring setPosition:ccp( size.width/2 - 10, size.height/2 - 300)];
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
+        spring.opacity = 0;
         
+        id fadein = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id actionMove = [CCEaseIn actionWithAction:move rate:1];
         id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id actionMove2 = [CCEaseOut actionWithAction:move2 rate:1];
         
-        [spring runAction: [CCSequence actions:actionMove, actionMove2, nil]];
+        [spring runAction: [CCSequence actions:fadein, actionMove, actionMove2, nil]];
         [spring runAction:[CCRepeatForever actionWithAction:[CCSequence actions:actionMove, actionMove2, nil]]];
         
         
@@ -104,9 +119,13 @@
         }];
         [key setFontName:fontName];
         [key setFontSize:_fontSize];
-        [key setPosition:ccp( size.width/2 - 92, size.height/2 - 100)];
+        [key setPosition:ccp( size.width/2 - 230, size.height/2 - 250)];
         [key setIsEnabled:false];
         [key setColor:ccc3(0,0,0)];
+        key.opacity = 0;
+        
+        id keyAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [key runAction:keyAction];
         
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
@@ -152,6 +171,36 @@
         
 	}
 	return self;
+}
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    
+    //Add common background
+    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background z:BACKGROUND_Z];
+    
+    //Add Scene Sprites
+    light = [CCSprite spriteWithFile:@"silence_light.png"];
+    light.position = ccp(size.width/2 - 150, size.height/2 + 120);
+    light.scale = 0.7f;
+    [self addChild: light z:BACKGROUND_Z];
+    
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 - 600, size.height/2 + 100);
+    silence.scale = 0.7f;
+    [self addChild: silence z:BACKGROUND_Z];
+    
+    tree_nest = [CCSprite spriteWithFile:@"tree_nest.png"];
+    tree_nest.position = ccp(size.width/2 + 250, size.height/2 - 100);
+    tree_nest.scale = 0.9f;
+    [self addChild: tree_nest z:BACKGROUND_Z];
+    
+    
+    
 }
 
 -(void)updateScene

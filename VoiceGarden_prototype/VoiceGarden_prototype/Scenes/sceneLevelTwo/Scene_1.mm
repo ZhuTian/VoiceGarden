@@ -37,7 +37,7 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         [self initSprites];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         label = [CCLabelTTF labelWithString:@"I am in a            ." fontName:fontName fontSize:_fontSize];
 		label.position =  ccp( size.width /2 - 100, size.height/2 - 50);

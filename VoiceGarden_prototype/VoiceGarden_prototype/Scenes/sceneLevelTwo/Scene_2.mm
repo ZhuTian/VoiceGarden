@@ -54,7 +54,7 @@
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         [self initSprites];
    
@@ -98,14 +98,16 @@
         desolate_beautiful.opacity = 0;
         
         slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
-            if(self.sceneStatus == 1)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:1] withColor:ccWHITE]];
-            }
-            else if(self.sceneStatus == 2)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:3] withColor:ccWHITE]];
-            }
+//            if(self.sceneStatus == 1)
+//            {
+//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:1] withColor:ccWHITE]];
+//            }
+//            else if(self.sceneStatus == 2)
+//            {
+//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:3] withColor:ccWHITE]];
+//            }
+            _nextScene = 2;
+            [self SceneTransition];
         }];
         [slience_XXX setFontName:fontName];
         [slience_XXX setFontSize:_fontSize];
@@ -199,6 +201,20 @@
 
     [[GlobalVariable sharedInstance].SceneStack addObject:[self class]];
     [[GlobalVariable sharedInstance].SceneStatusStack addObject:[NSNumber numberWithInt:1]];
+    
+    //Fade out scripts
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_3 runAction:label3Action];
+    
+    id silenceButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [slience_XXX runAction:silenceButtonAction];
+    id desolateButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [desolate_beautiful runAction:desolateButtonAction];
+    
     if(_nextScene == 1)
     {
         
@@ -235,12 +251,48 @@
         
         [path runAction:pathAction];
         
-        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
-        [label_1 runAction:label1Action];
-        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
-        [label_2 runAction:label2Action];
-        id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
-        [label_3 runAction:label3Action];
+        
+    }
+    else if(_nextScene == 2)
+    {
+        id desolateAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 50 - 400, size.height/2 + 150 - 200)],
+                             [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                             [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                             nil];
+        [desolate runAction:desolateAction];
+        
+        id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 600, size.height/2 - 50)],
+                            [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                            [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                            nil];
+        [silence runAction:silenceAction];
+        
+        id _gardenAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120 - 400, 120 - 200)],
+                            [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                            nil];
+        
+        id gardenAction = [CCSequence actions:_gardenAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
+        [garden runAction:gardenAction];
+        
+        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50 - 400, size.height/2 - 50 - 200)],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         [CCScaleTo actionWithDuration:transitionTime scale:0.3f],
+                         nil];
+        
+        [wind runAction:windAction];
+        
+        id pathAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430 - 400, size.height/2 + 180 - 200)],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         [CCScaleTo actionWithDuration:transitionTime scale:0.3f],
+                         nil];
+        
+        [path runAction:pathAction];
+        
+        id lightAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                          [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                          nil];
+        [light runAction:lightAction];
     }
 }
 
@@ -283,6 +335,11 @@
     garden = [CCSprite spriteWithFile:@"garden.png"];
     garden.position = ccp(size.width/2, size.height/2 - 50);
     [self addChild: garden z:SCENE_Z];
+    
+    light = [CCSprite spriteWithFile:@"silence_light.png"];
+    light.position = ccp(size.width/2 + 400, size.height/2 + 200);
+    light.opacity = 0;
+    [self addChild: light z:SCENE_Z];
 }
 
 -(void)nextScene
@@ -296,6 +353,18 @@
         else
         {
             [[CCDirector sharedDirector] replaceScene:[Scene_3A sceneWithVar:3]];
+        }
+    }
+    else if(_nextScene == 2)
+    {
+        if(sceneStatus == 1)
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_3B sceneWithVar:1]];
+        }
+        else if(sceneStatus == 2)
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_3B sceneWithVar:3]];
+
         }
     }
 }

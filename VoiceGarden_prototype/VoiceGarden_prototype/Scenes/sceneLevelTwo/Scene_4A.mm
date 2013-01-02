@@ -49,7 +49,7 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         [self initSprites];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         int _fontSize = 30;
         

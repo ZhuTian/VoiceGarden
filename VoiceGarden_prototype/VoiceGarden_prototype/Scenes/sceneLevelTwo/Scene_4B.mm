@@ -42,7 +42,7 @@
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
         [self initSprites];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         // add the label as a child to this Layer
         

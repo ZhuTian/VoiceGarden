@@ -45,7 +45,7 @@ extern bool haveKey;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         [self initSprites];
         
