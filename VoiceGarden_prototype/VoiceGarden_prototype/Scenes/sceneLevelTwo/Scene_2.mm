@@ -97,6 +97,7 @@
         [desolate_beautiful setColor:ccc3(100,100,100)];
         desolate_beautiful.opacity = 0;
         
+<<<<<<< HEAD
         slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
 //            if(self.sceneStatus == 1)
 //            {
@@ -108,6 +109,17 @@
 //            }
             _nextScene = 2;
             [self SceneTransition];
+=======
+        slience_XXX = [CCMenuItemFont itemWithString:@"silence" block:^(id sender){
+            if(self.sceneStatus == 1)
+            {
+                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:1] withColor:ccWHITE]];
+            }
+            else if(self.sceneStatus == 2)
+            {
+                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:3] withColor:ccWHITE]];
+            }
+>>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         }];
         [slience_XXX setFontName:fontName];
         [slience_XXX setFontSize:_fontSize];
@@ -135,7 +147,6 @@
         back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
             Class preScene = [[GlobalVariable sharedInstance].SceneStack lastObject];
             [[GlobalVariable sharedInstance].SceneStack removeLastObject];
-            //int preSceneStatus = (int)[[GlobalVariable sharedInstance].SceneStatusStack lastObject];
             [[GlobalVariable sharedInstance].SceneStatusStack removeLastObject];
             if(preScene != nil)
                 [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[preScene scene] withColor:ccWHITE]];
@@ -195,6 +206,47 @@
     }
 }
 
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    //Add common background
+    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background z:BACKGROUND_Z];
+    
+    //Add Scene Sprites
+    
+    //For desolate scene
+    wind = [CCSprite spriteWithFile:@"wind.png"];
+    wind.position = ccp(size.width/2 - 50, size.height/2 + 250);
+    wind.scale = 0.3f;
+    wind.opacity = 0;
+    [self addChild: wind z:SCENE_Z];
+    
+    path = [CCSprite spriteWithFile:@"path.png"];
+    path.position = ccp(size.width/2 - 330, size.height/2 + 280);
+    path.scale = 0.3f;
+    path.opacity = 0;
+    [self addChild: path z:SCENE_Z];
+    
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 + 50, size.height/2 + 150);
+    silence.scale = 0.8f;
+    silence.opacity = 255;
+    [self addChild: silence z:SCENE_Z];
+    
+    desolate = [CCSprite spriteWithFile:@"desolate.png"];
+    desolate.position = ccp(size.width/2 - 50, size.height/2 + 150);
+    desolate.scale = 0.8f;
+    desolate.opacity = 255;
+    [self addChild: desolate z:SCENE_Z];
+    
+    garden = [CCSprite spriteWithFile:@"garden.png"];
+    garden.position = ccp(size.width/2, size.height/2 - 50);
+    [self addChild: garden z:SCENE_Z];
+}
+
 -(void)SceneTransition
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
@@ -217,7 +269,6 @@
     
     if(_nextScene == 1)
     {
-        
         id desolateAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 - 50)],
                              [CCFadeTo actionWithDuration:transitionTime opacity:255],
                              [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
@@ -296,6 +347,7 @@
     }
 }
 
+<<<<<<< HEAD
 -(void)initSprites
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
@@ -341,6 +393,9 @@
     light.opacity = 0;
     [self addChild: light z:SCENE_Z];
 }
+=======
+
+>>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
 
 -(void)nextScene
 {
