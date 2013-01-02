@@ -44,50 +44,30 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-<<<<<<< HEAD
         
         [self initSprites];
         
         transitionTime = 1.0f;
-=======
-        CCSprite* background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
-        background.position = ccp(size.width/2, size.height/2);
-        [self addChild: background];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         
         [self initSprites];
         
-<<<<<<< HEAD
         label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 400, size.height/2 - 200);
-=======
-        label_1 = [CCLabelTTF labelWithString:@"All Colors and sounds of life are gone" fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 - 140, size.height/2 - 200);
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
+        
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
 		[self addChild: label_1];
         
-<<<<<<< HEAD
         label_2 = [CCLabelTTF labelWithString:@"with the           taken away by the bird." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 400, size.height/2 - 250);
-=======
-        label_2 = [CCLabelTTF labelWithString:@"along with the           taken away by the bird." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 - 85, size.height/2 - 250);
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
 		[self addChild: label_2];
-          
-<<<<<<< HEAD
+        
         label_3 = [CCLabelTTF labelWithString:@"The bird will come back in         ." fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 - 400, size.height/2 - 300);
-=======
-        label_3 = [CCLabelTTF labelWithString:@"The bird will come back in the         ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 150, size.height/2 - 300);
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
@@ -114,11 +94,7 @@
         }];
         [spring setFontName:fontName];
         [spring setFontSize:_fontSize];
-<<<<<<< HEAD
         [spring setPosition:ccp( size.width/2 - 10, size.height/2 - 300)];
-=======
-        [spring setPosition:ccp( size.width/2 + 45, size.height/2 - 300)];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
         spring.opacity = 0;
@@ -145,11 +121,7 @@
         }];
         [key setFontName:fontName];
         [key setFontSize:_fontSize];
-<<<<<<< HEAD
         [key setPosition:ccp( size.width/2 - 230, size.height/2 - 250)];
-=======
-        [key setPosition:ccp( size.width/2 - 152, size.height/2 - 250)];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         [key setIsEnabled:false];
         [key setColor:ccc3(0,0,0)];
         key.opacity = 0;
@@ -207,8 +179,6 @@
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
     
-<<<<<<< HEAD
-    
     //Add common background
     background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
     background.position = ccp(size.width/2, size.height/2);
@@ -230,26 +200,6 @@
     tree_nest.scale = 0.9f;
     [self addChild: tree_nest z:BACKGROUND_Z];
     
-    
-=======
-    silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 - 520, size.height/2 + 80);
-    silence.opacity = 255;
-    silence.scale = 0.5;
-    [self addChild:silence];
-    
-    silence_light = [CCSprite spriteWithFile:@"silence_light.png"];
-    silence_light.position = ccp(size.width/2 - 200, size.height/2 + 100);
-    silence_light.opacity = 255;
-    silence_light.scale = 0.5;
-    [self addChild:silence_light];
-    
-    tree = [CCSprite spriteWithFile:@"key_tree_right.png"];
-    tree.position = ccp(size.width/2 + 250, size.height/2 );
-    tree.opacity = 255;
-    tree.scale = 0.7;
-    [self addChild:tree];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
     
 }
 

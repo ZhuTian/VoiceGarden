@@ -26,18 +26,12 @@
     CCLabelTTF* spawnWord[8];
     NSString *fontName;
     
-<<<<<<< HEAD
     CCSprite *background;
     CCSprite *silence;
     CCSprite *light;
     CCSprite *tree_nest;
     
     int transitionTime;
-=======
-    CCSprite* tree;
-    CCSprite* silence;
-    CCSprite* silence_light;
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
     
     
 @public

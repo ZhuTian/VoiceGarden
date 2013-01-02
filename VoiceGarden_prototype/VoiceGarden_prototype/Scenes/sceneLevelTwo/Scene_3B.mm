@@ -43,50 +43,31 @@
 	if( (self=[super init]) ) {
         fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-<<<<<<< HEAD
-=======
-        CCSprite* background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
-        background.position = ccp(size.width/2, size.height/2);
-        //int _fontSize = 30;
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         
         transitionTime = 1.0f;
         
         [self initSprites];
         
         label_1 = [CCLabelTTF labelWithString:@"I tried to talk but realize." fontName:fontName fontSize:_fontSize];
-<<<<<<< HEAD
 		label_1.position =  ccp( size.width /2 - 50, size.height/2 - 150);
-=======
-		label_1.position =  ccp( size.width /2 + 100, size.height/2 - 200);
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
-		[self addChild: label_1];
+		[self addChild: label_1 z:TEXT_Z];
         
-<<<<<<< HEAD
         label_2 = [CCLabelTTF labelWithString:@"My voice               as the garden." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 50, size.height/2 - 200);
-=======
-        label_2 = [CCLabelTTF labelWithString:@"that my voice has               as the garden." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 + 210, size.height/2 - 240);
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
-		[self addChild: label_2];
+		[self addChild: label_2  z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"I am              ." fontName:fontName fontSize:_fontSize];
-<<<<<<< HEAD
 		label_3.position =  ccp( size.width /2 - 50, size.height/2 - 250);
-=======
-		label_3.position =  ccp( size.width /2 + 20, size.height/2 - 280);
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
-		[self addChild: label_3];
+		[self addChild: label_3  z:TEXT_Z];
         
         //Fade in the scripts
         id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
@@ -111,11 +92,7 @@
         }];
         [withered setFontName:fontName];
         [withered setFontSize:_fontSize];
-<<<<<<< HEAD
         [withered setPosition:ccp( size.width/2 + 140, size.height/2 - 200)];
-=======
-        [withered setPosition:ccp( size.width/2 + 230, size.height/2 - 240)];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         [withered setIsEnabled:false];
         [withered setColor:ccc3(0,0,0)];
         withered.opacity = 0;
@@ -125,11 +102,7 @@
         }];
         [waiting setFontName:fontName];
         [waiting setFontSize:_fontSize];
-<<<<<<< HEAD
         [waiting setPosition:ccp( size.width/2 + 80, size.height/2 - 250)];
-=======
-        [waiting setPosition:ccp( size.width/2 + 40 , size.height/2 - 280)];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         [waiting setIsEnabled:false];
         [waiting setColor:ccc3(0,0,0)];
         waiting.opacity = 0;
@@ -161,7 +134,7 @@
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z];
         
         //Init word spawn fucntion
         spawnThreshold = -30;
@@ -205,27 +178,6 @@
 	return self;
 }
 
--(void)initSprites
-{
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    
-    silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 - 620, size.height/2 - 20);
-    silence.opacity = 255;
-    [self addChild:silence];
-    
-    silence_light = [CCSprite spriteWithFile:@"silence_light.png"];
-    silence_light.position = ccp(size.width/2 + 20, size.height/2);
-    silence_light.opacity = 255;
-    [self addChild:silence_light];
-    
-    tree = [CCSprite spriteWithFile:@"key_tree_right.png"];
-    tree.position = ccp(size.width/2 + 300, size.height/2 - 500);
-    tree.opacity = 255;
-    tree.scale = 0.5;
-    [self addChild:tree];
-    
-}
 
 - (void)levelTimerCallback:(NSTimer *)timer {
     float currentVolume = [[AudioManager sharedInstance] getAverageVolume];
@@ -250,7 +202,6 @@
             spawnIndex++;
             hasSpawn = true;
             
-<<<<<<< HEAD
             //Word transition effect
 //            int i;
 //            for(i = 0; i < 7; i++)
@@ -261,10 +212,6 @@
             //[spawnWord[7] runAction:[CCMoveTo actionWithDuration:1 position:waiting.position]];
             spawnWord[7].opacity = 0;
             [spawnWord[7] runAction:[CCFadeTo actionWithDuration:transitionTime opacity:255]];
-=======
-            [waiting runAction:[CCFadeOut actionWithDuration:2]];
-            [spawnWord[7] runAction:[CCMoveTo actionWithDuration:2 position:waiting.position]];
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         }
     }
     if(currentVolume < spawnThreshold && hasSpawn)

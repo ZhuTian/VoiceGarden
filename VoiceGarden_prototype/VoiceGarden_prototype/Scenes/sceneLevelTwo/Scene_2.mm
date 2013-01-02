@@ -97,7 +97,6 @@
         [desolate_beautiful setColor:ccc3(100,100,100)];
         desolate_beautiful.opacity = 0;
         
-<<<<<<< HEAD
         slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
 //            if(self.sceneStatus == 1)
 //            {
@@ -109,17 +108,6 @@
 //            }
             _nextScene = 2;
             [self SceneTransition];
-=======
-        slience_XXX = [CCMenuItemFont itemWithString:@"silence" block:^(id sender){
-            if(self.sceneStatus == 1)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:1] withColor:ccWHITE]];
-            }
-            else if(self.sceneStatus == 2)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:3] withColor:ccWHITE]];
-            }
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
         }];
         [slience_XXX setFontName:fontName];
         [slience_XXX setFontSize:_fontSize];
@@ -206,7 +194,7 @@
     }
 }
 
--(void)initSprites
+/*-(void)initSprites
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
     
@@ -245,7 +233,7 @@
     garden = [CCSprite spriteWithFile:@"garden.png"];
     garden.position = ccp(size.width/2, size.height/2 - 50);
     [self addChild: garden z:SCENE_Z];
-}
+}*/
 
 -(void)SceneTransition
 {
@@ -347,7 +335,6 @@
     }
 }
 
-<<<<<<< HEAD
 -(void)initSprites
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
@@ -393,9 +380,6 @@
     light.opacity = 0;
     [self addChild: light z:SCENE_Z];
 }
-=======
-
->>>>>>> c6746c9406feea18e1b2a6be883b48d99ac94c4d
 
 -(void)nextScene
 {
