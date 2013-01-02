@@ -23,7 +23,7 @@
     CCSprite *background;
     CCSprite *door;
     
-    int transitionTime;
+    float transitionTime;
     
 @public
     int sceneStatus;

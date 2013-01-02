@@ -129,18 +129,28 @@
         
         footPrintLeft = [CCSprite spriteWithFile:@"foot_L.png"];
         footPrintLeft.scale = 0.3f;
-        footPrintLeft.position = ccp(125, 170);
-        //[self addChild:footPrintLeft z:2 tag:1];
+        footPrintLeft.position = ccp(500, 220);
+        footPrintLeft.rotation = 195;
+        footPrintLeft.opacity = 0;
+        [self addChild:footPrintLeft z:SCENE_Z tag:1];
         
         footPrintRight = [CCSprite spriteWithFile:@"foot_R.png"];
         footPrintRight.scale = 0.3f;
-        footPrintRight.position = ccp(100, 135);
-        //[self addChild:footPrintRight z:2 tag:2];
+        footPrintRight.position = ccp(470, 270);
+        footPrintRight.rotation = 195;
+        footPrintRight.opacity = 0;
+        [self addChild:footPrintRight z:SCENE_Z tag:2];
+        
+        //Fade in footprints
+        id footLeftAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [footPrintLeft runAction:footLeftAction];
+        id footRightAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [footPrintRight runAction:footRightAction];
         
         status = 1;
         timer = 30;
-        isLeft = false;
-        //[self scheduleUpdate];
+        isLeft = true;
+        [self scheduleUpdate];
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
@@ -173,8 +183,8 @@
     [self addChild: pond z:SCENE_Z];
     
     door = [CCSprite spriteWithFile:@"door.png"];
-    door.position = ccp(size.width/2 - 400, size.height/2 + 100);
-    door.scale = 0.6f;
+    door.position = ccp(size.width/2 - 300, size.height/2 + 100);
+    door.scale = 0.8f;
     [self addChild: door z:SCENE_Z];
 
     
@@ -197,6 +207,12 @@
     //Fade out button
     id goButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [go runAction:goButtonAction];
+    
+    //Fade out footprints
+    id footLeftAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [footPrintLeft runAction:footLeftAction];
+    id footRightAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [footPrintRight runAction:footRightAction];
     
     //Transition animation
     id _pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 900 + 400, size.height/2 - 300 - 300)],
@@ -252,47 +268,105 @@
 -(void)update:(ccTime)dt
 {
     float volume = [[AudioManager sharedInstance] getAverageVolume];
-    //NSLog(@"%f",volumn);
-    if (volume>-20&&status !=7) {
-        timer--;
-        if (timer==0) {
-            if(isLeft==false){
-                if(footPrintRight.position.x<350){
-                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y);
-                    isLeft = true;
+    //NSLog(@"%f",volume);
+    if (volume>-100&&status !=7) {
+        timer-=2;
+        
+        if(timer == 0)
+        {
+            timer = 30;
+            if(isLeft == false)
+            {
+                isLeft = true;
+                if(footPrintRight.position.y <= 300)
+                {
+                    footPrintRight.position = ccp(footPrintRight.position.x - 80, footPrintRight.position.y + 30);
                 }
-                else if(footPrintRight.position.x>=350&&footPrintRight.position.x<=550){
-                    footPrintRight.rotation = -15;
-                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
-                    isLeft = true;
+                else if(footPrintRight.position.y <= 350)
+                {
+                    footPrintRight.position = ccp(footPrintRight.position.x - 50, footPrintRight.position.y + 30);
+                    footPrintRight.rotation = 240;
                 }
-                else if(footPrintRight.position.x<900&&footPrintRight.position.x>550){
-                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
-                    isLeft = true;
+                else if(footPrintRight.position.y <= 380)
+                {
+                    footPrintRight.position = ccp(footPrintRight.position.x + 10, footPrintRight.position.y + 60);
+                    footPrintRight.rotation = 290;
                 }
-                else{
+                else if(footPrintRight.position.y <= 470)
+                {
+                    footPrintRight.position = ccp(footPrintRight.position.x + 80, footPrintRight.position.y + 40);
+                    footPrintRight.rotation = 330;
+                }
+                else
+                {
                     self.sceneStatus = 2;
                     [self updateScene];
                     status = 7;
                 }
             }
-            else{
-                if(footPrintLeft.position.x<350){
-                    footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y);
-                    isLeft = false;
+            else
+            {
+                isLeft = false;
+                if(footPrintLeft.position.y <= 300)
+                {
+                    footPrintLeft.position = ccp(footPrintLeft.position.x - 80, footPrintLeft.position.y + 30);
                 }
-                else if (footPrintLeft.position.x>=350&&footPrintLeft.position.x<=550){
-                    footPrintLeft.rotation = -15;
-                    footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y+10);
-                    isLeft = false;
+                else if(footPrintLeft.position.y <= 330)
+                {
+                    footPrintLeft.position = ccp(footPrintLeft.position.x - 50, footPrintLeft.position.y + 50);
+                    footPrintLeft.rotation = 240;
                 }
-                else if(footPrintLeft.position.x<900&&footPrintLeft.position.x>550){
-                    footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y+10);
-                    isLeft = false;
+                else if(footPrintLeft.position.y <= 400)
+                {
+                    footPrintLeft.position = ccp(footPrintLeft.position.x + 30, footPrintLeft.position.y + 80);
+                    footPrintLeft.rotation = 290;
                 }
+                else if(footPrintLeft.position.y <= 470)
+                {
+                    footPrintLeft.position = ccp(footPrintLeft.position.x + 120, footPrintLeft.position.y + 60);
+                    footPrintLeft.rotation = 330;
+                }
+                
             }
-            timer = 30;
         }
+//        if (timer==0) {
+//            if(isLeft==false){
+//                if(footPrintRight.position.x<350){
+//                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y);
+//                    isLeft = true;
+//                }
+//                else if(footPrintRight.position.x>=350&&footPrintRight.position.x<=550){
+//                    footPrintRight.rotation = -15;
+//                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
+//                    isLeft = true;
+//                }
+//                else if(footPrintRight.position.x<900&&footPrintRight.position.x>550){
+//                    footPrintRight.position = ccp(footPrintRight.position.x+50, footPrintRight.position.y+10);
+//                    isLeft = true;
+//                }
+//                else{
+//                    self.sceneStatus = 2;
+//                    [self updateScene];
+//                    status = 7;
+//                }
+//            }
+//            else{
+//                if(footPrintLeft.position.x<350){
+//                    footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y);
+//                    isLeft = false;
+//                }
+//                else if (footPrintLeft.position.x>=350&&footPrintLeft.position.x<=550){
+//                    footPrintLeft.rotation = -15;
+//                    footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y+10);
+//                    isLeft = false;
+//                }
+//                else if(footPrintLeft.position.x<900&&footPrintLeft.position.x>550){
+//                    footPrintLeft.position = ccp(footPrintLeft.position.x+50, footPrintLeft.position.y+10);
+//                    isLeft = false;
+//                }
+//            }
+//            timer = 30;
+//        }
     }
 }
 

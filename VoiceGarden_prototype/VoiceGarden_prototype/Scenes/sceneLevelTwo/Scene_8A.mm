@@ -46,7 +46,7 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         [self initSprites];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         
         label_1 = [CCLabelTTF labelWithString:@"Life comes into my garden." fontName:fontName fontSize:_fontSize];

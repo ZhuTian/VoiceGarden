@@ -33,6 +33,9 @@
     //For own way scene
     CCSprite *pond;
     
+    //For companion scene
+    CCSprite *road_loop;
+    
     int transitionTime;
     int _nextScene;
     

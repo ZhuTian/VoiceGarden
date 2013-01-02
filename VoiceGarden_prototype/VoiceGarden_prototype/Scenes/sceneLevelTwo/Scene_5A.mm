@@ -42,21 +42,15 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        background1 = [CCSprite spriteWithFile:@"footprint_bg.png" rect:CGRectMake(0, 0, 2048, 768)];
-        background1.position = ccp(size.width/2, size.height/2);
-        //background1.anchorPoint = ccp(0,0);
-        offset1 = 0;
         
-        background2 = [CCSprite spriteWithFile:@"footprint_bg.png" rect:CGRectMake(0, 0, 2048, 768)];
-        offset2 = 2048;
-        background2.position = ccp(size.width/2 + offset2, size.height/2);
+        [self initSprites];
+        transitionTime = 1.0f;
         
         scrollSpeed = 100;
         
+        enableFootprint = true;
         
-        // add the label as a child to this Layer
-        [self addChild: background1];
-        [self addChild: background2];
+        
         
         int xOffset = 150, yOffset = 250;
         int _fontSize = 30;
@@ -65,32 +59,50 @@
         label_1 = [CCLabelTTF labelWithString:@"I follow the footprint." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 + xOffset, size.height/2 - 40 + yOffset);
         label_1.color = ccc3(0, 0, 0);
+        label_1.opacity = 0;
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"People who are gone." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 + xOffset, size.height/2 - 100 + yOffset);
         label_2.color = ccc3(0, 0, 0);
+        label_2.opacity = 0;
 		[self addChild: label_2];
         
         label_3 = [CCLabelTTF labelWithString:@"Were they once belong here?" fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 + xOffset, size.height/2 - 160 + yOffset);
         label_3.color = ccc3(0, 0, 0);
+        label_3.opacity = 0;
 		[self addChild: label_3];
         
         label_4 = [CCLabelTTF labelWithString:@"I                                  " fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 + xOffset, size.height/2 - 220 + yOffset);
         label_4.color = ccc3(0, 0, 0);
+        label_4.opacity = 0;
 		[self addChild: label_4];
         
         label_5 = [CCLabelTTF labelWithString:@"and pick up things left by them" fontName:fontName fontSize:_fontSize];
 		label_5.position =  ccp( size.width /2 + xOffset, size.height/2 - 280 + yOffset);
         label_5.color = ccc3(0, 0, 0);
+        label_5.opacity = 0;
 		[self addChild: label_5];
+        
+        //Fade in scripts
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
+        id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_3 runAction:label3Action];
+        id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_4 runAction:label4Action];
+        id label5Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_5 runAction:label5Action];
 		
         
         keep = [CCMenuItemFont itemWithString:@"keep moving forward" block:^(id sender){
 
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_7A sceneWithVar:1] withColor:ccWHITE]];
+            enableFootprint = false;
+            [self SceneTransition];
 
         }];
         [keep setFontName:fontName];
@@ -99,6 +111,10 @@
         [keep setIsEnabled:true];
         [keep setIsEnabled:false];
         [keep setColor:ccc3(0,0,0)];
+        keep.opacity = 0;
+        
+        id keepAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [keep runAction:keepAction];
         
         
         
@@ -111,14 +127,7 @@
         [back setColor:ccc3(100,100,100)];
         
         CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
-            if(self.sceneStatus == 1)
-            {
-                self.sceneStatus = 2;
-            }
-            else if(self.sceneStatus == 3)
-            {
-                self.sceneStatus = 4;
-            }
+            sceneStatus = 2;
             [self updateScene];
         }];
         [action setFontName:fontName];
@@ -154,7 +163,7 @@
         [high setColor:ccc3(100,100,100)];
         
         
-        CCMenuItem *menu = [CCMenu menuWithItems:keep, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:keep, action, nil];
         //CCMenuItem *menu = [CCMenu menuWithItems:keep, middle, low, high, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
@@ -206,54 +215,63 @@
 
 - (void)levelTimerCallback:(NSTimer *)timer {
     //NSLog([[AudioManager sharedInstance] getNote]);
-    NSString* note = [[AudioManager sharedInstance] getNote];
-    if([note isEqualToString:@"Do"] || [note isEqualToString:@"Re"] || [note isEqualToString:@"Mi"])
+    if(enableFootprint == true)
     {
-        [footprintManager addFoot:[footprintManager getLowVolume]];
+        NSString* note = [[AudioManager sharedInstance] getNote];
+        if([note isEqualToString:@"Do"] || [note isEqualToString:@"Re"] || [note isEqualToString:@"Mi"])
+        {
+            [footprintManager addFoot:[footprintManager getLowVolume]];
+        }
+        else if([note isEqualToString:@"Fa"] || [note isEqualToString:@"So"])
+        {
+            [footprintManager addFoot:[footprintManager getMidVolume]];
+        }
+        else if([note isEqualToString:@"La"] || [note isEqualToString:@"Si"] || [note isEqualToString:@"Do+"])
+        {
+            [footprintManager addFoot:[footprintManager getHighVolume]];
+        }
+        else
+        {
+            //NSLog(note);
+        }
+        
+        [self detectCollision];
     }
-    else if([note isEqualToString:@"Fa"] || [note isEqualToString:@"So"])
-    {
-        [footprintManager addFoot:[footprintManager getMidVolume]];
-    }
-    else if([note isEqualToString:@"La"] || [note isEqualToString:@"Si"] || [note isEqualToString:@"Do+"])
-    {
-        [footprintManager addFoot:[footprintManager getHighVolume]];
-    }
-    else
-    {
-        NSLog(note);
-    }
-    
-    [self detectCollision];
 }
 
 - (void)scrollCallback:(ccTime)dt {
+    
+    if(!enableFootprint)
+    {
+        return;
+    }
+    
     CGSize size = [[CCDirector sharedDirector] winSize];
     offset1 -= dt * scrollSpeed;
-    background1.position = ccp(size.width/2 + offset1, size.height/2);
+    road_loop1.position = ccp(size.width/2 + offset1, size.height/2);
     offset2 -= dt * scrollSpeed;
-    background2.position = ccp(size.width/2 + offset2, size.height/2);
+    road_loop2.position = ccp(size.width/2 + offset2, size.height/2);
     if(offset2 <= 0)
     {
-        offset1 = offset2 + 2048;
+        offset1 = offset2 + 1024;
     }
     if(offset1 <= 0)
     {
-        offset2 = offset1 + 2048;
+        offset2 = offset1 + 1024;
     }
     
     
     int temp = faithLabel.position.x - dt*scrollSpeed;
     if(temp < 0)
-        temp += 2048;
+        temp += 1024;
     faithLabel.position = ccp(temp, faithLabel.position.y);
     temp = courageLabel.position.x - dt*scrollSpeed;
     if(temp < 0)
-        temp += 2048;
+        temp += 1024;
     courageLabel.position = ccp(temp, courageLabel.position.y);
     temp = friendshipLabel.position.x - dt*scrollSpeed;
     if(temp < 0)
-        temp += 2048;
+        temp += 1024;
     friendshipLabel.position = ccp(temp, friendshipLabel.position.y);
     
     [self detectCollision];
@@ -281,6 +299,12 @@
     {
         keep.isEnabled = true;
         keep.color = ccc3(100, 100, 100);
+        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+        id action = [CCEaseIn actionWithAction:move rate:1];
+        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+        [keep runAction: [CCSequence actions:action, action2, nil]];
+        [keep runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
     }
 }
 
@@ -320,4 +344,94 @@
 {
     [footprintManager updateOpacity:dt];
 }
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    //Add common background
+    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background z:BACKGROUND_Z];
+    
+    //Init roads;
+    door = [CCSprite spriteWithFile:@"door.png"];
+    door.position = ccp(size.width/2 + 300, size.height/2 + 100);
+    door.scale = 0.5f;
+    [self addChild: door z:SCENE_Z];
+    
+    road_ground = [CCSprite spriteWithFile:@"footprint_ground.png"];
+    road_ground.position = ccp(size.width/2, size.height/2);
+    [self addChild: road_ground z:SCENE_Z];
+    
+    road_loop1 = [CCSprite spriteWithFile:@"footprint_scroll.png" rect:CGRectMake(0, 0, 1024, 768)];
+    road_loop1.position = ccp(size.width/2, size.height/2);
+    //background1.anchorPoint = ccp(0,0);
+    offset1 = 0;
+    [self addChild: road_loop1 z:SCENE_Z];
+    
+    road_loop2 = [CCSprite spriteWithFile:@"footprint_scroll.png" rect:CGRectMake(0, 0, 1024, 768)];
+    offset2 = 1024;
+    road_loop2.position = ccp(size.width/2 + offset2, size.height/2);
+    [self addChild: road_loop2 z:SCENE_Z];
+    
+    road_front = [CCSprite spriteWithFile:@"footprint_scroll_front.png"];
+    road_front.position = ccp(size.width/2, size.height/2);
+    [self addChild: road_front z:SCENE_Z];
+}
+
+-(void)SceneTransition
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    //Fade out scripts
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_3 runAction:label3Action];
+    id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_4 runAction:label4Action];
+    id label5Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_5 runAction:label5Action];
+    
+    id keepAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [keep runAction:keepAction];
+    
+    //Transition animation
+    id roadLoop1Action = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_loop1.position.x - 400, road_loop1.position.y - 400)],
+                     [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                     nil];
+    [road_loop1 runAction:roadLoop1Action];
+    
+    id roadLoop2Action = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_loop2.position.x - 400, road_loop2.position.y - 400)],
+                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                          nil];
+    [road_loop2 runAction:roadLoop2Action];
+    
+    id roadGroundAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)],
+                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                          nil];
+    [road_ground runAction:roadGroundAction];
+    
+    id roadFrontAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)],
+                           [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                           nil];
+    [road_front runAction:roadFrontAction];
+    
+    id _doorAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                      [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                      nil];
+    id doorAction = [CCSequence actions:_doorAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
+    [door runAction:doorAction];
+    
+}
+
+-(void)nextScene
+{
+    [[CCDirector sharedDirector] replaceScene:[Scene_7A sceneWithVar:1]];
+}
+
 @end

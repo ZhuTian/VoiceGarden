@@ -107,7 +107,9 @@
         
         
         company = [CCMenuItemFont itemWithString:@"a companion" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5A sceneWithVar:1] withColor:ccWHITE]];
+            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5A sceneWithVar:1] withColor:ccWHITE]];
+            _nextScene = 2;
+            [self SceneTransition];
         }];
         [company setFontName:fontName];
         [company setFontSize:_fontSize];
@@ -215,6 +217,16 @@
     pond.position = ccp(size.width/2 - 130 - 600, size.height/2 + 300);
     pond.scale = 0.5f;
     [self addChild: pond z:SCENE_Z];
+    
+    //For companion
+    road_loop = [CCSprite spriteWithFile:@"footprint_scroll.png"];
+    road_loop.position = ccp(size.width/2 + 800, size.height/2 + 200);
+    road_loop.scale = 0.8f;
+    road_loop.opacity = 0;
+    [self addChild: road_loop z:SCENE_Z];
+    
+    id roadLoopAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    [road_loop runAction:roadLoopAction];
 }
 
 -(void)SceneTransition
@@ -267,6 +279,9 @@
         
         id fearAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
         [fear runAction:fearAction];
+        
+        id roadLoopAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+        [road_loop runAction:roadLoopAction];
     }
     else if(_nextScene == 1)
     {
@@ -292,6 +307,28 @@
         [pond runAction:pondAction];
         
     }
+    else if(_nextScene == 2)
+    {
+        id _pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150 - 400, size.height/2 - 300)],
+                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                          [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                          nil];
+        id pathAction = [CCSequence actions:_pathAction,
+                         [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
+                         nil];
+        [path runAction:pathAction];
+        
+        id desolateAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 150 - 400, size.height/2 - 300 - 300)],
+                             [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                             nil];
+        [desolate runAction:desolateAction];
+        
+        id roadLoopAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+                         [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                         nil];
+        [road_loop runAction:roadLoopAction];
+    }
 }
 
 -(void)nextScene
@@ -303,6 +340,10 @@
     else if(_nextScene == 1)
     {
         [[CCDirector sharedDirector] replaceScene:[Scene_5D sceneWithVar:1]];
+    }
+    else if(_nextScene == 2)
+    {
+        [[CCDirector sharedDirector] replaceScene:[Scene_5A sceneWithVar:1]];
     }
 }
 

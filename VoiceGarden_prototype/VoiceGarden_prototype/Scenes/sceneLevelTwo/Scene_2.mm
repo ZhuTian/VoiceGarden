@@ -396,11 +396,11 @@
     }
     else if(_nextScene == 2)
     {
-        if(sceneStatus == 1)
+        if([GlobalVariable sharedInstance].isSlience)
         {
             [[CCDirector sharedDirector] replaceScene:[Scene_3B sceneWithVar:1]];
         }
-        else if(sceneStatus == 2)
+        else
         {
             [[CCDirector sharedDirector] replaceScene:[Scene_3B sceneWithVar:3]];
 

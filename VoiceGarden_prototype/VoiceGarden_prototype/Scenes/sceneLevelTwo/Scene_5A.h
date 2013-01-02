@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import "FootprintManager.h"
+#import "SceneCommon.h"
 
 @interface Scene_5A : CCLayer
 {
@@ -40,8 +41,17 @@
     int offset1;
     int offset2;
     int scrollSpeed;
-    CCSprite* background1;
-    CCSprite* background2;
+    CCSprite *road_loop1;
+    CCSprite *road_loop2;
+    
+    CCSprite *background;
+    CCSprite *road_front;
+    CCSprite *road_ground;
+    CCSprite *door;
+    
+    float transitionTime;
+    
+    bool enableFootprint;
     
     
 @public

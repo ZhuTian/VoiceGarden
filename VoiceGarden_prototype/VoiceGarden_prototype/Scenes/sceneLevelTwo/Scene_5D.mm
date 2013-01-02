@@ -236,8 +236,8 @@
                      nil];
     [pond runAction:pondAction];
     
-    id doorAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 + 100)],
-                     [CCScaleTo actionWithDuration:transitionTime scale:0.6f],
+    id doorAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 300, size.height/2 + 100)],
+                     [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
                      nil];
     [door runAction:doorAction];
