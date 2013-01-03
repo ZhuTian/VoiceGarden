@@ -23,7 +23,18 @@
     CCSprite *light;
     CCSprite *tree_nest;
     
+    //for Scene_5B
+    CCSprite* treeLeft;
+    CCSprite* springBottom;
+    CCSprite* cat;
+    
+    //for Scene_5C
+    CCSprite* keyTreeLeft;
+    CCSprite* treeLayer_1;
+    CCSprite* treeLayer_2;
+    
     int transitionTime;
+    int _nextScene;
     
     @public
     int sceneStatus;

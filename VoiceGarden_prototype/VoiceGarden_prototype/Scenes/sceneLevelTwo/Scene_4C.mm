@@ -12,6 +12,9 @@
 #import "GlobalVariable.h"
 #define _fontSize 30
 
+#define SCENE_5B 1
+#define SCENE_5C 2
+
 @implementation Scene_4C
 
 @synthesize sceneStatus;
@@ -83,14 +86,8 @@
 		
         
         spring = [CCMenuItemFont itemWithString:@"spring" block:^(id sender){
-            if(self.sceneStatus == 1 || self.sceneStatus == 2)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5B sceneWithVar:1 preScene:self.sceneStatus] withColor:ccWHITE]];
-            }
-            else if(self.sceneStatus == 3 || self.sceneStatus == 4)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5B sceneWithVar:2 preScene:self.sceneStatus] withColor:ccWHITE]];
-            }
+            _nextScene = SCENE_5B;
+            [self sceneTransition];
         }];
         [spring setFontName:fontName];
         [spring setFontSize:_fontSize];
@@ -108,16 +105,9 @@
         [spring runAction: [CCSequence actions:fadein, actionMove, actionMove2, nil]];
         [spring runAction:[CCRepeatForever actionWithAction:[CCSequence actions:actionMove, actionMove2, nil]]];
         
-        
         key = [CCMenuItemFont itemWithString:@"secret" block:^(id sender){
-            if(self.sceneStatus == 2)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5C sceneWithVar:1] withColor:ccWHITE]];
-            }
-            else if(self.sceneStatus == 4)
-            {
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_5C sceneWithVar:2] withColor:ccWHITE]];
-            }
+            _nextScene = SCENE_5C;
+            [self sceneTransition];
         }];
         [key setFontName:fontName];
         [key setFontSize:_fontSize];
@@ -129,10 +119,7 @@
         id keyAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [key runAction:keyAction];
         
-        
-        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
-        }];
+        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){   /*  DUMB  func*/   }];
         [back setFontName:fontName];
         [back setFontSize:48];
         [back setPosition:ccp( 70, 30)];
@@ -154,15 +141,9 @@
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
-        
         CCMenuItem *menu = [CCMenu menuWithItems:spring, key, action, nil];
-        //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		//[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( 0, 0)];
-		
-		// Add the menu to the layer
-		[self addChild:menu];
+        [self addChild:menu];
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
@@ -170,7 +151,6 @@
             keySprite.position = ccp(900, 100);
             [self addChild:keySprite];
         }
-        
 	}
 	return self;
 }
@@ -200,7 +180,142 @@
     tree_nest.scale = 0.9f;
     [self addChild: tree_nest z:BACKGROUND_Z];
     
+    treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
+    treeLeft.position = ccp(size.width/2 - 200,size.height/2 - 100);
+    treeLeft.opacity = 0;
+    [self addChild:treeLeft];
     
+    springBottom = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
+    springBottom.position=ccp(size.width/2 , size.height/2 - 200);
+    springBottom.opacity = 0;
+    [self addChild:springBottom];
+    
+    cat = [CCSprite spriteWithFile:@"cat_down.png"];
+    cat.position = ccp(size.width/2, size.height/2 - 200);
+    cat.opacity = 0;
+    [self addChild:cat];
+    
+    keyTreeLeft = [CCSprite spriteWithFile:@"key_tree_left.png"];
+    keyTreeLeft.position = ccp(size.width/2, size.height/2+ 100);
+    keyTreeLeft.opacity = 0;
+    [self addChild:keyTreeLeft];
+    
+    treeLayer_1 = [CCSprite spriteWithFile:@"key_treeLayer1.png"];
+    treeLayer_1.position = ccp(size.width/2, size.height/2 + 150);
+ //   treeLayer_1.scale = 0.9;
+    treeLayer_1.opacity = 0;
+    [self addChild:treeLayer_1];
+    
+    treeLayer_2 = [CCSprite spriteWithFile:@"key_treeLayer2.png"];
+    treeLayer_2.position = ccp(size.width/2, size.height/2 + 150);
+ //   treeLayer_2.scale = 0.9;
+    treeLayer_2.opacity = 0;
+    [self addChild:treeLayer_2];
+    
+}
+
+-(void)sceneTransition
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_3 runAction:label3Action];
+    id springAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [spring runAction:springAction];
+    id keyAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [key runAction:keyAction];
+    
+    if (_nextScene == SCENE_5B) {
+        
+        id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                            nil];
+        [silence runAction:silenceAction];
+        
+        id lightAction = [CCSpawn actions:  [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                            nil];
+        [light runAction:lightAction];
+        
+        id treeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                                [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                                nil];
+        [treeLeft runAction:treeLeftAction];
+        
+        id bottomAction = [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                            nil];
+        [springBottom runAction:bottomAction];
+        
+        id catAction =  [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                        nil];
+        [cat runAction:catAction];
+        
+        id _treeNestAction = [CCSpawn actions:  [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)],
+                                                [CCScaleTo actionWithDuration:transitionTime scale:0.9],
+                                                nil];
+        id treeNestAction = [CCSequence actions:_treeNestAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
+        [tree_nest runAction:treeNestAction];
+    }
+    else if(_nextScene == SCENE_5C){
+        id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -100)],
+                            nil];
+        [silence runAction:silenceAction];
+        
+        id lightAction = [CCSpawn actions:  [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                          [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -100)],
+                          nil];
+        [light runAction:lightAction];
+        
+        id treeNestAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 200)],
+                                             [CCScaleTo actionWithDuration:transitionTime scale:1.0f],nil];
+        [tree_nest runAction:treeNestAction];
+        
+        id treeLayer1Action =  [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                                    [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                                [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -150)],nil];
+        [treeLayer_1 runAction:treeLayer1Action];
+        
+        id treeLayer2Action = [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                               [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                               [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -150)],nil];
+        [treeLayer_2 runAction:treeLayer2Action];
+        
+        id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                                    [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],nil];
+        id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
+        [keyTreeLeft runAction:keyTreeLeftAction];
+    }
+}
+
+-(void)nextScene
+{
+    if(_nextScene == SCENE_5B)
+    {
+        if (self.sceneStatus==1 || self.sceneStatus == 2) {
+            [[CCDirector sharedDirector] replaceScene:[Scene_5B sceneWithVar:1 preScene:self.sceneStatus]];
+        }
+        else if(self.sceneStatus ==3 || self.sceneStatus == 4){
+            [[CCDirector sharedDirector] replaceScene:[Scene_5B sceneWithVar:2 preScene:self.sceneStatus]];
+        }
+    }
+    else if(_nextScene == SCENE_5C)
+    {
+        if(self.sceneStatus == 2)
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_5C sceneWithVar:1]];
+        }
+        else if(self.sceneStatus == 4)
+        {
+            [[CCDirector sharedDirector] replaceScene:[Scene_5C sceneWithVar:2]];
+        }
+    }  
 }
 
 -(void)updateScene

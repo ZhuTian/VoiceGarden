@@ -17,6 +17,7 @@
     CCLabelTTF *label_2;
     CCLabelTTF *label_3;
     CCLabelTTF *label_4;
+    CCLabelTTF *label_5;
     
     CGPoint bloomPosition;
     CGPoint swayPosition;
@@ -28,6 +29,16 @@
     CCLabelTTF *swayLabel;
     
     float collisionThreshold;
+    CCSprite* treeLeft;
+    CCSprite* treeRight;
+    CCSprite* bottomRight;
+    CCSprite* cat;
+    
+    CCSprite *silence;
+    CCSprite *light;
+    
+    float transitionTime;
+    int _nextScene;
     
 @public
     int sceneStatus;

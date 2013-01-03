@@ -43,53 +43,56 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"Spring_bg.png"];
-        background.position = ccp(size.width/2, size.height/2);
         
-        // add the label as a child to this Layer
-        [self addChild: background];
+        [self initSprites];
+        transitionTime = 1.0f;
         
         int yOffset = 50;
         int _fontSize = 26;
         
         label_1 = [CCLabelTTF labelWithString:@"It's April." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 - 170, size.height/2 + yOffset);
+		label_1.position =  ccp( size.width /2 - 170, size.height/2 + 40 + yOffset);
         label_1.color = ccc3(0, 0, 0);
+        label_1.opacity = 0;
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"But where are the signs of spring?" fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 - 20, size.height/2 - 40 + yOffset);
+        label_2 = [CCLabelTTF labelWithString:@"The butterfly dances with my voice." fontName:fontName fontSize:_fontSize];
+		label_2.position =  ccp( size.width /2 - 15, size.height/2 + yOffset);
         label_2.color = ccc3(0, 0, 0);
+        label_2.opacity = 0;
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@"The flowers have shrunken" fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 70, size.height/2 - 80 + yOffset);
+        label_3 = [CCLabelTTF labelWithString:@"But where are the signs of spring?" fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 20, size.height/2 - 40 + yOffset);
         label_3.color = ccc3(0, 0, 0);
+        label_3.opacity = 0;
 		[self addChild: label_3];
         
-        label_4 = [CCLabelTTF labelWithString:@"and the tree leaves are falling." fontName:fontName fontSize:_fontSize];
-		label_4.position =  ccp( size.width /2 - 40, size.height/2 - 120 + yOffset);
+        label_4 = [CCLabelTTF labelWithString:@"The flowers have shrunken" fontName:fontName fontSize:_fontSize];
+		label_4.position =  ccp( size.width /2 - 70, size.height/2 - 80 + yOffset);
         label_4.color = ccc3(0, 0, 0);
+        label_4.opacity = 0;
 		[self addChild: label_4];
         
+        label_5 = [CCLabelTTF labelWithString:@"and the tree leaves are falling." fontName:fontName fontSize:_fontSize];
+		label_5.position =  ccp( size.width /2 - 40, size.height/2 - 120 + yOffset);
+        label_5.color = ccc3(0, 0, 0);
+        label_5.opacity = 0;
+		[self addChild: label_5];
         
-        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            if(self.preScene == 1 || self.preScene == 3)
-            {
-                if(self.sceneStatus == 2)
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:3] withColor:ccWHITE]];
-                else
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:1] withColor:ccWHITE]];
-            }
-            else if(self.preScene == 2 || self.preScene == 4)
-            {
-                if(self.sceneStatus == 2)
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:4] withColor:ccWHITE]];
-                else
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:2] withColor:ccWHITE]];
-            }
-        }];
+        id labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:labelAction];
+        labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:labelAction];
+        labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_3 runAction:labelAction];
+        labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_4 runAction:labelAction];
+        labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_5 runAction:labelAction];
         
+        
+        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){   [self sceneTransition];   }];
         [back setFontName:fontName];
         [back setFontSize:30];
         [back setPosition:ccp( 70, 30)];
@@ -163,6 +166,116 @@
 	}
 	return self;
 }
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    CCSprite* background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background];
+    
+    treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
+    treeLeft.position = ccp(size.width/2 - 200,size.height/2+ 100);
+    [self addChild:treeLeft];
+    
+    treeRight = [CCSprite spriteWithFile:@"tree_nest.png"];
+    treeRight.position = ccp(size.width/2+210,size.height/2+200);
+    treeRight.scale = 0.9;
+    [self addChild:treeRight];
+    
+    bottomRight = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
+    bottomRight.position=ccp(size.width/2, size.height/2);
+    [self addChild:bottomRight z:10];
+    
+    cat = [CCSprite spriteWithFile:@"cat_down.png"];
+    cat.position = ccp(size.width/2, size.height/2);
+    [self addChild:cat];
+    
+    light = [CCSprite spriteWithFile:@"silence_light.png"];
+    light.position = ccp(size.width/2 - 150, size.height/2 + 320);
+    light.scale = 0.7f;
+    light.opacity = 0;
+    [self addChild: light z:BACKGROUND_Z];
+    
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 - 600, size.height/2 + 300);
+    silence.scale = 0.7f;
+    silence.opacity = 0;
+    [self addChild: silence z:BACKGROUND_Z];
+}
+
+-(void)sceneTransition
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    
+    id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_3 runAction:label3Action];
+    
+    id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_4 runAction:label4Action];
+    
+    id label5Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_5 runAction:label5Action];
+    
+    
+    
+    id lightAction = [CCSpawn actions:  [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                                        nil];
+    [light runAction:lightAction];
+    
+    id silenceAction = [CCSpawn actions:    [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                                            nil];
+    [silence runAction:silenceAction];
+    
+    id treeLeftAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                                        nil];
+    [treeLeft runAction:treeLeftAction];
+    
+    id bottomAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                       [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                       nil];
+    [bottomRight runAction:bottomAction];
+
+    id catAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                    [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                    nil];
+    [cat runAction:catAction];
+    
+    id _treeRightAction = [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)];
+    id treeRightAction = [CCSequence actions:_treeRightAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
+    [treeRight runAction:treeRightAction];
+    
+}
+
+-(void)nextScene
+{
+    if(self.preScene == 1 || self.preScene == 3)
+    {
+        if(self.sceneStatus == 2)
+            [[CCDirector sharedDirector] replaceScene:[Scene_4C sceneWithVar:3]];
+        else
+            [[CCDirector sharedDirector] replaceScene:[Scene_4C sceneWithVar:1]];
+    }
+    else if(self.preScene == 2 || self.preScene == 4)
+    {
+        if(self.sceneStatus == 2)
+            [[CCDirector sharedDirector] replaceScene:[Scene_4C sceneWithVar:4]];
+        else
+            [[CCDirector sharedDirector] replaceScene:[Scene_4C sceneWithVar:2]];
+    }
+}
+
+
 
 - (void)dealloc {
 

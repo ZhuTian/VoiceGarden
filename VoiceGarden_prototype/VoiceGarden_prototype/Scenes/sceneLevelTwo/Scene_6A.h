@@ -15,6 +15,16 @@
     CCLabelTTF *label_1;
     CCLabelTTF *label_2;
     
+    CCSprite* treeLeft;
+    CCSprite* treeRight;
+    CCSprite* bottomRight;
+    CCSprite* cat;
+    
+    CCSprite *desolate;
+    CCSprite *garden;
+    CCSprite *silence;
+    
+    int transitionTime;
 }
 
 +(CCScene *) sceneWithVar: (int)_sceneType;

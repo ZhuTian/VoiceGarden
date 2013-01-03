@@ -20,11 +20,27 @@
     CCLabelTTF *label_4;
     CCMenuItemImage *key;
     
+    CCSprite* treeLeft;
+    CCSprite* treeRight;
+    CCSprite* treeLayer_1;
+    CCSprite* treeLayer_2;
+    
+    float transitionTime;
+    int _nextScene;
+    
+    //for scene 6A
+    CCSprite* tree_L;
+    CCSprite* treeRightEgg;
+    CCSprite* bottomRight;
+    CCSprite* cat;
+    
     int dominantnote;
     float flowerTimer[4];
     bool falling[4];
     float floweRotation[4];
     
+    CCSprite *silence;
+    CCSprite *light;
     
 @public
     int sceneStatus;

@@ -37,30 +37,35 @@
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"life_bg.png"];
-        background.position = ccp(size.width/2, size.height/2);
         
-        // add the label as a child to this Layer
-        [self addChild: background];
-        
+        [self initSprites];
+        transitionTime = 1;
         
         label_1 = [CCLabelTTF labelWithString:@"I hear faint sounds in the garden." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 , size.height/2 - 100);
+		label_1.position =  ccp( size.width /2 , size.height/2);
         label_1.color = ccc3(0, 0, 0);
+        label_1.opacity = 0;
 		[self addChild: label_1];
         
         label_2 = [CCLabelTTF labelWithString:@"It's  the echos of         returning." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 , size.height/2 - 160);
+		label_2.position =  ccp( size.width /2 , size.height/2 - 60);
         label_2.color = ccc3(0, 0, 0);
+        label_2.opacity = 0;
 		[self addChild: label_2];
 		
+        id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_1 runAction:label1Action];
+        
+        id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+        [label_2 runAction:label2Action];
+        
         XXX = [CCMenuItemFont itemWithString:@"life" block:^(id sender){
             [GlobalVariable sharedInstance].isSlience = false;
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:2] withColor:ccWHITE]];
+            [self sceneTransition];
         }];
         [XXX setFontName:fontName];
         [XXX setFontSize:_fontSize];
-        [XXX setPosition:ccp( size.width/2 + 50, size.height/2 - 160)];
+        [XXX setPosition:ccp( size.width/2 + 50, size.height/2 - 60)];
         [XXX setIsEnabled:true];
         [XXX setColor:ccc3(100,100,100)];
         
@@ -91,9 +96,6 @@
         
         
         CCMenuItem *menu = [CCMenu menuWithItems:XXX, nil];
-        //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		//[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
@@ -109,4 +111,96 @@
 	}
 	return self;
 }
+
+-(void)initSprites
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    CCSprite* background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
+    background.position = ccp(size.width/2, size.height/2);
+    [self addChild: background];
+    
+    treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
+    treeLeft.position = ccp(size.width/2 - 200,size.height/2+ 100);
+    [self addChild:treeLeft];
+    
+    treeRight = [CCSprite spriteWithFile:@"tree_nest_egg.png"];
+    treeRight.position = ccp(size.width/2+210,size.height/2+200);
+    treeRight.scale = 0.9;
+    [self addChild:treeRight];
+    
+    bottomRight = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
+    bottomRight.position=ccp(size.width/2, size.height/2);
+    [self addChild:bottomRight z:10];
+    
+    cat = [CCSprite spriteWithFile:@"cat_up.png"];
+    cat.position = ccp(size.width/2, size.height/2);
+    [self addChild:cat];
+    
+    //transition 
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 + 350, size.height/2 + 150);
+    silence.scale = 0.8f;
+    silence.opacity = 0;
+    [self addChild: silence z:SCENE_Z];
+    
+    desolate = [CCSprite spriteWithFile:@"desolate.png"];
+    desolate.position = ccp(size.width/2 + 250, size.height/2 + 150);
+    desolate.scale = 0.8f;
+    desolate.opacity = 0;
+    [self addChild: desolate z:SCENE_Z];
+    
+    garden = [CCSprite spriteWithFile:@"garden.png"];
+    garden.position = ccp(size.width/2 + 300, size.height/2 - 50);
+    garden.opacity = 0;
+    [self addChild: garden z:SCENE_Z];
+    
+}
+
+-(void)sceneTransition
+{
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    
+    id treeLeftAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    [treeLeft runAction:treeLeftAction];
+    
+    id treeRightAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    [treeRight runAction:treeRightAction];
+    
+    id bottomRightAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                         [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    [bottomRight runAction:bottomRightAction];
+    
+    
+    id catAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
+                            [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    [cat runAction:catAction];
+    
+    id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
+                    [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    [silence runAction:silenceAction];
+    
+    id desolateAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
+                        [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    [desolate runAction:desolateAction];
+
+    id _gardenAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
+                        [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+    id gardenAction = [CCSequence actions:_gardenAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
+    
+    [garden runAction:gardenAction];    
+}
+
+-(void)nextScene
+{
+    [[CCDirector sharedDirector] replaceScene:[Scene_2 sceneWithVar:2]];
+}
+
+
 @end
