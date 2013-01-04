@@ -52,7 +52,6 @@
         
         transitionTime = 1.0f;
         
-        [self initSprites];
         
         label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 400, size.height/2 - 200);
