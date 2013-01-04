@@ -47,38 +47,38 @@
         [self initSprites];
         transitionTime = 1.0f;
         
-        int yOffset = 50;
+        int yOffset = -150;
         int _fontSize = 26;
         
         label_1 = [CCLabelTTF labelWithString:@"It's April." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 170, size.height/2 + 40 + yOffset);
         label_1.color = ccc3(0, 0, 0);
         label_1.opacity = 0;
-		[self addChild: label_1];
+		[self addChild: label_1 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"The butterfly dances with my voice." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 15, size.height/2 + yOffset);
         label_2.color = ccc3(0, 0, 0);
         label_2.opacity = 0;
-		[self addChild: label_2];
+		[self addChild: label_2 z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"But where are the signs of spring?" fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 - 20, size.height/2 - 40 + yOffset);
         label_3.color = ccc3(0, 0, 0);
         label_3.opacity = 0;
-		[self addChild: label_3];
+		[self addChild: label_3 z:TEXT_Z];
         
         label_4 = [CCLabelTTF labelWithString:@"The flowers have shrunken" fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 - 70, size.height/2 - 80 + yOffset);
         label_4.color = ccc3(0, 0, 0);
         label_4.opacity = 0;
-		[self addChild: label_4];
+		[self addChild: label_4 z:TEXT_Z];
         
         label_5 = [CCLabelTTF labelWithString:@"and the tree leaves are falling." fontName:fontName fontSize:_fontSize];
 		label_5.position =  ccp( size.width /2 - 40, size.height/2 - 120 + yOffset);
         label_5.color = ccc3(0, 0, 0);
         label_5.opacity = 0;
-		[self addChild: label_5];
+		[self addChild: label_5 z:TEXT_Z];
         
         id labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [label_1 runAction:labelAction];
@@ -113,7 +113,6 @@
 		
 		// Add the menu to the layer
 		[self addChild:menu];
-        
         
         bloomLabel = [CCLabelTTF labelWithString:@"blooming." fontName:fontName fontSize:_fontSize];
 		bloomLabel.position =  ccp(500, 600);
@@ -176,7 +175,7 @@
     [self addChild: background];
     
     treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
-    treeLeft.position = ccp(size.width/2 - 200,size.height/2+ 100);
+    treeLeft.position = ccp(size.width/2,size.height/2);
     [self addChild:treeLeft];
     
     treeRight = [CCSprite spriteWithFile:@"tree_nest.png"];
@@ -186,20 +185,10 @@
     
     bottomRight = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
     bottomRight.position=ccp(size.width/2, size.height/2);
-    [self addChild:bottomRight z:10];
-    
-    cat = [CCSprite spriteWithFile:@"cat_down.png"];
-    cat.position = ccp(size.width/2, size.height/2);
-    [self addChild:cat];
-    
-    light = [CCSprite spriteWithFile:@"silence_light.png"];
-    light.position = ccp(size.width/2 - 150, size.height/2 + 320);
-    light.scale = 0.7f;
-    light.opacity = 0;
-    [self addChild: light z:BACKGROUND_Z];
+    [self addChild:bottomRight];
     
     silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 - 600, size.height/2 + 300);
+    silence.position = ccp(size.width/2 - 150, size.height/2 + 320);
     silence.scale = 0.7f;
     silence.opacity = 0;
     [self addChild: silence z:BACKGROUND_Z];
@@ -224,13 +213,6 @@
     id label5Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [label_5 runAction:label5Action];
     
-    
-    
-    id lightAction = [CCSpawn actions:  [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
-                                        nil];
-    [light runAction:lightAction];
-    
     id silenceAction = [CCSpawn actions:    [CCFadeTo actionWithDuration:transitionTime opacity:255],
                                             [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
                                             nil];
@@ -245,11 +227,6 @@
                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
                        nil];
     [bottomRight runAction:bottomAction];
-
-    id catAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                    [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
-                    nil];
-    [cat runAction:catAction];
     
     id _treeRightAction = [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)];
     id treeRightAction = [CCSequence actions:_treeRightAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];

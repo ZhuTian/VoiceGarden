@@ -28,7 +28,6 @@
     
     CCSprite *background;
     CCSprite *silence;
-    CCSprite *light;
     CCSprite *tree_nest;
     
     int transitionTime;

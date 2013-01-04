@@ -52,7 +52,6 @@
         
         transitionTime = 1.0f;
         
-        
         label_1 = [CCLabelTTF labelWithString:@"Colors, sounds, and life are gone along" fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 400, size.height/2 - 200);
         
@@ -83,7 +82,6 @@
         id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [label_3 runAction:label3Action];
 		
-        
         spring = [CCMenuItemFont itemWithString:@"spring" block:^(id sender){
             _nextScene = SCENE_5B;
             [self sceneTransition];
@@ -164,13 +162,9 @@
     [self addChild: background z:BACKGROUND_Z];
     
     //Add Scene Sprites
-    light = [CCSprite spriteWithFile:@"silence_light.png"];
-    light.position = ccp(size.width/2 - 150, size.height/2 + 120);
-    light.scale = 0.7f;
-    [self addChild: light z:BACKGROUND_Z];
-    
+
     silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 - 600, size.height/2 + 100);
+    silence.position = ccp(size.width/2 - 150, size.height/2 + 120);
     silence.scale = 0.7f;
     [self addChild: silence z:BACKGROUND_Z];
     
@@ -180,7 +174,7 @@
     [self addChild: tree_nest z:BACKGROUND_Z];
     
     treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
-    treeLeft.position = ccp(size.width/2 - 200,size.height/2 - 100);
+    treeLeft.position = ccp(size.width/2 ,size.height/2 - 200);
     treeLeft.opacity = 0;
     [self addChild:treeLeft];
     
@@ -189,28 +183,10 @@
     springBottom.opacity = 0;
     [self addChild:springBottom];
     
-    cat = [CCSprite spriteWithFile:@"cat_down.png"];
-    cat.position = ccp(size.width/2, size.height/2 - 200);
-    cat.opacity = 0;
-    [self addChild:cat];
-    
-    keyTreeLeft = [CCSprite spriteWithFile:@"key_tree_left.png"];
+    keyTreeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
     keyTreeLeft.position = ccp(size.width/2, size.height/2+ 100);
     keyTreeLeft.opacity = 0;
-    [self addChild:keyTreeLeft];
-    
-    treeLayer_1 = [CCSprite spriteWithFile:@"key_treeLayer1.png"];
-    treeLayer_1.position = ccp(size.width/2, size.height/2 + 150);
- //   treeLayer_1.scale = 0.9;
-    treeLayer_1.opacity = 0;
-    [self addChild:treeLayer_1];
-    
-    treeLayer_2 = [CCSprite spriteWithFile:@"key_treeLayer2.png"];
-    treeLayer_2.position = ccp(size.width/2, size.height/2 + 150);
- //   treeLayer_2.scale = 0.9;
-    treeLayer_2.opacity = 0;
-    [self addChild:treeLayer_2];
-    
+    [self addChild:keyTreeLeft];    
 }
 
 -(void)sceneTransition
@@ -235,11 +211,6 @@
                                             nil];
         [silence runAction:silenceAction];
         
-        id lightAction = [CCSpawn actions:  [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
-                                            nil];
-        [light runAction:lightAction];
-        
         id treeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:255],
                                                 [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
                                                 nil];
@@ -249,11 +220,6 @@
                                             [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
                                             nil];
         [springBottom runAction:bottomAction];
-        
-        id catAction =  [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
-                        nil];
-        [cat runAction:catAction];
         
         id _treeNestAction = [CCSpawn actions:  [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)],
                                                 [CCScaleTo actionWithDuration:transitionTime scale:0.9],
@@ -267,24 +233,9 @@
                             nil];
         [silence runAction:silenceAction];
         
-        id lightAction = [CCSpawn actions:  [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                          [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -100)],
-                          nil];
-        [light runAction:lightAction];
-        
         id treeNestAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 200)],
                                              [CCScaleTo actionWithDuration:transitionTime scale:1.0f],nil];
         [tree_nest runAction:treeNestAction];
-        
-        id treeLayer1Action =  [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                                    [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
-                                [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -150)],nil];
-        [treeLayer_1 runAction:treeLayer1Action];
-        
-        id treeLayer2Action = [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                               [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
-                               [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -150)],nil];
-        [treeLayer_2 runAction:treeLayer2Action];
         
         id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:255],
                                                     [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],nil];

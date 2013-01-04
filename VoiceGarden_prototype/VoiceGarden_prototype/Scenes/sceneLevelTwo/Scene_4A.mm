@@ -192,7 +192,6 @@
     footprint_path.scale = 0.8f;
     [self addChild: footprint_path z:SCENE_Z];
     
-    
     fear = [CCSprite spriteWithFile:@"Path_fear_cloud.png"];
     fear.position = ccp(size.width/2 - 100, size.height/2 + 200);
     fear.scale = 0.8f;

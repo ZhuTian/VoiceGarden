@@ -20,7 +20,6 @@
     
     CCSprite *background;
     CCSprite *silence;
-    CCSprite *light;
     CCSprite *tree_nest;
     
     //for Scene_5B

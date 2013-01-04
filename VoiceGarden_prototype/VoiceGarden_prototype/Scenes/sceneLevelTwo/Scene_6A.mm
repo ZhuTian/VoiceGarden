@@ -121,21 +121,17 @@
     [self addChild: background];
     
     treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
-    treeLeft.position = ccp(size.width/2 - 200,size.height/2+ 100);
+    treeLeft.position = ccp(size.width/2,size.height/2);
     [self addChild:treeLeft];
     
-    treeRight = [CCSprite spriteWithFile:@"tree_nest_egg.png"];
+    treeRight = [CCSprite spriteWithFile:@"tree_flower_nest_egg.png"];
     treeRight.position = ccp(size.width/2+210,size.height/2+200);
     treeRight.scale = 0.9;
     [self addChild:treeRight];
     
     bottomRight = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
     bottomRight.position=ccp(size.width/2, size.height/2);
-    [self addChild:bottomRight z:10];
-    
-    cat = [CCSprite spriteWithFile:@"cat_up.png"];
-    cat.position = ccp(size.width/2, size.height/2);
-    [self addChild:cat];
+    [self addChild:bottomRight];
     
     //transition 
     silence = [CCSprite spriteWithFile:@"silence.png"];

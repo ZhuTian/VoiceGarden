@@ -44,7 +44,7 @@
         label.color = ccc3(0, 0, 0);
         label.anchorPoint = ccp(0, 0.5);
         label.opacity = 0;
-        [self addChild:label];
+        [self addChild:label z:TEXT_Z];
         id labelAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [label runAction:labelAction];
        

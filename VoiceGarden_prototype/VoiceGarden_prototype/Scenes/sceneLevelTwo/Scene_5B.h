@@ -32,10 +32,8 @@
     CCSprite* treeLeft;
     CCSprite* treeRight;
     CCSprite* bottomRight;
-    CCSprite* cat;
     
     CCSprite *silence;
-    CCSprite *light;
     
     float transitionTime;
     int _nextScene;

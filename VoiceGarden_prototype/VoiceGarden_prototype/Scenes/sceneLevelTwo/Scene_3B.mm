@@ -78,16 +78,7 @@
         [label_3 runAction:label3Action];
 
         
-        withered = [CCMenuItemFont itemWithString:@"withered" block:^(id sender){
-//            if(self.sceneStatus == 1 || self.sceneStatus == 2)
-//            {
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:1] withColor:ccWHITE]];
-//            }
-//            else if(self.sceneStatus == 3)
-//            {
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:4] withColor:ccWHITE]];
-//            }
-            
+        withered = [CCMenuItemFont itemWithString:@"withered" block:^(id sender){            
             [self SceneTransition];
         }];
         [withered setFontName:fontName];
@@ -238,15 +229,9 @@
     background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
     background.position = ccp(size.width/2, size.height/2);
     [self addChild: background z:BACKGROUND_Z];
-    
-    //Add Scene Sprites
-    light = [CCSprite spriteWithFile:@"silence_light.png"];
-    light.position = ccp(size.width/2, size.height/2);
-    light.scale = 1.0f;
-    [self addChild: light z:BACKGROUND_Z];
-    
+        
     silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 - 600, size.height/2 - 50);
+    silence.position = ccp(size.width/2, size.height/2);
     silence.scale = 1.0f;
     [self addChild: silence z:BACKGROUND_Z];
     
@@ -254,9 +239,7 @@
     tree_nest.position = ccp(size.width/2 + 250 + 400, size.height/2 - 100 - 400);
     tree_nest.scale = 0.7f;
     tree_nest.opacity = 0;
-    [self addChild: tree_nest z:BACKGROUND_Z];
-
-    
+    [self addChild: tree_nest z:BACKGROUND_Z];    
 }
 
 -(void)SceneTransition
@@ -277,19 +260,12 @@
     [waiting runAction:waitingAction];
     
     //Scene Transition Animation
-    id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 600, size.height/2 + 100)],
+    id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 + 120)],
                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
                      [CCScaleTo actionWithDuration:transitionTime scale:0.7f],
                      nil];
     
     [silence runAction:silenceAction];
-    
-    id lightAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 + 120)],
-                        [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                        [CCScaleTo actionWithDuration:transitionTime scale:0.7f],
-                        nil];
-    
-    [light runAction:lightAction];
     
     id _treeAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],

@@ -52,28 +52,28 @@
         label_1.anchorPoint = ccp(0,0.5);
         label_1.color = ccc3(0, 0, 0);
         label_1.opacity = 0;
-		[self addChild: label_1];
+		[self addChild: label_1 z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"A little bit more confidently." fontName:fontName fontSize:sceneFontSize];
 		label_3.position =  ccp( size.width /2 - 50, size.height/2 + 250);
         label_3.anchorPoint = ccp(0,0.5);
         label_3.color = ccc3(0, 0, 0);
         label_3.opacity = 0;
-		[self addChild: label_3];
+		[self addChild: label_3 z:TEXT_Z];
         
         label_4 = [CCLabelTTF labelWithString:@"I step forward with the power of voice." fontName:fontName fontSize:sceneFontSize];
 		label_4.position =  ccp( size.width /2 - 50, size.height/2 + 200);
         label_4.anchorPoint = ccp(0,0.5);
         label_4.color = ccc3(0, 0, 0);
         label_4.opacity = 0;
-		[self addChild: label_4];
+		[self addChild: label_4 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"I am ready to               ." fontName:fontName fontSize:sceneFontSize];
 		label_2.position =  ccp( size.width /2 - 50, size.height/2 + 150);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
-		[self addChild: label_2];
+		[self addChild: label_2 z:TEXT_Z];
         
         id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [label_1 runAction:label1Action];

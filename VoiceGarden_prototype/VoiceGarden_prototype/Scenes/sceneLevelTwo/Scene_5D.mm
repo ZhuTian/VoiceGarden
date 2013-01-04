@@ -51,35 +51,35 @@
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
-		[self addChild: label_1];
+		[self addChild: label_1 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"To see, to explore." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 150, size.height/2 + 250);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
-		[self addChild: label_2];
+		[self addChild: label_2 z:TEXT_Z];
         
         label_5 = [CCLabelTTF labelWithString:@"To let the nature competes for my attention" fontName:fontName fontSize:_fontSize];
 		label_5.position =  ccp( size.width /2 - 150, size.height/2 + 200);
         label_5.color = ccc3(0, 0, 0);
         label_5.anchorPoint = ccp(0, 0.5);
         label_5.opacity = 0;
-		[self addChild: label_5];
+		[self addChild: label_5 z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"The lilies have overtaken the pond." fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 - 150, size.height/2 + 150);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
-        [self addChild:label_3];
+        [self addChild:label_3 z:TEXT_Z];
         
         label_4 = [CCLabelTTF labelWithString:@"     want to see what's hiding underneath" fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 - 150, size.height/2 + 100);
         label_4.color = ccc3(0, 0, 0);
         label_4.anchorPoint = ccp(0, 0.5);
         label_4.opacity = 0;
-		[self addChild:label_4];
+		[self addChild:label_4 z:TEXT_Z];
         
         //Fade in scripts
         id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
@@ -157,7 +157,7 @@
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z];
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];

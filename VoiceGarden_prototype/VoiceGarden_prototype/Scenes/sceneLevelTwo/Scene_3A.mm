@@ -54,42 +54,42 @@ extern bool haveKey;
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
-		[self addChild: label_1];
+		[self addChild: label_1 z:TEXT_Z];
         
         label_6 = [CCLabelTTF labelWithString:@"There is a         sightly concealed by a tangle of shrubs." fontName:fontName fontSize:sceneFontSize];
 		label_6.position =  ccp( size.width /2 - 120, size.height/2+150);
         label_6.color = ccc3(0, 0, 0);
         label_6.anchorPoint = ccp(0, 0.5);
         label_6.opacity = 0;
-		[self addChild: label_6];
+		[self addChild: label_6 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:sceneFontSize];
 		label_2.position =  ccp( size.width /2 - 120, size.height/2 + 100);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
-		[self addChild: label_2];
+		[self addChild: label_2 z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face," fontName:fontName fontSize:sceneFontSize];
 		label_3.position =  ccp( size.width /2 - 120, size.height/2 + 50);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
-		[self addChild: label_3];
+		[self addChild: label_3 z:TEXT_Z];
         
         label_4 = [CCLabelTTF labelWithString:@"whispering to me in an unfamiliar language." fontName:fontName fontSize:sceneFontSize];
 		label_4.position =  ccp( size.width /2 - 120, size.height/2 + 0);
         label_4.color = ccc3(0, 0, 0);
         label_4.anchorPoint = ccp(0, 0.5);
         label_4.opacity = 0;
-		[self addChild: label_4];
+		[self addChild: label_4 z:TEXT_Z];
         
         label_5 = [CCLabelTTF labelWithString:@"I start to run to chase its word." fontName:fontName fontSize:sceneFontSize];
 		label_5.position =  ccp( size.width /2 - 120, size.height/2 - 50);
         label_5.color = ccc3(0, 0, 0);
         label_5.anchorPoint = ccp(0, 0.5);
         label_5.opacity = 0;
-		[self addChild: label_5];
+		[self addChild: label_5 z:TEXT_Z];
         
         //Fade in the scripts
         id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
@@ -104,8 +104,6 @@ extern bool haveKey;
         [label_5 runAction:label5Action];
         id label6Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         [label_6 runAction:label6Action];
-        
-		
         
         road = [CCMenuItemFont itemWithString:@"path" block:^(id sender){
             _nextScene = 1;
@@ -127,15 +125,6 @@ extern bool haveKey;
         [road runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
         
         wind_button = [CCMenuItemFont itemWithString:@"wind" block:^(id sender){
-//            if([GlobalVariable sharedInstance].haveKey)
-//            {
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:2] withColor:ccWHITE]];
-//                
-//            }
-//            else
-//            {
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4B sceneWithVar:1] withColor:ccWHITE]];
-//            }
             _nextScene = 2;
             [self SceneTransition];
         }];
@@ -172,14 +161,8 @@ extern bool haveKey;
         [action setColor:ccc3(100,100,100)];
         
         CCMenuItem *menu = [CCMenu menuWithItems:road, action, wind_button, back, nil];
-        //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		//[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( 0, 0)];
-		
-		// Add the menu to the layer
-		[self addChild:menu z:TEXT_Z];
-        
+        [self addChild:menu z:TEXT_Z];
         
         isLoud = false;
         isBlowOver = false;
@@ -204,14 +187,8 @@ extern bool haveKey;
     CGSize size = [[CCDirector sharedDirector] winSize];
     
     CCSprite* wind1Sprite = [CCSprite spriteWithFile:@"wind_top1.png"];
-    //wind1Sprite.position = ccp(size.width/2 + 50, size.height/2 - 50);
-    //wind1Sprite.scale = 0.8f;
     CCSprite* wind2Sprite = [CCSprite spriteWithFile:@"wind_top2.png"];
-    //wind2Sprite.position = ccp(size.width/2 + 50, size.height/2 - 50);
-   // wind2Sprite.scale = 0.8f;
-    //CCSprite* wind3Sprite = [CCSprite spriteWithFile:@"wind3.png"];
-    //CCSprite* wind4Sprite = [CCSprite spriteWithFile:@"wind4.png"];
-    
+
     CCProgressTimer* wind1 = [CCProgressTimer progressWithSprite:wind1Sprite];
     wind1.type = kCCProgressTimerTypeBar;
     wind1.barChangeRate = ccp(1,0);
@@ -222,32 +199,15 @@ extern bool haveKey;
     wind2.type = kCCProgressTimerTypeBar;
     wind2.barChangeRate = ccp(1,0);
     wind2.midpoint = ccp(0.0f,0.0f);
-    wind2.percentage = 50;
-    
-    /*CCProgressTimer* wind3 = [CCProgressTimer progressWithSprite:wind3Sprite];
-    wind3.type = kCCProgressTimerTypeBar;
-    wind3.barChangeRate = ccp(1,0);
-    wind3.midpoint = ccp(0.0f,0.0f);
-    wind3.percentage = 58;
-    
-    CCProgressTimer* wind4 = [CCProgressTimer progressWithSprite:wind4Sprite];
-    wind4.type = kCCProgressTimerTypeBar;
-    wind4.barChangeRate = ccp(1,0);
-    wind4.midpoint = ccp(1024.0f,0.0f);
-    wind4.percentage = 5;*/
+    wind2.percentage = 48;
     
     [wind1 setPosition:ccp(size.width/2 + 50, size.height/2 - 50)];
     [wind1 setScale:0.8f];
     [wind2 setPosition:ccp(size.width/2 + 50, size.height/2 - 50)];
     [wind2 setScale:0.8f];
-    //[wind3 setPosition:ccp(size.width/2,size.height/2)];
-    //[wind4 setPosition:ccp(size.width/2,size.height/2)];
-    
+
     [self addChild:wind1 z:SCENE_Z tag:21];
     [self addChild:wind2 z:SCENE_Z tag:22];
-    //[self addChild:wind3 z:10 tag:23];
-    //[self addChild:wind4 z:10 tag:24];
-    
 }
 
 
@@ -283,9 +243,7 @@ extern bool haveKey;
     
     CCProgressTimer* wind1 = (CCProgressTimer*)[self getChildByTag:21];
     CCProgressTimer* wind2 = (CCProgressTimer*)[self getChildByTag:22];
-    //CCProgressTimer* wind3 = (CCProgressTimer*)[self getChildByTag:23];
-    //CCProgressTimer* wind4 = (CCProgressTimer*)[self getChildByTag:24];
-    
+ 
     if(whichWind == 1){
         if (isLoud)
             wind1.percentage+=dt*10;
@@ -328,46 +286,6 @@ extern bool haveKey;
             isBlowOver = false;
         }
     }
-    /*else if(whichWind == 3)
-    {
-        if(isLoud)
-            wind3.percentage+=dt*10;
-        else if(!isBlowOver)
-            wind3.percentage-=dt*10;
-        
-        if(wind3.percentage<58)
-            wind3.percentage=58;
-        if(wind3.percentage>88){
-            wind3.percentage=88;
-            isBlowOver=true;
-        }
-        if(isBlowOver&&volumn<-45.0f){
-            whichWind++;
-            isBlowOver = false;
-        }
-    }
-    else if(whichWind == 4)
-    {
-        if(isLoud)
-            wind4.percentage+=dt*10;
-        else if(!isBlowOver)
-            wind4.percentage-=dt*10;
-        
-        if(wind4.percentage<5)
-            wind4.percentage=5;
-        if(wind4.percentage>30){
-            wind4.percentage=30;
-            isBlowOver=true;
-            if(self.sceneStatus==1){
-                self.sceneStatus = 2;
-                [self updateScene];
-            }
-        }
-        if(isBlowOver&&volumn<-45.0f){
-            whichWind++;
-            isBlowOver = false;
-        }
-    }*/
 }
 
 
@@ -398,19 +316,13 @@ extern bool haveKey;
     wind.scale = 0.8f;
     wind.opacity = 255;
     [self addChild: wind z:SCENE_Z];
-    
-    //id windAction = [CCFadeTo actionWithDuration:transitionTime opacity:150];
-    //[wind runAction:windAction];
-    
+ 
     path = [CCSprite spriteWithFile:@"path.png"];
     path.position = ccp(size.width/2 - 430, size.height/2 + 180);
     path.scale = 0.5f;
     path.opacity = 255;
     [self addChild: path z:SCENE_Z];
-    
-    //id pathAction = [CCFadeTo actionWithDuration:transitionTime opacity:150];
-    //[path runAction:pathAction];
-    
+     
     desolate = [CCSprite spriteWithFile:@"desolate.png"];
     desolate.position = ccp(size.width/2 - 150, size.height/2 - 50);
     desolate.scale = 1.0f;

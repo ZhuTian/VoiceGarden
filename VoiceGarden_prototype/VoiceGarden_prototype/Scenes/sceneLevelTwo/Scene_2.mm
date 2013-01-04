@@ -300,7 +300,7 @@
                              nil];
         [desolate runAction:desolateAction];
         
-        id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 600, size.height/2 - 50)],
+        id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
                             [CCFadeTo actionWithDuration:transitionTime opacity:255],
                             [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                             nil];
@@ -327,11 +327,6 @@
         
         [path runAction:pathAction];
         
-        id lightAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
-                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                          [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
-                          nil];
-        [light runAction:lightAction];
     }
 }
 
@@ -374,11 +369,6 @@
     garden = [CCSprite spriteWithFile:@"garden.png"];
     garden.position = ccp(size.width/2, size.height/2 - 50);
     [self addChild: garden z:SCENE_Z];
-    
-    light = [CCSprite spriteWithFile:@"silence_light.png"];
-    light.position = ccp(size.width/2 + 400, size.height/2 + 200);
-    light.opacity = 0;
-    [self addChild: light z:SCENE_Z];
 }
 
 -(void)nextScene
