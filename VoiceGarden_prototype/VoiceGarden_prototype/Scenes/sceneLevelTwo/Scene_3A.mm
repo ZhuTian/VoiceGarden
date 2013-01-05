@@ -374,9 +374,9 @@ extern bool haveKey;
                          nil];
         [wind runAction:windAction];
         
-        id _pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2)]],
+        id _pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                         [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                         [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                          nil];
         id pathAction = [CCSequence actions:_pathAction,
                          [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],

@@ -197,10 +197,29 @@
     background.position = ccp(size.width/2, size.height/2);
     [self addChild: background z:BACKGROUND_Z];
     
+    //For companion
+    road_loop = [CCSprite spriteWithFile:@"footprint_scroll.png"];
+    road_loop.position = ccp(size.width/2 + 770, size.height/2 + 162);
+    road_loop.scale = 1.0f;
+    road_loop.opacity = 0;
+    [self addChild: road_loop z:SCENE_Z];
+    
+    door = [CCSprite spriteWithFile:@"door.png"];
+    door.position = ccp(size.width/2 + 400, size.height/2 + 300);
+    door.scale = 0.3f;
+    door.opacity = 0;
+    [self addChild: door z:SCENE_Z];
+    
+    
+    id roadLoopAction = [CCFadeTo actionWithDuration:3.0f opacity:255];
+    [road_loop runAction:roadLoopAction];
+    
     path = [CCSprite spriteWithFile:@"path.png"];
-    path.position = ccp(size.width/2 - 150, size.height/2);
-    path.scale = 0.8f;
+    path.position = ccp(size.width/2, size.height/2);
+    path.scale = 1.0f;
     [self addChild: path z:SCENE_Z];
+    
+    
     
     desolate = [CCSprite spriteWithFile:@"desolate.png"];
     desolate.position = ccp(size.width/2 + 150, size.height/2 - 300);
@@ -232,20 +251,11 @@
     [self addChild: wind z:SCENE_Z];
     
     //For own way
-    pond = [CCSprite spriteWithFile:@"I_pond.png"];
+    pond = [CCSprite spriteWithFile:@"pond.png"];
     pond.position = ccp(size.width/2 - 130 - 600, size.height/2 + 300);
     pond.scale = 0.5f;
     [self addChild: pond z:SCENE_Z];
     
-    //For companion
-    road_loop = [CCSprite spriteWithFile:@"footprint_scroll.png"];
-    road_loop.position = ccp(size.width/2 + 800, size.height/2 + 200);
-    road_loop.scale = 0.8f;
-    road_loop.opacity = 0;
-    [self addChild: road_loop z:SCENE_Z];
-    
-    id roadLoopAction = [CCFadeTo actionWithDuration:transitionTime opacity:255];
-    [road_loop runAction:roadLoopAction];
     
     tip_down = [CCSprite spriteWithFile:@"tip_down_L.png"];
     tip_down.position = ccp(size.width/2 - 100, size.height/2 - 250);
@@ -337,9 +347,9 @@
     }
     else if(_nextScene == 2)
     {
-        id _pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150 - 400, size.height/2 - 300)]],
+        id _pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150 - 800, size.height/2 - 200)]],
                           [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                          [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
+                          [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                           nil];
         id pathAction = [CCSequence actions:_pathAction,
                          [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
@@ -356,6 +366,12 @@
                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
                          nil];
         [road_loop runAction:roadLoopAction];
+        
+        id doorAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 300, size.height/2 + 100)]],
+                             [CCScaleTo actionWithDuration:transitionTime scale:0.5f],
+                             [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                             nil];
+        [door runAction:doorAction];
     }
 }
 

@@ -111,6 +111,7 @@
 		07E99AB616981ACF006E22B9 /* tip_spring.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99AAC16981ACF006E22B9 /* tip_spring.png */; };
 		07E99AB716981ACF006E22B9 /* tip_up_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99AAD16981ACF006E22B9 /* tip_up_R.png */; };
 		0E4E952016946C5900A20959 /* door_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4E951F16946C5900A20959 /* door_old.png */; };
+		0E8A249F1698A0E6004DA3DB /* pond.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8A249E1698A0E5004DA3DB /* pond.png */; };
 		0EB7E196164193D60050F56C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E195164193D60050F56C /* QuartzCore.framework */; };
 		0EB7E198164193D60050F56C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E197164193D60050F56C /* OpenGLES.framework */; };
 		0EB7E19A164193D60050F56C /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E199164193D60050F56C /* OpenAL.framework */; };
@@ -421,6 +422,7 @@
 		07E99AAC16981ACF006E22B9 /* tip_spring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tip_spring.png; sourceTree = "<group>"; };
 		07E99AAD16981ACF006E22B9 /* tip_up_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tip_up_R.png; sourceTree = "<group>"; };
 		0E4E951F16946C5900A20959 /* door_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = door_old.png; path = layered_visual/door_old.png; sourceTree = "<group>"; };
+		0E8A249E1698A0E5004DA3DB /* pond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pond.png; sourceTree = "<group>"; };
 		0EB7E191164193D60050F56C /* VoiceGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB7E195164193D60050F56C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0EB7E197164193D60050F56C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -966,6 +968,7 @@
 				07E99A4B1696E7F2006E22B9 /* key_flower.png */,
 				07E99A4C1696E7F2006E22B9 /* path.png */,
 				07E99A4D1696E7F2006E22B9 /* path_all.jpg */,
+				0E8A249E1698A0E5004DA3DB /* pond.png */,
 				07E99A4E1696E7F2006E22B9 /* I_pond.png */,
 				07E99A4F1696E7F2006E22B9 /* pond_1.png */,
 				07E99A501696E7F2006E22B9 /* pond_2.png */,
@@ -1678,6 +1681,7 @@
 				07E99AB516981ACF006E22B9 /* tip_silence.png in Resources */,
 				07E99AB616981ACF006E22B9 /* tip_spring.png in Resources */,
 				07E99AB716981ACF006E22B9 /* tip_up_R.png in Resources */,
+				0E8A249F1698A0E6004DA3DB /* pond.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

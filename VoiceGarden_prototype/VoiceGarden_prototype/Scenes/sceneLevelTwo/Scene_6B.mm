@@ -66,7 +66,7 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         [self initSprites];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
         
         label_1 = [CCLabelTTF labelWithString:@"I see a shimmering reflection of myself." fontName:fontName fontSize:sceneFontSize];
 		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 300);
@@ -198,7 +198,7 @@
     path.position = ccp(size.width/2 + 900, size.height/2 - 300);
     [self addChild: path z:SCENE_Z];
     
-    pond = [CCSprite spriteWithFile:@"I_pond.png"];
+    pond = [CCSprite spriteWithFile:@"pond.png"];
     pond.position = ccp(size.width/2 + 470, size.height/2);
     pond.scale = 0.8f;
     [self addChild: pond z:SCENE_Z];

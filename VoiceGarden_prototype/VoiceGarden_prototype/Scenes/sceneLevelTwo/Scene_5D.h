@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 #import "SceneCommon.h"
+#import "AudioManager.h"
 
 @interface Scene_5D : CCLayer
 {
@@ -25,6 +26,27 @@
     CCSprite *background;
     CCSprite *path;
     CCSprite *pond;
+    
+    CCSprite *pond_pad1;
+    CCSprite *pond_pad2;
+    CCSprite *pond_pad3;
+    
+    float verticalSpeed;
+    float horizontalSpeed;
+    
+    int target_X1;
+    int target_Y1;
+    int target_X2;
+    int target_Y2;
+    int target_X3;
+    int target_Y3;
+    
+    bool enablePond;
+    
+    float maxVolumn;
+    float minVolumn;
+    
+    float preFactor;
     
     //For next scene
     CCSprite *door;

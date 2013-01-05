@@ -47,6 +47,7 @@
         transitionTime = 1.0f;
         
         scrollSpeed = 100;
+        front_scrollSpeed = 60;
         
         enableFootprint = true;
         
@@ -171,7 +172,7 @@
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z - 1];
         
         levelTimer = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(levelTimerCallback:) userInfo: nil repeats: YES];
         
@@ -191,19 +192,19 @@
         faithLabel = [CCLabelTTF labelWithString:@"faith" fontName:fontName fontSize:40];
 		faithLabel.position =  faithPosition;
         faithLabel.color = ccc3(0, 0, 0);
-		[self addChild: faithLabel];
+		[self addChild: faithLabel z:SCENE_Z];
         
         couragePosition = CGPointMake(1200, footprintManager->lowY),
         courageLabel = [CCLabelTTF labelWithString:@"courage" fontName:fontName fontSize:40];
 		courageLabel.position =  couragePosition;
         courageLabel.color = ccc3(0, 0, 0);
-		[self addChild: courageLabel];
+		[self addChild: courageLabel z:SCENE_Z];
         
         friendshipPosition = CGPointMake(1900, footprintManager->highY),
         friendshipLabel = [CCLabelTTF labelWithString:@"friendship" fontName:fontName fontSize:40];
 		friendshipLabel.position =  friendshipPosition;
         friendshipLabel.color = ccc3(0, 0, 0);
-		[self addChild: friendshipLabel];
+		[self addChild: friendshipLabel z:SCENE_Z];
         
         collisionThreshold = 40;
         
@@ -214,7 +215,7 @@
 }
 
 - (void)levelTimerCallback:(NSTimer *)timer {
-    //NSLog([[AudioManager sharedInstance] getNote]);
+    NSLog([[AudioManager sharedInstance] getNote]);
     if(enableFootprint == true)
     {
         NSString* note = [[AudioManager sharedInstance] getNote];
@@ -258,6 +259,19 @@
     if(offset1 <= 0)
     {
         offset2 = offset1 + 1024;
+    }
+    
+    front_offset1 -= dt * front_scrollSpeed;
+    road_front1.position = ccp(size.width/2 + front_offset1, size.height/2);
+    front_offset2 -= dt * front_scrollSpeed;
+    road_front2.position = ccp(size.width/2 + front_offset2, size.height/2);
+    if(front_offset2 <= 0)
+    {
+        front_offset1 = front_offset2 + 1024;
+    }
+    if(front_offset1 <= 0)
+    {
+        front_offset2 = front_offset1 + 1024;
     }
     
     
@@ -327,7 +341,7 @@
     }
     
     //For friendship
-    if(footPosition.y == friendshipLabel.position.y && abs(footPosition.x - friendshipLabel.position.x) <= collisionThreshold)
+    if(footPosition.y == friendshipLabel.position.y && abs(footPosition.x - friendshipLabel.position.x) <= collisionThreshold * 2)
     {
         friendshipCollected = true;
         friendshipLabel.visible = false;
@@ -337,6 +351,7 @@
     {
         sceneStatus = 2;
         [self updateScene];
+        enableFootprint = false;
     }
 }
 
@@ -360,7 +375,7 @@
     door.scale = 0.5f;
     [self addChild: door z:SCENE_Z];
     
-    road_ground = [CCSprite spriteWithFile:@"footprint_ground.png"];
+    road_ground = [CCSprite spriteWithFile:@"footprint_back.png"];
     road_ground.position = ccp(size.width/2, size.height/2);
     [self addChild: road_ground z:SCENE_Z];
     
@@ -375,9 +390,16 @@
     road_loop2.position = ccp(size.width/2 + offset2, size.height/2);
     [self addChild: road_loop2 z:SCENE_Z];
     
-    road_front = [CCSprite spriteWithFile:@"footprint_scroll_front.png"];
-    road_front.position = ccp(size.width/2, size.height/2);
-    [self addChild: road_front z:SCENE_Z];
+    
+    front_offset1 = 0;
+    road_front1 = [CCSprite spriteWithFile:@"footprint_scroll_front.png"];
+    road_front1.position = ccp(size.width/2, size.height/2);
+    [self addChild: road_front1 z:TEXT_Z];
+    
+    front_offset2 = 1024;
+    road_front2 = [CCSprite spriteWithFile:@"footprint_scroll_front.png"];
+    road_front2.position = ccp(size.width/2 + front_offset2, size.height/2);
+    [self addChild: road_front2 z:TEXT_Z];
 }
 
 -(void)SceneTransition
@@ -415,10 +437,15 @@
                           nil];
     [road_ground runAction:roadGroundAction];
     
-    id roadFrontAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)]],
+    id roadFrontAction1 = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_front1.position.x - 400, road_front1.position.y - 400)]],
                            [CCFadeTo actionWithDuration:transitionTime opacity:0],
                            nil];
-    [road_front runAction:roadFrontAction];
+    [road_front1 runAction:roadFrontAction1];
+    
+    id roadFrontAction2 = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_front2.position.x - 400, road_front2.position.y - 400)]],
+                           [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                           nil];
+    [road_front2 runAction:roadFrontAction2];
     
     id _doorAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],

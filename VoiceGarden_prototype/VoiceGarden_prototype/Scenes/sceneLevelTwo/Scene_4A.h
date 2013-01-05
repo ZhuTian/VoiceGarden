@@ -35,6 +35,7 @@
     
     //For companion scene
     CCSprite *road_loop;
+    CCSprite *door;
     
     int transitionTime;
     int _nextScene;

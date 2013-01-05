@@ -40,12 +40,18 @@
     
     int offset1;
     int offset2;
+    
+    int front_offset1;
+    int front_offset2;
+    
     int scrollSpeed;
+    int front_scrollSpeed;
     CCSprite *road_loop1;
     CCSprite *road_loop2;
     
     CCSprite *background;
-    CCSprite *road_front;
+    CCSprite *road_front1;
+    CCSprite *road_front2;
     CCSprite *road_ground;
     CCSprite *door;
     

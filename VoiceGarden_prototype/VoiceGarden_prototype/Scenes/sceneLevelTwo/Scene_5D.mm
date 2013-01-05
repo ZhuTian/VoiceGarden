@@ -63,7 +63,17 @@
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
         [self initSprites];
-        transitionTime = 2.0f;
+        transitionTime = 1.0f;
+        
+        verticalSpeed = 30;
+        horizontalSpeed = 100;
+        
+        maxVolumn = -20;
+        minVolumn = -50;
+        
+        preFactor = -1;
+        enablePond = true;
+        
         
         int _fontSize = 30;
         
@@ -205,10 +215,37 @@
     path.position = ccp(size.width/2 + 300, size.height/2 - 300);
     [self addChild: path z:SCENE_Z];
     
-    pond = [CCSprite spriteWithFile:@"I_pond.png"];
+    pond = [CCSprite spriteWithFile:@"pond.png"];
     pond.position = ccp(size.width/2 - 130, size.height/2);
     pond.scale = 0.8f;
     [self addChild: pond z:SCENE_Z];
+    
+    pond_pad1 = [CCSprite spriteWithFile:@"pond_pad_L.png"];
+    pond_pad1.position = ccp(size.width/2 - 140, size.height/2 - 120);
+    pond_pad1.scale = 0.8f;
+    pond_pad1.opacity = 0;
+    [self addChild: pond_pad1 z:SCENE_Z];
+    
+    pond_pad2 = [CCSprite spriteWithFile:@"pond_pad_T.png"];
+    pond_pad2.position = ccp(size.width/2 - 90, size.height/2 - 30);
+    pond_pad2.scale = 0.8f;
+    pond_pad2.opacity = 0;
+    [self addChild: pond_pad2 z:SCENE_Z];
+    
+    pond_pad3 = [CCSprite spriteWithFile:@"pond_pad_R.png"];
+    pond_pad3.position = ccp(size.width/2 - 0, size.height/2 - 130);
+    pond_pad3.scale = 0.8f;
+    pond_pad3.opacity = 0;
+    [self addChild: pond_pad3 z:SCENE_Z];
+    
+    id pad1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    [pond_pad1 runAction:pad1Action];
+    id pad2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    [pond_pad2 runAction:pad2Action];
+    id pad3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    [pond_pad3 runAction:pad3Action];
+    
+    
     
     door = [CCSprite spriteWithFile:@"door.png"];
     door.position = ccp(size.width/2 - 400 - 400, size.height/2 + 100);
@@ -224,6 +261,8 @@
     tip_up.position = ccp(size.width/2 - 100, size.height/2 - 250);
     tip_up.visible = false;
     [self addChild:tip_up z:3];
+    
+    [self scheduleUpdate];
 }
 
 -(void)SceneTransition
@@ -247,6 +286,14 @@
     [I_1 runAction:IButton1Action];
     id IButton2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
     [I_2 runAction:IButton2Action];
+    
+    //Fade out pond pad
+    id pad1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [pond_pad1 runAction:pad1Action];
+    id pad2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [pond_pad2 runAction:pad2Action];
+    id pad3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [pond_pad3 runAction:pad3Action];
     
     //Transition animation
     id _pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 900, size.height/2 - 300)]],
@@ -315,5 +362,65 @@
 //        [I_3 runAction: [CCSequence actions:action_3, action2_3, nil]];
 //        [I_3 runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_3, action2_3, nil]]];
     }
+}
+
+-(void)update:(ccTime)dt
+{
+    if(!enablePond)
+        return;
+    
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    float volumn = [[AudioManager sharedInstance] getAverageVolume];
+    
+    if(volumn > maxVolumn)
+        volumn = maxVolumn;
+    else if(volumn < minVolumn)
+        volumn = minVolumn;
+    
+    
+    
+    float interFactor;
+    
+    interFactor = (volumn - minVolumn)/(maxVolumn - minVolumn);
+    
+    if(preFactor == -1)
+        preFactor = interFactor;
+    
+    NSLog(@"%f", preFactor - interFactor);
+    
+    //Smooth the transition
+    float thresholod = 0.000001f;
+    
+    if((preFactor - interFactor)> thresholod || (preFactor - interFactor) < -thresholod || abs(target_X1 > pond_pad1.position.x) >= 1)
+    {
+        preFactor = interFactor;
+        
+        
+        target_X1 = size.width/2 - 140 -100 * interFactor;
+        target_Y1 = size.height/2 - 120 + 30 * interFactor;
+        
+        
+        pond_pad1.position = ccp(((target_X1 > pond_pad1.position.x) - 0.5f)* dt * horizontalSpeed + pond_pad1.position.x,((target_Y1 > pond_pad1.position.y) -0.5f) * dt * verticalSpeed + pond_pad1.position.y);
+        
+        target_X2 = size.width/2 - 90;
+        target_Y2 = size.height/2 - 30 + 90 * interFactor;
+        
+        
+        pond_pad2.position = ccp(((target_X2 > pond_pad2.position.x) - 0.5f)* dt * horizontalSpeed + pond_pad2.position.x,((target_Y2 > pond_pad2.position.y) -0.5f) * dt * verticalSpeed * 3 + pond_pad2.position.y);
+        
+        target_X3 = size.width/2 - 0 + 100 * interFactor;
+        target_Y3 = size.height/2 - 130 + 30 * interFactor;
+        
+        
+        pond_pad3.position = ccp(((target_X3 > pond_pad3.position.x) - 0.5f)* dt * horizontalSpeed + pond_pad3.position.x,((target_Y3 > pond_pad3.position.y) -0.5f) * dt * verticalSpeed + pond_pad3.position.y);
+    }
+    
+    if(pond_pad1.position.x <= size.width/2 - 140 - 80)
+    {
+        enablePond = false;
+        self.sceneStatus = 2;
+        [self updateScene];
+    }
+    
 }
 @end
