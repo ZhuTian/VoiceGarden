@@ -27,7 +27,7 @@
     layer= [Scene_7A node];
     if([GlobalVariable sharedInstance].haveKey)
     {
-        layer.sceneStatus = 1;
+        layer.sceneStatus = 3;
     }
     else
     {
@@ -110,6 +110,7 @@
 		
         open = [CCMenuItemFont itemWithString:@"open" block:^(id sender){
             //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_8A sceneWithVar:1] withColor:ccWHITE]];
+            _nextScene = 1;
             [self SceneTransition];
         }];
         [open setFontName:fontName];
@@ -121,7 +122,9 @@
         
         
         secret = [CCMenuItemFont itemWithString:@"secret" block:^(id sender){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:1] withColor:ccWHITE]];
+            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_4C sceneWithVar:1] withColor:ccWHITE]];
+            _nextScene = 2;
+            [self SceneTransition];
         }];
         [secret setFontName:fontName];
         [secret setFontSize:_fontSize];
@@ -155,7 +158,16 @@
         [action_button setPosition:ccp( size.width - 100, 30)];
         [action_button setColor:ccc3(100,100,100)];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:open, secret, action_button, nil];
+        //Display collected key
+        CCMenuItemImage* collected_key = [CCMenuItemImage itemWithNormalImage:@"key_collect.png" selectedImage:@"key_collect.png" block:^(id sender) {
+            _nextScene = 1;
+            [self SceneTransition];
+        }];
+        collected_key.visible = [[GlobalVariable sharedInstance] haveKey];
+        collected_key.position = ccp(950, 200);
+        
+        
+        CCMenuItem *menu = [CCMenu menuWithItems:open, secret, collected_key, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -163,13 +175,6 @@
 		
 		// Add the menu to the layer
 		[self addChild:menu];
-        
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
-        }
         
 	}
 	return self;
@@ -190,6 +195,25 @@
     door.position = ccp(size.width/2, size.height/2);
     door.scale = 1.0f;
     [self addChild: door z:SCENE_Z];
+    
+    door_open = [CCSprite spriteWithFile:@"door_open.png"];
+    door_open.position = ccp(size.width/2, size.height/2);
+    door_open.scale = 1.0f;
+    door_open.opacity = 0;
+    [self addChild: door_open z:SCENE_Z];
+    
+    //For Scene_4C
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 - 150, size.height/2 + 120 - 900);
+    silence.scale = 0.7f;
+    silence.opacity = 0;
+    [self addChild: silence z:BACKGROUND_Z];
+    
+    tree_nest = [CCSprite spriteWithFile:@"tree_nest.png"];
+    tree_nest.position = ccp(size.width/2 + 250, size.height/2 - 100 - 900);
+    tree_nest.scale = 0.9f;
+    tree_nest.opacity = 0;
+    [self addChild: tree_nest z:BACKGROUND_Z];
     
     tip_down = [CCSprite spriteWithFile:@"tip_down_L.png"];
     tip_down.position = ccp(size.width/2 - 100, size.height/2 - 250);
@@ -218,20 +242,54 @@
     id secretAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [secret runAction:secretAction];
     
-    //Transition animation
-    id _doorAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
-                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                      [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
-                      nil];
-    id doorAction = [CCSequence actions:_doorAction,
-                     [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
-                     nil];
-    [door runAction:doorAction];
+    if(_nextScene == 1)
+    {
+        //Transition animation
+        id _doorAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
+                          [CCFadeTo actionWithDuration:transitionTime + 1 opacity:0],
+                          [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                          nil];
+        id doorAction = [CCSequence actions:_doorAction,
+                         [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
+                         nil];
+        [door runAction:doorAction];
+        
+        id _doorOpenAction = [CCFadeTo actionWithDuration:transitionTime + 1 opacity:255];
+        [door_open runAction:_doorOpenAction];
+    }
+    else if(_nextScene == 2)
+    {
+        id _doorAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2 + 900)]],
+                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                          [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                          nil];
+        id doorAction = [CCSequence actions:_doorAction,
+                         [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
+                         nil];
+        [door runAction:doorAction];
+        
+        id silenceAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 + 120)]],
+                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                          nil];
+        [silence runAction:silenceAction];
+        
+        id treeNestAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)]],
+                            [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                            nil];
+        [tree_nest runAction:treeNestAction];
+    }
 }
 
 -(void)nextScene
 {
-    [[CCDirector sharedDirector] replaceScene:[Scene_8A sceneWithVar:1]];
+    if(_nextScene == 1)
+    {
+        [[CCDirector sharedDirector] replaceScene:[Scene_8A sceneWithVar:1]];
+    }
+    else if(_nextScene == 2)
+    {
+        [[CCDirector sharedDirector] replaceScene:[Scene_4C sceneWithVar:1]];
+    }
 }
 
 -(void)updateScene

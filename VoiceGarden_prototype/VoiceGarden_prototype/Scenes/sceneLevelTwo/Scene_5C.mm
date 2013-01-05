@@ -138,35 +138,47 @@
         [action setColor:ccc3(100,100,100)];
         
         key = [CCMenuItemImage itemWithNormalImage:@"key.png" selectedImage:@"key.png" block:^(id sender) {
+            
+            CCSprite *key_bg = [CCSprite spriteWithFile:@"key_bg.png"];
+            key_bg.opacity = 0;
+            key_bg.position = ccp(950, 200);
+            id keyBgAction = [CCFadeTo actionWithDuration:3.0f opacity:255];
+            [key_bg runAction:keyBgAction];
+            [self addChild:key_bg z:TEXT_Z];
+            
             CCSprite* keySprite =[CCSprite spriteWithFile:@"key.png"];
-            keySprite.position = ccp(300, 350);
-            keySprite.scale = 0.3;
+            keySprite.position = ccp(320, 400);
+            keySprite.scale = 1.0f;
             
-            [self addChild:keySprite];
+            [self addChild:keySprite z:TEXT_Z];
             
-            id moveKey = [CCMoveTo actionWithDuration:3.0f position:ccp(900, 100)];
+            id moveKey = [CCMoveTo actionWithDuration:3.0f position:ccp(950, 200)];
             [keySprite runAction:moveKey];
             
             key.visible = false;
             [GlobalVariable sharedInstance].keyInThePocket = true;
+
+            
             
         }];
         
-        [key setScale:0.3f];
+        [key setScale:1.0f];
         key.visible = false;
+        
+
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
             [key setPosition:ccp(900, 100)];
         }
         else{
-            [key setPosition:ccp(300,350)];
+            [key setPosition:ccp(320, 400)];
         }
         
         CCMenuItem *menu = [CCMenu menuWithItems:spring, back, key, key_button, nil];
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z];
        
         [self scheduleUpdate];
         
@@ -395,6 +407,7 @@
     }
     
     key.visible = [GlobalVariable sharedInstance].haveKey;
+    //key.visible = true;
 }
 
 
@@ -406,7 +419,7 @@
     CCSprite* flowerSprite3 = (CCSprite*)[self getChildByTag:53];
     
     NSString* noteString = [[AudioManager sharedInstance] getNote];
-    NSLog(@"%@", noteString);
+    //NSLog(@"%@", noteString);
     
     if ([noteString isEqualToString:@"Do"]) {
         dominantnote = 0;

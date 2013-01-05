@@ -131,7 +131,7 @@
     [self addChild: background z:BACKGROUND_Z];
     
     
-    door = [CCSprite spriteWithFile:@"door.png"];
+    door = [CCSprite spriteWithFile:@"door_open.png"];
     door.position = ccp(size.width/2, size.height/2);
     door.scale = 1.0f;
     [self addChild: door z:SCENE_Z];

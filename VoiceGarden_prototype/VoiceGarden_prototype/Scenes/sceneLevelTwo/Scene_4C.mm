@@ -138,7 +138,7 @@
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:spring, key, action, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:spring, key, nil];
 		[menu setPosition:ccp( 0, 0)];
         [self addChild:menu];
         
@@ -259,11 +259,11 @@
     }
     else if(_nextScene == SCENE_5C)
     {
-        if(self.sceneStatus == 2)
+        if (self.sceneStatus==1 || self.sceneStatus == 2)
         {
             [[CCDirector sharedDirector] replaceScene:[Scene_5C sceneWithVar:1]];
         }
-        else if(self.sceneStatus == 4)
+        else if(self.sceneStatus ==3 || self.sceneStatus == 4)
         {
             [[CCDirector sharedDirector] replaceScene:[Scene_5C sceneWithVar:2]];
         }
@@ -272,13 +272,7 @@
 
 -(void)updateScene
 {
-    if(self.sceneStatus == 1)
-    {
-        [key setIsEnabled:false];
-        [key setString:@"secret"];
-        [key setColor:ccc3(0, 0, 0)];
-    }
-    else if(self.sceneStatus == 2)
+    if(self.sceneStatus == 1 || self.sceneStatus == 2)
     {
         [key setIsEnabled:true];
         [key setString:@"key"];
@@ -293,13 +287,7 @@
         [key runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
             
     }
-    else if(self.sceneStatus == 3)
-    {
-        [key setIsEnabled:false];
-        [key setString:@"secret"];
-        [key setColor:ccc3(0, 0, 0)];
-    }
-    else if(self.sceneStatus == 4)
+    else if(self.sceneStatus == 3 || self.sceneStatus == 4)
     {
         [key setIsEnabled:true];
         [key setString:@"key"];

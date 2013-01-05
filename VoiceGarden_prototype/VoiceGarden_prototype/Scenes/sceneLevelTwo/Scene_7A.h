@@ -22,8 +22,15 @@
     
     CCSprite *background;
     CCSprite *door;
+    CCSprite *door_open;
+    
+    //For Scene_4C
+    CCSprite *silence;
+    CCSprite *tree_nest;
     
     float transitionTime;
+    
+    int _nextScene;
     
     CCSprite* tip_down;
     CCSprite* tip_up;
