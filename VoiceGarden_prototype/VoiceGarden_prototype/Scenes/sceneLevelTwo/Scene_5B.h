@@ -38,6 +38,9 @@
     float transitionTime;
     int _nextScene;
     
+    CCSprite* tip_down;
+    CCSprite* tip_up;
+    
 @public
     int sceneStatus;
     int preScene;

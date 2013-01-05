@@ -35,11 +35,32 @@
 	return scene;
 }
 
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch=[touches anyObject];
+    CGPoint loc=[touch locationInView:[touch view]];
+    loc=[[CCDirector sharedDirector] convertToGL:loc];
+    
+    if (loc.x > 400 && loc.x<480 && loc.y > 50 && loc.y < 110) {
+        if (tip_down.visible == true) {
+            tip_down.visible = false;
+            tip_up.visible = true;
+        }
+        else if (tip_down.visible == false){
+            tip_up.visible = false;
+            tip_down.visible = true;
+        }
+    }
+    
+    NSLog(@"(%g,%g)",loc.x,loc.y);
+}
+
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        
+        self.isTouchEnabled = true;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
@@ -192,6 +213,15 @@
     silence.scale = 0.7f;
     silence.opacity = 0;
     [self addChild: silence z:BACKGROUND_Z];
+    
+    tip_down = [CCSprite spriteWithFile:@"tip_down_L.png"];
+    tip_down.position = ccp(size.width/2 + 100, size.height/2 - 250);
+    [self addChild:tip_down z:3];
+    
+    tip_up = [CCSprite spriteWithFile:@"tip_spring.png"];
+    tip_up.position = ccp(size.width/2 + 100, size.height/2 - 250);
+    tip_up.visible = false;
+    [self addChild:tip_up z:3];
 }
 
 -(void)sceneTransition
@@ -214,21 +244,21 @@
     [label_5 runAction:label5Action];
     
     id silenceAction = [CCSpawn actions:    [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                                            [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)]],
                                             nil];
     [silence runAction:silenceAction];
     
     id treeLeftAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                        [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                                        [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)]],
                                         nil];
     [treeLeft runAction:treeLeftAction];
     
     id bottomAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                       [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
+                       [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)]],
                        nil];
     [bottomRight runAction:bottomAction];
     
-    id _treeRightAction = [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)];
+    id _treeRightAction = [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)]];
     id treeRightAction = [CCSequence actions:_treeRightAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
     [treeRight runAction:treeRightAction];
     
@@ -251,7 +281,6 @@
             [[CCDirector sharedDirector] replaceScene:[Scene_4C sceneWithVar:2]];
     }
 }
-
 
 
 - (void)dealloc {

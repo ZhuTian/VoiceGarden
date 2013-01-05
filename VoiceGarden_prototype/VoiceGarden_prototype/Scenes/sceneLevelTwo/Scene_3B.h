@@ -30,6 +30,9 @@
     CCSprite *silence;
     CCSprite *tree_nest;
     
+    CCSprite* tip;
+    CCSprite* tipSilence;
+    
     int transitionTime;
     
     

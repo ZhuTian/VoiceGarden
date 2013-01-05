@@ -42,11 +42,31 @@
 	return scene;
 }
 
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch=[touches anyObject];
+    CGPoint loc=[touch locationInView:[touch view]];
+    loc=[[CCDirector sharedDirector] convertToGL:loc];
+    
+    if (loc.x > 200 && loc.x<280 && loc.y > 50 && loc.y < 110) {
+        if (tip_down.visible == true) {
+            tip_down.visible = false;
+            tip_up.visible = true;
+        }
+        else if (tip_down.visible == false){
+            tip_up.visible = false;
+            tip_down.visible = true;
+        }
+    }
+    
+    NSLog(@"(%g,%g)",loc.x,loc.y);
+}
+
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        self.isTouchEnabled = true;
         
         NSString *fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
@@ -171,7 +191,14 @@
     door.scale = 1.0f;
     [self addChild: door z:SCENE_Z];
     
+    tip_down = [CCSprite spriteWithFile:@"tip_down_L.png"];
+    tip_down.position = ccp(size.width/2 - 100, size.height/2 - 250);
+    [self addChild:tip_down z:3];
     
+    tip_up = [CCSprite spriteWithFile:@"tip_door_noKey.png"];
+    tip_up.position = ccp(size.width/2 - 100, size.height/2 - 250);
+    tip_up.visible = false;
+    [self addChild:tip_up z:3];
 }
 
 -(void)SceneTransition
@@ -192,7 +219,7 @@
     [secret runAction:secretAction];
     
     //Transition animation
-    id _doorAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+    id _doorAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],
                       [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                       nil];
@@ -253,7 +280,7 @@
     {
         
         CGSize size = [[CCDirector sharedDirector] winSize];
-        CCSprite* background = [CCSprite spriteWithFile:@"door_open.png"];
+        background = [CCSprite spriteWithFile:@"door_open.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the label as a child to this Layer

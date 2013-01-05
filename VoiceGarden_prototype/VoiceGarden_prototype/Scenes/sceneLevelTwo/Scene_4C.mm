@@ -207,21 +207,21 @@
     if (_nextScene == SCENE_5B) {
         
         id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                            [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)]],
                                             nil];
         [silence runAction:silenceAction];
         
         id treeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                                [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                                [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)]],
                                                 nil];
         [treeLeft runAction:treeLeftAction];
         
         id bottomAction = [CCSpawn actions: [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)],
+                                            [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, 200)] ],
                                             nil];
         [springBottom runAction:bottomAction];
         
-        id _treeNestAction = [CCSpawn actions:  [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)],
+        id _treeNestAction = [CCSpawn actions:  [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)]],
                                                 [CCScaleTo actionWithDuration:transitionTime scale:0.9],
                                                 nil];
         id treeNestAction = [CCSequence actions:_treeNestAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
@@ -229,16 +229,16 @@
     }
     else if(_nextScene == SCENE_5C){
         id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -100)],
+                            [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, -100)]],
                             nil];
         [silence runAction:silenceAction];
         
-        id treeNestAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 200)],
+        id treeNestAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 200)]],
                                              [CCScaleTo actionWithDuration:transitionTime scale:1.0f],nil];
         [tree_nest runAction:treeNestAction];
         
         id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                                    [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],nil];
+                                                    [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],nil];
         id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
         [keyTreeLeft runAction:keyTreeLeftAction];
         

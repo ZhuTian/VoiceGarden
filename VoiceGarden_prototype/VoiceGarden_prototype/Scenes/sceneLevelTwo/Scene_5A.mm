@@ -400,27 +400,27 @@
     [keep runAction:keepAction];
     
     //Transition animation
-    id roadLoop1Action = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_loop1.position.x - 400, road_loop1.position.y - 400)],
+    id roadLoop1Action = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_loop1.position.x - 400, road_loop1.position.y - 400)]],
                      [CCFadeTo actionWithDuration:transitionTime opacity:0],
                      nil];
     [road_loop1 runAction:roadLoop1Action];
     
-    id roadLoop2Action = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_loop2.position.x - 400, road_loop2.position.y - 400)],
+    id roadLoop2Action = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(road_loop2.position.x - 400, road_loop2.position.y - 400)]],
                           [CCFadeTo actionWithDuration:transitionTime opacity:0],
                           nil];
     [road_loop2 runAction:roadLoop2Action];
     
-    id roadGroundAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)],
+    id roadGroundAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)]],
                           [CCFadeTo actionWithDuration:transitionTime opacity:0],
                           nil];
     [road_ground runAction:roadGroundAction];
     
-    id roadFrontAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)],
+    id roadFrontAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 400, size.height/2 - 400)]],
                            [CCFadeTo actionWithDuration:transitionTime opacity:0],
                            nil];
     [road_front runAction:roadFrontAction];
     
-    id _doorAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+    id _doorAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],
                       [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                       nil];

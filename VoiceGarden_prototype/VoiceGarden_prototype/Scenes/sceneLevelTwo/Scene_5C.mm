@@ -38,6 +38,25 @@
 	return scene;
 }
 
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch=[touches anyObject];
+    CGPoint loc=[touch locationInView:[touch view]];
+    loc=[[CCDirector sharedDirector] convertToGL:loc];
+    
+    if (loc.x > 300 && loc.x<380 && loc.y > 50 && loc.y < 110) {
+        if (tip_down.visible == true) {
+            tip_down.visible = false;
+            tip_up.visible = true;
+        }
+        else if (tip_down.visible == false){
+            tip_up.visible = false;
+            tip_down.visible = true;
+        }
+    }
+    
+    NSLog(@"(%g,%g)",loc.x,loc.y);
+}
+
 -(id) init
 {
 	// always call "super" init
@@ -158,6 +177,8 @@
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
     
+    self.isTouchEnabled = true;
+    
     CCSprite* background;
     background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
     background.position = ccp(size.width/2, size.height/2);
@@ -195,6 +216,14 @@
     bottomRight.opacity = 0;
     [self addChild:bottomRight];
     
+    tip_down = [CCSprite spriteWithFile:@"tip_down_L.png"];
+    tip_down.position = ccp(size.width/2, size.height/2 - 250);
+    [self addChild:tip_down z:3];
+    
+    tip_up = [CCSprite spriteWithFile:@"tip_flower.png"];
+    tip_up.position = ccp(size.width/2, size.height/2 - 250);
+    tip_up.visible = false;
+    [self addChild:tip_up z:3];
 }
 
 -(void)sceneTransition
@@ -227,16 +256,16 @@
         [flowerSprite3 runAction:flower3Action];
 
         id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                            [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 100)],
+                            [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, 100)]],
                             nil];
         [silence runAction:silenceAction];
         
-        id treeNestAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)],
+        id treeNestAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)]],
                              [CCScaleTo actionWithDuration:transitionTime scale:0.9f],nil];
         [treeRight runAction:treeNestAction];
         
         id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                 [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2+ 100)],nil];
+                                 [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2+ 100)]],nil];
         id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
         
         [treeLeft runAction:keyTreeLeftAction];
@@ -245,11 +274,11 @@
     else if(_nextScene == SCENE_6A){
        
         id treeLAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                          [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 400)],nil];
+                          [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, 400)]],nil];
         [tree_L runAction:treeLAction];
 
         id bottomAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                           [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 400)],nil];
+                           [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, 400)]],nil];
         
         [bottomRight runAction:bottomAction];
         
@@ -266,12 +295,12 @@
         id flower3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
         [flowerSprite3 runAction:flower3Action];
         
-        id treeNestAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)],
+        id treeNestAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)]],
                              [CCScaleTo actionWithDuration:transitionTime scale:0.9],nil];
         [treeRight runAction:treeNestAction];
         
         id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                 [CCMoveBy actionWithDuration:transitionTime position:ccp(0,400)],nil];
+                                 [CCEaseExponentialOut actionWithAction:[CCMoveBy actionWithDuration:transitionTime position:ccp(0,400)]],nil];
         id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
         
         [treeLeft runAction:keyTreeLeftAction];

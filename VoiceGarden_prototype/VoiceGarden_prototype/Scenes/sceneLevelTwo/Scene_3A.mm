@@ -368,13 +368,13 @@ extern bool haveKey;
     
     if(_nextScene == 1)
     {
-        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50 + 600, size.height/2 - 50 - 600)],
+        id windAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50 + 600, size.height/2 - 50 - 600)]],
                          [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
                          nil];
         [wind runAction:windAction];
         
-        id _pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2)],
+        id _pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
                          [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
                          nil];
@@ -383,40 +383,40 @@ extern bool haveKey;
                          nil];
         [path runAction:pathAction];
         
-        id desolateAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 150, size.height/2 - 300)],
+        id desolateAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 150, size.height/2 - 300)]],
                              [CCFadeTo actionWithDuration:transitionTime opacity:255],
                              nil];
         [desolate runAction:desolateAction];
         
-        id gardenAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120, 120 - 600)],
+        id gardenAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120, 120 - 600)]],
                            [CCFadeTo actionWithDuration:transitionTime opacity:0],
                            nil];
         [garden runAction:gardenAction];
     }
     else if(_nextScene == 2)
     {
-        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 700, size.height/2 - 50)],
+        id windAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 700, size.height/2 - 50)]],
                          [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                          nil];
         [wind runAction:windAction];
         
-        id _windMessageAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+        id _windMessageAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]],
                                  [CCFadeTo actionWithDuration:transitionTime opacity:255],
                                  nil];
         id windMessageAction = [CCSequence actions:_windMessageAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
         [wind_message runAction:windMessageAction];
         
-        id pathAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430 - 1200, size.height/2 + 180)],
+        id pathAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430 - 1200, size.height/2 + 180)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
                          nil];
         [path runAction:pathAction];
         
-        id desolateAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150 - 1200, size.height/2 - 50)],
+        id desolateAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150 - 1200, size.height/2 - 50)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
                          nil];
         [desolate runAction:desolateAction];
         
-        id gardenAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120 - 1200, 120)],
+        id gardenAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120 - 1200, 120)]],
                              [CCFadeTo actionWithDuration:transitionTime opacity:0],
                              nil];
         [garden runAction:gardenAction];

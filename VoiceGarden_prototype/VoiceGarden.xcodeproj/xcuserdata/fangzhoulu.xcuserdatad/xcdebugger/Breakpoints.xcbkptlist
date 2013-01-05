@@ -8,12 +8,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "VoiceGarden_prototype/Scenes/sceneLevelTwo/Scene_3B.mm"
-         timestampString = "378994847.667015"
+         timestampString = "379070173.348066"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
          landmarkName = "-init"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VoiceGarden_prototype/Scenes/sceneLevelTwo/Scene_4C.mm"
+         timestampString = "379062710.231186"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
+         landmarkName = "-sceneTransition"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

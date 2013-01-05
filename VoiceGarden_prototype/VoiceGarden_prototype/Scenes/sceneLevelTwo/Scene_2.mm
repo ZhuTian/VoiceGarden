@@ -257,33 +257,33 @@
     
     if(_nextScene == 1)
     {
-        id desolateAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 - 50)],
+        id desolateAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 - 50)]],
                              [CCFadeTo actionWithDuration:transitionTime opacity:255],
                              [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                              nil];
         [desolate runAction:desolateAction];
         
-        id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 100, size.height/2 - 200)],
+        id silenceAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 100, size.height/2 - 200)]],
                             [CCFadeTo actionWithDuration:transitionTime opacity:0],
                             [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                             nil];
         [silence runAction:silenceAction];
         
-        id _gardenAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120, 120)],
+        id _gardenAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120, 120)]],
                             [CCFadeTo actionWithDuration:transitionTime opacity:255],
                             nil];
         
         id gardenAction = [CCSequence actions:_gardenAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
         [garden runAction:gardenAction];
         
-        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50, size.height/2 - 50)],
+        id windAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50, size.height/2 - 50)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
                          [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
                          nil];
         
         [wind runAction:windAction];
         
-        id pathAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430, size.height/2 + 180)],
+        id pathAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430, size.height/2 + 180)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:255],
                          [CCScaleTo actionWithDuration:transitionTime scale:0.5f],
                          nil];
@@ -294,33 +294,39 @@
     }
     else if(_nextScene == 2)
     {
-        id desolateAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 50 - 400, size.height/2 + 150 - 200)],
+        
+        id _desolateMove = [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 50 - 400, size.height/2 + 150 - 200)]];
+        
+        id desolateAction = [CCSpawn actions:_desolateMove ,
                              [CCFadeTo actionWithDuration:transitionTime opacity:0],
                              [CCScaleTo actionWithDuration:transitionTime scale:0.8f],
                              nil];
         [desolate runAction:desolateAction];
         
-        id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],
+        id _silenceMove = [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)]];
+        id silenceAction = [CCSpawn actions:_silenceMove,
                             [CCFadeTo actionWithDuration:transitionTime opacity:255],
                             [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
                             nil];
         [silence runAction:silenceAction];
         
-        id _gardenAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120 - 400, 120 - 200)],
+        id _gardenMove = [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 120 - 400, 120 - 200)]];
+        id _gardenAction = [CCSpawn actions: _gardenMove,
                             [CCFadeTo actionWithDuration:transitionTime opacity:0],
                             nil];
         
         id gardenAction = [CCSequence actions:_gardenAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
         [garden runAction:gardenAction];
         
-        id windAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50 - 400, size.height/2 - 50 - 200)],
+
+        id windAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 50 - 400, size.height/2 - 50 - 200)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
                          [CCScaleTo actionWithDuration:transitionTime scale:0.3f],
                          nil];
         
         [wind runAction:windAction];
         
-        id pathAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430 - 400, size.height/2 + 180 - 200)],
+        id pathAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 430 - 400, size.height/2 + 180 - 200)]],
                          [CCFadeTo actionWithDuration:transitionTime opacity:0],
                          [CCScaleTo actionWithDuration:transitionTime scale:0.3f],
                          nil];

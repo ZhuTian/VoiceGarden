@@ -36,11 +36,33 @@
 	return scene;
 }
 
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch=[touches anyObject];
+    CGPoint loc=[touch locationInView:[touch view]];
+    loc=[[CCDirector sharedDirector] convertToGL:loc];
+    
+    if (loc.x > 850 && loc.x<900 && loc.y > 110 && loc.y < 150) {
+        if (tip.visible == true) {
+            tip.visible = false;
+            tipSilence.visible = true;
+        }
+        else if (tip.visible == false){
+            tipSilence.visible = false;
+            tip.visible = true;
+        }
+    }
+    
+    
+    NSLog(@"(%g,%g)", loc.x,loc.y);
+}
+
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        self.isTouchEnabled = true;
+        
         fontName = @"Kristenalwaysnotsonormal";
         CGSize size = [[CCDirector sharedDirector] winSize];
         
@@ -49,21 +71,21 @@
         [self initSprites];
         
         label_1 = [CCLabelTTF labelWithString:@"I tried to talk but realize." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 - 50, size.height/2 - 150);
+		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 250);
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
 		[self addChild: label_1 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"My voice               as the garden." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 - 50, size.height/2 - 200);
+		label_2.position =  ccp( size.width /2 - 50, size.height/2 + 200);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
 		[self addChild: label_2  z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"I am              ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 50, size.height/2 - 250);
+		label_3.position =  ccp( size.width /2 - 50, size.height/2 + 150);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
@@ -83,7 +105,7 @@
         }];
         [withered setFontName:fontName];
         [withered setFontSize:_fontSize];
-        [withered setPosition:ccp( size.width/2 + 140, size.height/2 - 200)];
+        [withered setPosition:ccp( size.width/2 + 140, size.height/2 + 200)];
         [withered setIsEnabled:false];
         [withered setColor:ccc3(0,0,0)];
         withered.opacity = 0;
@@ -93,7 +115,7 @@
         }];
         [waiting setFontName:fontName];
         [waiting setFontSize:_fontSize];
-        [waiting setPosition:ccp( size.width/2 + 80, size.height/2 - 250)];
+        [waiting setPosition:ccp( size.width/2 + 80, size.height/2 + 150)];
         [waiting setIsEnabled:false];
         [waiting setColor:ccc3(0,0,0)];
         waiting.opacity = 0;
@@ -154,7 +176,7 @@
         spawnPosition[6].y = size.height/2 - 100;
         
         spawnPosition[7].x = size.width/2 + 80;
-        spawnPosition[7].y = size.height/2 - 250;
+        spawnPosition[7].y = size.height/2 + 150;
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
@@ -239,7 +261,17 @@
     tree_nest.position = ccp(size.width/2 + 250 + 400, size.height/2 - 100 - 400);
     tree_nest.scale = 0.7f;
     tree_nest.opacity = 0;
-    [self addChild: tree_nest z:BACKGROUND_Z];    
+    [self addChild: tree_nest z:BACKGROUND_Z];
+    
+    tip = [CCSprite spriteWithFile:@"tip_up_R.png"];
+    tip.position = ccp(size.width/2 + 100, size.height/2 - 200);
+    [self addChild:tip];
+    
+    tipSilence = [CCSprite spriteWithFile:@"tip_silence.png"];
+    tipSilence.position = ccp(size.width/2 + 100, size.height/2 - 200);
+    tipSilence.visible = false;
+    [self addChild:tipSilence];
+    
 }
 
 -(void)SceneTransition
@@ -260,14 +292,14 @@
     [waiting runAction:waitingAction];
     
     //Scene Transition Animation
-    id silenceAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 + 120)],
+    id silenceAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 150, size.height/2 + 120)]],
                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
                      [CCScaleTo actionWithDuration:transitionTime scale:0.7f],
                      nil];
     
     [silence runAction:silenceAction];
     
-    id _treeAction = [CCSpawn actions: [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)],
+    id _treeAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)]],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],
                       [CCScaleTo actionWithDuration:transitionTime scale:0.9f],
                       nil];

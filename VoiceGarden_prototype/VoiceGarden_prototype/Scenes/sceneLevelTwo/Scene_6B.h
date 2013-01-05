@@ -33,6 +33,10 @@
     int timer;
     bool isLeft;
     
+    CCSprite* tip_down;
+    CCSprite* tip_up;
+
+    
 @public
     int sceneStatus;
 };

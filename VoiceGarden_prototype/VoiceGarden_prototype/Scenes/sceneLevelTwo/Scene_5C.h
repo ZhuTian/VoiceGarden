@@ -42,6 +42,10 @@
     CCSprite *silence;
     CCSprite *light;
     
+    CCSprite* tip_down;
+    CCSprite* tip_up;
+
+    
 @public
     int sceneStatus;
     
