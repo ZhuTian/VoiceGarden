@@ -120,7 +120,7 @@
     background.position = ccp(size.width/2, size.height/2);
     [self addChild: background];
     
-    treeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
+    treeLeft = [CCSprite spriteWithFile:@"spring_spring_L.png"];
     treeLeft.position = ccp(size.width/2,size.height/2);
     [self addChild:treeLeft];
     
@@ -129,25 +129,25 @@
     treeRight.scale = 0.9;
     [self addChild:treeRight];
     
-    bottomRight = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
+    bottomRight = [CCSprite spriteWithFile:@"spring_spring_R.png"];
     bottomRight.position=ccp(size.width/2, size.height/2);
     [self addChild:bottomRight];
     
     //transition 
     silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 + 350, size.height/2 + 150);
+    silence.position = ccp(size.width/2 + 100, size.height/2 + 150);
     silence.scale = 0.8f;
     silence.opacity = 0;
     [self addChild: silence z:SCENE_Z];
     
     desolate = [CCSprite spriteWithFile:@"desolate.png"];
-    desolate.position = ccp(size.width/2 + 250, size.height/2 + 150);
+    desolate.position = ccp(size.width/2 + -350, size.height/2 + 150);
     desolate.scale = 0.8f;
     desolate.opacity = 0;
     [self addChild: desolate z:SCENE_Z];
     
     garden = [CCSprite spriteWithFile:@"garden.png"];
-    garden.position = ccp(size.width/2 + 300, size.height/2 - 50);
+    garden.position = ccp(size.width/2 - 300, size.height/2 - 50);
     garden.opacity = 0;
     [self addChild: garden z:SCENE_Z];
     
@@ -155,6 +155,8 @@
 
 -(void)sceneTransition
 {
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
     id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [label_1 runAction:label1Action];
     
@@ -162,32 +164,31 @@
     [label_2 runAction:label2Action];
     
     id treeLeftAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                         [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+                         [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -300)],nil];
     [treeLeft runAction:treeLeftAction];
     
     id treeRightAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                         [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+                         [CCMoveBy actionWithDuration:transitionTime position:ccp(300, -300)],nil];
     [treeRight runAction:treeRightAction];
     
     id bottomRightAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                         [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+                         [CCMoveBy actionWithDuration:transitionTime position:ccp(300, -300)],nil];
     [bottomRight runAction:bottomRightAction];
+
     
-    
-    id catAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:0],
-                            [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
-    [cat runAction:catAction];
-    
+    // move in scene
     id silenceAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                    [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+                    [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 400, size.height/2 + 110)],
+                        [CCScaleTo actionWithDuration:transitionTime scale:0.9f],nil];
     [silence runAction:silenceAction];
     
     id desolateAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                        [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+                        [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 50, size.height/2 + 50)],
+                         [CCScaleTo actionWithDuration:transitionTime scale:1.0f],nil];
     [desolate runAction:desolateAction];
 
     id _gardenAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                        [CCMoveBy actionWithDuration:transitionTime position:ccp(-300, 0)],nil];
+                        [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2 - 120)],nil];
     id gardenAction = [CCSequence actions:_gardenAction, [CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
     
     [garden runAction:gardenAction];    

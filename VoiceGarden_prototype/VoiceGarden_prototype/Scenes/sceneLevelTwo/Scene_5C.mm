@@ -179,8 +179,8 @@
     silence.opacity = 0;
     [self addChild: silence z:BACKGROUND_Z];
     
-    tree_L = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
-    tree_L.position = ccp(size.width/2 - 200,size.height/2+ 300);
+    tree_L = [CCSprite spriteWithFile:@"spring_spring_L.png"];
+    tree_L.position = ccp(size.width/2 ,size.height/2 - 400);
     tree_L.opacity = 0;
     [self addChild:tree_L];
     
@@ -190,8 +190,8 @@
     treeRightEgg.opacity = 0;
     [self addChild:treeRightEgg];
     
-    bottomRight = [CCSprite spriteWithFile:@"finalSpring_BottomRight.png"];
-    bottomRight.position =ccp(size.width/2, size.height/2+200);
+    bottomRight = [CCSprite spriteWithFile:@"spring_spring_R.png"];
+    bottomRight.position =ccp(size.width/2, size.height/2 - 400);
     bottomRight.opacity = 0;
     [self addChild:bottomRight];
     
@@ -245,15 +245,11 @@
     else if(_nextScene == SCENE_6A){
        
         id treeLAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                          [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],nil];
+                          [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 400)],nil];
         [tree_L runAction:treeLAction];
-        
-        id treeRightEggAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                                 [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],nil];
-        [treeRightEgg runAction:treeRightEggAction];
-        
+
         id bottomAction = [CCSpawn actions:[CCFadeTo actionWithDuration:transitionTime opacity:255],
-                           [CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],nil];
+                           [CCMoveBy actionWithDuration:transitionTime position:ccp(0, 400)],nil];
         
         [bottomRight runAction:bottomAction];
         
@@ -270,17 +266,16 @@
         id flower3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
         [flowerSprite3 runAction:flower3Action];
         
-        id treeNestAction = [CCSpawn actions:[CCMoveBy actionWithDuration:transitionTime position:ccp(0, -200)],
-                             [CCFadeTo actionWithDuration:transitionTime opacity:0],nil];
+        id treeNestAction = [CCSpawn actions:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2+210,size.height/2+200)],
+                             [CCScaleTo actionWithDuration:transitionTime scale:0.9],nil];
         [treeRight runAction:treeNestAction];
         
         id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                 [CCMoveBy actionWithDuration:transitionTime position:ccp(0,-200)],nil];
+                                 [CCMoveBy actionWithDuration:transitionTime position:ccp(0,400)],nil];
         id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
         
         [treeLeft runAction:keyTreeLeftAction];
-    }
-    
+    }   
 }
 
 -(void)nextScene

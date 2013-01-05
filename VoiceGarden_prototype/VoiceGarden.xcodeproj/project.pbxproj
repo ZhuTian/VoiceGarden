@@ -59,7 +59,6 @@
 		07E2385916758B4E008F3888 /* Scene_Pratice_3.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07E2383F16758B4D008F3888 /* Scene_Pratice_3.mm */; };
 		07E2385B16758EFC008F3888 /* key_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E2385A16758EFB008F3888 /* key_old.png */; };
 		07E99A671696E7F2006E22B9 /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A3D1696E7F2006E22B9 /* bird.png */; };
-		07E99A681696E7F2006E22B9 /* desolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A3E1696E7F2006E22B9 /* desolate.png */; };
 		07E99A691696E7F2006E22B9 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A3F1696E7F2006E22B9 /* door.png */; };
 		07E99A6A1696E7F2006E22B9 /* door_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A401696E7F2006E22B9 /* door_open.png */; };
 		07E99A6C1696E7F2006E22B9 /* footprint_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A421696E7F2006E22B9 /* footprint_all.png */; };
@@ -81,7 +80,6 @@
 		07E99A7C1696E7F2006E22B9 /* pond_pad_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A521696E7F2006E22B9 /* pond_pad_L.png */; };
 		07E99A7D1696E7F2006E22B9 /* pond_pad_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A531696E7F2006E22B9 /* pond_pad_R.png */; };
 		07E99A7E1696E7F2006E22B9 /* pond_pad_T.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A541696E7F2006E22B9 /* pond_pad_T.png */; };
-		07E99A7F1696E7F2006E22B9 /* silence.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A551696E7F2006E22B9 /* silence.png */; };
 		07E99A801696E7F2006E22B9 /* spring_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A561696E7F2006E22B9 /* spring_all.png */; };
 		07E99A811696E7F2006E22B9 /* finalSpring_tree_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A571696E7F2006E22B9 /* finalSpring_tree_L.png */; };
 		07E99A821696E7F2006E22B9 /* spring_note_接回第一頁desolate和silence.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A581696E7F2006E22B9 /* spring_note_接回第一頁desolate和silence.png */; };
@@ -98,6 +96,10 @@
 		07E99A8D1696E7F2006E22B9 /* tree_nest.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A641696E7F2006E22B9 /* tree_nest.png */; };
 		07E99A8E1696E7F2006E22B9 /* tree_nest_egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A651696E7F2006E22B9 /* tree_nest_egg.png */; };
 		07E99A8F1696E7F2006E22B9 /* tutorial_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A661696E7F2006E22B9 /* tutorial_bg.png */; };
+		07E99A9C1697C5DC006E22B9 /* spring_spring_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A9A1697C5DC006E22B9 /* spring_spring_L.png */; };
+		07E99A9D1697C5DC006E22B9 /* spring_spring_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A9B1697C5DC006E22B9 /* spring_spring_R.png */; };
+		07E99AA01697D64B006E22B9 /* silence.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A9F1697D64A006E22B9 /* silence.png */; };
+		07E99AA21697D718006E22B9 /* desolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99AA11697D718006E22B9 /* desolate.png */; };
 		0E4E952016946C5900A20959 /* door_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4E951F16946C5900A20959 /* door_old.png */; };
 		0EB7E196164193D60050F56C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E195164193D60050F56C /* QuartzCore.framework */; };
 		0EB7E198164193D60050F56C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E197164193D60050F56C /* OpenGLES.framework */; };
@@ -357,7 +359,6 @@
 		07E2383F16758B4D008F3888 /* Scene_Pratice_3.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene_Pratice_3.mm; sourceTree = "<group>"; };
 		07E2385A16758EFB008F3888 /* key_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = key_old.png; path = LevelTwo/key_old.png; sourceTree = "<group>"; };
 		07E99A3D1696E7F2006E22B9 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
-		07E99A3E1696E7F2006E22B9 /* desolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desolate.png; sourceTree = "<group>"; };
 		07E99A3F1696E7F2006E22B9 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
 		07E99A401696E7F2006E22B9 /* door_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door_open.png; sourceTree = "<group>"; };
 		07E99A421696E7F2006E22B9 /* footprint_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_all.png; sourceTree = "<group>"; };
@@ -379,7 +380,6 @@
 		07E99A521696E7F2006E22B9 /* pond_pad_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pond_pad_L.png; sourceTree = "<group>"; };
 		07E99A531696E7F2006E22B9 /* pond_pad_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pond_pad_R.png; sourceTree = "<group>"; };
 		07E99A541696E7F2006E22B9 /* pond_pad_T.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pond_pad_T.png; sourceTree = "<group>"; };
-		07E99A551696E7F2006E22B9 /* silence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silence.png; sourceTree = "<group>"; };
 		07E99A561696E7F2006E22B9 /* spring_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spring_all.png; sourceTree = "<group>"; };
 		07E99A571696E7F2006E22B9 /* finalSpring_tree_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finalSpring_tree_L.png; sourceTree = "<group>"; };
 		07E99A581696E7F2006E22B9 /* spring_note_接回第一頁desolate和silence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spring_note_接回第一頁desolate和silence.png"; sourceTree = "<group>"; };
@@ -396,6 +396,10 @@
 		07E99A641696E7F2006E22B9 /* tree_nest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree_nest.png; sourceTree = "<group>"; };
 		07E99A651696E7F2006E22B9 /* tree_nest_egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree_nest_egg.png; sourceTree = "<group>"; };
 		07E99A661696E7F2006E22B9 /* tutorial_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_bg.png; sourceTree = "<group>"; };
+		07E99A9A1697C5DC006E22B9 /* spring_spring_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spring_spring_L.png; sourceTree = "<group>"; };
+		07E99A9B1697C5DC006E22B9 /* spring_spring_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spring_spring_R.png; sourceTree = "<group>"; };
+		07E99A9F1697D64A006E22B9 /* silence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silence.png; sourceTree = "<group>"; };
+		07E99AA11697D718006E22B9 /* desolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desolate.png; sourceTree = "<group>"; };
 		0E4E951F16946C5900A20959 /* door_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = door_old.png; path = layered_visual/door_old.png; sourceTree = "<group>"; };
 		0EB7E191164193D60050F56C /* VoiceGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB7E195164193D60050F56C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -923,9 +927,12 @@
 			children = (
 				07E99A5A1696E7F2006E22B9 /* title */,
 				07E99A3D1696E7F2006E22B9 /* bird.png */,
-				07E99A3E1696E7F2006E22B9 /* desolate.png */,
+				07E99A9F1697D64A006E22B9 /* silence.png */,
+				07E99A9A1697C5DC006E22B9 /* spring_spring_L.png */,
+				07E99A9B1697C5DC006E22B9 /* spring_spring_R.png */,
 				07E99A3F1696E7F2006E22B9 /* door.png */,
 				07E99A401696E7F2006E22B9 /* door_open.png */,
+				07E99AA11697D718006E22B9 /* desolate.png */,
 				07E99A421696E7F2006E22B9 /* footprint_all.png */,
 				07E99A431696E7F2006E22B9 /* footprint_back.png */,
 				07E99A441696E7F2006E22B9 /* footprint_scroll_front.png */,
@@ -945,7 +952,6 @@
 				07E99A521696E7F2006E22B9 /* pond_pad_L.png */,
 				07E99A531696E7F2006E22B9 /* pond_pad_R.png */,
 				07E99A541696E7F2006E22B9 /* pond_pad_T.png */,
-				07E99A551696E7F2006E22B9 /* silence.png */,
 				07E99A561696E7F2006E22B9 /* spring_all.png */,
 				07E99A581696E7F2006E22B9 /* spring_note_接回第一頁desolate和silence.png */,
 				07E99A591696E7F2006E22B9 /* finalSpring_BottomRight.png */,
@@ -1583,7 +1589,6 @@
 				0EC072F3168DC13A000789B6 /* wind.png in Resources */,
 				0E4E952016946C5900A20959 /* door_old.png in Resources */,
 				07E99A671696E7F2006E22B9 /* bird.png in Resources */,
-				07E99A681696E7F2006E22B9 /* desolate.png in Resources */,
 				07E99A691696E7F2006E22B9 /* door.png in Resources */,
 				07E99A6A1696E7F2006E22B9 /* door_open.png in Resources */,
 				07E99A6C1696E7F2006E22B9 /* footprint_all.png in Resources */,
@@ -1605,7 +1610,6 @@
 				07E99A7C1696E7F2006E22B9 /* pond_pad_L.png in Resources */,
 				07E99A7D1696E7F2006E22B9 /* pond_pad_R.png in Resources */,
 				07E99A7E1696E7F2006E22B9 /* pond_pad_T.png in Resources */,
-				07E99A7F1696E7F2006E22B9 /* silence.png in Resources */,
 				07E99A801696E7F2006E22B9 /* spring_all.png in Resources */,
 				07E99A811696E7F2006E22B9 /* finalSpring_tree_L.png in Resources */,
 				07E99A821696E7F2006E22B9 /* spring_note_接回第一頁desolate和silence.png in Resources */,
@@ -1622,6 +1626,10 @@
 				07E99A8D1696E7F2006E22B9 /* tree_nest.png in Resources */,
 				07E99A8E1696E7F2006E22B9 /* tree_nest_egg.png in Resources */,
 				07E99A8F1696E7F2006E22B9 /* tutorial_bg.png in Resources */,
+				07E99A9C1697C5DC006E22B9 /* spring_spring_L.png in Resources */,
+				07E99A9D1697C5DC006E22B9 /* spring_spring_R.png in Resources */,
+				07E99AA01697D64B006E22B9 /* silence.png in Resources */,
+				07E99AA21697D718006E22B9 /* desolate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -354,20 +354,20 @@
     path.opacity = 0;
     [self addChild: path z:SCENE_Z];
     
-    silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 + 50, size.height/2 + 150);
-    silence.scale = 0.8f;
-    silence.opacity = 255;
-    [self addChild: silence z:SCENE_Z];
-    
     desolate = [CCSprite spriteWithFile:@"desolate.png"];
-    desolate.position = ccp(size.width/2 - 50, size.height/2 + 150);
-    desolate.scale = 0.8f;
+    desolate.position = ccp(size.width/2 - 50, size.height/2 + 50);
+    // desolate.scale = 0.8f;
     desolate.opacity = 255;
     [self addChild: desolate z:SCENE_Z];
     
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 + 400, size.height/2 + 110);
+    silence.scale = 0.9f;
+    silence.opacity = 255;
+    [self addChild: silence z:SCENE_Z];
+    
     garden = [CCSprite spriteWithFile:@"garden.png"];
-    garden.position = ccp(size.width/2, size.height/2 - 50);
+    garden.position = ccp(size.width/2, size.height/2 - 120);
     [self addChild: garden z:SCENE_Z];
 }
 

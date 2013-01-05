@@ -40,7 +40,7 @@
         transitionTime = 1.0f;
         
         label = [CCLabelTTF labelWithString:@"I am in a            ." fontName:fontName fontSize:_fontSize];
-		label.position =  ccp( size.width /2 - 100, size.height/2 - 50);
+		label.position =  ccp( size.width /2 - 100, size.height/2 - 80);
         label.color = ccc3(0, 0, 0);
         label.anchorPoint = ccp(0, 0.5);
         label.opacity = 0;
@@ -74,7 +74,7 @@
         [back setColor:ccc3(100,100,100)];
         
         CCMenuItem *menu = [CCMenu menuWithItems:button_garden, back, nil];
-		[menu setPosition:ccp( 0, 0)];
+		[menu setPosition:ccp( 0, - 30)];
 		[self addChild:menu  z:TEXT_Z];
         
 	}
@@ -92,20 +92,20 @@
     [self addChild: background z:BACKGROUND_Z];
     
     //Add Scene Sprites
-    silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 + 50, size.height/2 + 150);
-    silence.scale = 0.8f;
-    silence.opacity = 255;
-    [self addChild: silence z:SCENE_Z];
-    
     desolate = [CCSprite spriteWithFile:@"desolate.png"];
-    desolate.position = ccp(size.width/2 - 50, size.height/2 + 150);
-    desolate.scale = 0.8f;
+    desolate.position = ccp(size.width/2 - 50, size.height/2 + 50);
+   // desolate.scale = 0.8f;
     desolate.opacity = 255;
     [self addChild: desolate z:SCENE_Z];
     
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 + 400, size.height/2 + 110);
+    silence.scale = 0.9f;
+    silence.opacity = 255;
+    [self addChild: silence z:SCENE_Z];
+    
     garden = [CCSprite spriteWithFile:@"garden.png"];
-    garden.position = ccp(size.width/2, size.height/2 - 50);
+    garden.position = ccp(size.width/2, size.height/2 - 120);
     [self addChild: garden z:SCENE_Z];
 }
 

@@ -241,6 +241,8 @@
                                                     [CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2)],nil];
         id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
         [keyTreeLeft runAction:keyTreeLeftAction];
+        
+        
     }
 }
 
