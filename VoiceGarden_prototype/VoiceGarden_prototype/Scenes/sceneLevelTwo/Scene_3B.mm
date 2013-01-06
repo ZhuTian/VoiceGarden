@@ -155,19 +155,19 @@
         
         //Init word position
         spawnPosition[0].x = size.width/2 ;
-        spawnPosition[0].y = size.height/2 + 200 ;
+        spawnPosition[0].y = size.height/2 - 200 ;
         
         spawnPosition[1].x = size.width/2 + 220;
-        spawnPosition[1].y = size.height/2 - 50;
+        spawnPosition[1].y = size.height/2 - 250;
         
-        spawnPosition[2].x = size.width/2 +60;
+        spawnPosition[2].x = size.width/2 - 260;
         spawnPosition[2].y = size.height/2 + 140 ;
         
         spawnPosition[3].x = size.width/2 - 370;
         spawnPosition[3].y = size.height/2 ;
         
         spawnPosition[4].x = size.width/2 + 370;
-        spawnPosition[4].y = size.height/2 + 200;
+        spawnPosition[4].y = size.height/2 - 200;
         
         spawnPosition[5].x = size.width/2 - 300;
         spawnPosition[5].y = size.height/2 - 300;
@@ -178,11 +178,18 @@
         spawnPosition[7].x = size.width/2 + 50;
         spawnPosition[7].y = size.height/2 + 150;
         
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
+        spawnContent[0] = @"O";
+        spawnContent[1] = @"Op";
+        spawnContent[2] = @"Ope";
+        spawnContent[3] = @"Open";
+        spawnContent[4] = @"Openi";
+        spawnContent[5] = @"Openin";
+        spawnContent[6] = @"Opening";
+        
+        if ([GlobalVariable sharedInstance].haveKey == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key_collect.png"];
+            keySprite.position = ccp(950, 200);
+            [self addChild:keySprite z: 10 tag:20];
         }
         
         [self initSprites];
@@ -198,7 +205,7 @@
     {
         if(spawnIndex < 7)
         {
-            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"Hewow" fontName:fontName fontSize:_fontSize];
+            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:spawnContent[spawnIndex] fontName:fontName fontSize:_fontSize];
             spawnWord[spawnIndex].position =  spawnPosition[spawnIndex];
             spawnWord[spawnIndex].color = ccc3(0, 0, 0);
             [self addChild: spawnWord[spawnIndex]];
@@ -225,6 +232,16 @@
             //[spawnWord[7] runAction:[CCMoveTo actionWithDuration:1 position:waiting.position]];
             spawnWord[7].opacity = 0;
             [spawnWord[7] runAction:[CCFadeTo actionWithDuration:transitionTime opacity:255]];
+            
+            [withered setIsEnabled:true];
+            [withered setColor:ccc3(100,100,100)];
+            id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+            id action = [CCEaseIn actionWithAction:move rate:1];
+            id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+            id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+            
+            [withered runAction: [CCSequence actions:action, action2, nil]];
+            [withered runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
         }
     }
     if(currentVolume < spawnThreshold && hasSpawn)
@@ -338,15 +355,7 @@
     else if(self.sceneStatus == 2 || self.sceneStatus == 3)
     {
         //NSLog(@"Bounce");
-        [withered setIsEnabled:true];
-        [withered setColor:ccc3(100,100,100)];
-        id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
-        id action = [CCEaseIn actionWithAction:move rate:1];
-        id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
-        id action2 = [CCEaseOut actionWithAction:move2 rate:1];
-
-        [withered runAction: [CCSequence actions:action, action2, nil]];
-        [withered runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        
     }
 }
 

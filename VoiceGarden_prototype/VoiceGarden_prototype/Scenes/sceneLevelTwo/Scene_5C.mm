@@ -156,6 +156,8 @@
             
             key.visible = false;
             [GlobalVariable sharedInstance].keyInThePocket = true;
+            
+            [[SimpleAudioEngine sharedEngine] playEffect:@"key.mp3"];
 
             
             

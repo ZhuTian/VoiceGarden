@@ -62,7 +62,6 @@
 		07E99A691696E7F2006E22B9 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A3F1696E7F2006E22B9 /* door.png */; };
 		07E99A6A1696E7F2006E22B9 /* door_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A401696E7F2006E22B9 /* door_open.png */; };
 		07E99A6C1696E7F2006E22B9 /* footprint_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A421696E7F2006E22B9 /* footprint_all.png */; };
-		07E99A6D1696E7F2006E22B9 /* footprint_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A431696E7F2006E22B9 /* footprint_back.png */; };
 		07E99A6E1696E7F2006E22B9 /* footprint_scroll_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A441696E7F2006E22B9 /* footprint_scroll_front.png */; };
 		07E99A6F1696E7F2006E22B9 /* footprint_scroll.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A451696E7F2006E22B9 /* footprint_scroll.png */; };
 		07E99A701696E7F2006E22B9 /* garden.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99A461696E7F2006E22B9 /* garden.png */; };
@@ -111,6 +110,13 @@
 		07E99AB616981ACF006E22B9 /* tip_spring.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99AAC16981ACF006E22B9 /* tip_spring.png */; };
 		07E99AB716981ACF006E22B9 /* tip_up_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E99AAD16981ACF006E22B9 /* tip_up_R.png */; };
 		0E4E952016946C5900A20959 /* door_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4E951F16946C5900A20959 /* door_old.png */; };
+		0E5AB1581699CD830000AF3A /* garden_spring_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB1561699CD830000AF3A /* garden_spring_L.png */; };
+		0E5AB1591699CD830000AF3A /* garden_spring_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB1571699CD830000AF3A /* garden_spring_R.png */; };
+		0E5AB15C1699CDDD0000AF3A /* desolate_spring.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB15B1699CDDD0000AF3A /* desolate_spring.png */; };
+		0E5AB15E1699D1380000AF3A /* footprint_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB15D1699D1380000AF3A /* footprint_back.png */; };
+		0E5AB1631699D6560000AF3A /* bird and water.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB1601699D6560000AF3A /* bird and water.mp3 */; };
+		0E5AB1641699D6560000AF3A /* door sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB1611699D6560000AF3A /* door sound.mp3 */; };
+		0E5AB1651699D6560000AF3A /* key.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0E5AB1621699D6560000AF3A /* key.mp3 */; };
 		0E8A249F1698A0E6004DA3DB /* pond.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8A249E1698A0E5004DA3DB /* pond.png */; };
 		0EB7E196164193D60050F56C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E195164193D60050F56C /* QuartzCore.framework */; };
 		0EB7E198164193D60050F56C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB7E197164193D60050F56C /* OpenGLES.framework */; };
@@ -373,7 +379,6 @@
 		07E99A3F1696E7F2006E22B9 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
 		07E99A401696E7F2006E22B9 /* door_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door_open.png; sourceTree = "<group>"; };
 		07E99A421696E7F2006E22B9 /* footprint_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_all.png; sourceTree = "<group>"; };
-		07E99A431696E7F2006E22B9 /* footprint_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_back.png; sourceTree = "<group>"; };
 		07E99A441696E7F2006E22B9 /* footprint_scroll_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_scroll_front.png; sourceTree = "<group>"; };
 		07E99A451696E7F2006E22B9 /* footprint_scroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_scroll.png; sourceTree = "<group>"; };
 		07E99A461696E7F2006E22B9 /* garden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garden.png; sourceTree = "<group>"; };
@@ -422,6 +427,13 @@
 		07E99AAC16981ACF006E22B9 /* tip_spring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tip_spring.png; sourceTree = "<group>"; };
 		07E99AAD16981ACF006E22B9 /* tip_up_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tip_up_R.png; sourceTree = "<group>"; };
 		0E4E951F16946C5900A20959 /* door_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = door_old.png; path = layered_visual/door_old.png; sourceTree = "<group>"; };
+		0E5AB1561699CD830000AF3A /* garden_spring_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garden_spring_L.png; sourceTree = "<group>"; };
+		0E5AB1571699CD830000AF3A /* garden_spring_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garden_spring_R.png; sourceTree = "<group>"; };
+		0E5AB15B1699CDDD0000AF3A /* desolate_spring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desolate_spring.png; sourceTree = "<group>"; };
+		0E5AB15D1699D1380000AF3A /* footprint_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footprint_back.png; sourceTree = "<group>"; };
+		0E5AB1601699D6560000AF3A /* bird and water.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bird and water.mp3"; sourceTree = "<group>"; };
+		0E5AB1611699D6560000AF3A /* door sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "door sound.mp3"; sourceTree = "<group>"; };
+		0E5AB1621699D6560000AF3A /* key.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = key.mp3; sourceTree = "<group>"; };
 		0E8A249E1698A0E5004DA3DB /* pond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pond.png; sourceTree = "<group>"; };
 		0EB7E191164193D60050F56C /* VoiceGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB7E195164193D60050F56C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -956,10 +968,13 @@
 				07E99A3F1696E7F2006E22B9 /* door.png */,
 				07E99A401696E7F2006E22B9 /* door_open.png */,
 				07E99AA11697D718006E22B9 /* desolate.png */,
+				0E5AB15B1699CDDD0000AF3A /* desolate_spring.png */,
+				0E5AB15D1699D1380000AF3A /* footprint_back.png */,
 				07E99A421696E7F2006E22B9 /* footprint_all.png */,
-				07E99A431696E7F2006E22B9 /* footprint_back.png */,
 				07E99A441696E7F2006E22B9 /* footprint_scroll_front.png */,
 				07E99A451696E7F2006E22B9 /* footprint_scroll.png */,
+				0E5AB1561699CD830000AF3A /* garden_spring_L.png */,
+				0E5AB1571699CD830000AF3A /* garden_spring_R.png */,
 				07E99A461696E7F2006E22B9 /* garden.png */,
 				07E99A471696E7F2006E22B9 /* garden_water.png */,
 				07E99A481696E7F2006E22B9 /* key.png */,
@@ -1051,6 +1066,16 @@
 			path = tip;
 			sourceTree = "<group>";
 		};
+		0E5AB15F1699D6390000AF3A /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0E5AB1601699D6560000AF3A /* bird and water.mp3 */,
+				0E5AB1611699D6560000AF3A /* door sound.mp3 */,
+				0E5AB1621699D6560000AF3A /* key.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		0EB7E186164193D60050F56C = {
 			isa = PBXGroup;
 			children = (
@@ -1105,6 +1130,7 @@
 		0EB7E1A8164193D60050F56C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0E5AB15F1699D6390000AF3A /* Audio */,
 				07E237A3167584DF008F3888 /* GVResources */,
 				0EB7E1A9164193D60050F56C /* Default.png */,
 				07E237A116758365008F3888 /* Default-568h@2x.png */,
@@ -1633,7 +1659,6 @@
 				07E99A691696E7F2006E22B9 /* door.png in Resources */,
 				07E99A6A1696E7F2006E22B9 /* door_open.png in Resources */,
 				07E99A6C1696E7F2006E22B9 /* footprint_all.png in Resources */,
-				07E99A6D1696E7F2006E22B9 /* footprint_back.png in Resources */,
 				07E99A6E1696E7F2006E22B9 /* footprint_scroll_front.png in Resources */,
 				07E99A6F1696E7F2006E22B9 /* footprint_scroll.png in Resources */,
 				07E99A701696E7F2006E22B9 /* garden.png in Resources */,
@@ -1682,6 +1707,13 @@
 				07E99AB616981ACF006E22B9 /* tip_spring.png in Resources */,
 				07E99AB716981ACF006E22B9 /* tip_up_R.png in Resources */,
 				0E8A249F1698A0E6004DA3DB /* pond.png in Resources */,
+				0E5AB1581699CD830000AF3A /* garden_spring_L.png in Resources */,
+				0E5AB1591699CD830000AF3A /* garden_spring_R.png in Resources */,
+				0E5AB15C1699CDDD0000AF3A /* desolate_spring.png in Resources */,
+				0E5AB15E1699D1380000AF3A /* footprint_back.png in Resources */,
+				0E5AB1631699D6560000AF3A /* bird and water.mp3 in Resources */,
+				0E5AB1641699D6560000AF3A /* door sound.mp3 in Resources */,
+				0E5AB1651699D6560000AF3A /* key.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

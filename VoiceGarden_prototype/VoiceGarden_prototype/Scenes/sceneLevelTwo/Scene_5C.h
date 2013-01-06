@@ -7,6 +7,7 @@
 //
 #import "cocos2d.h"
 #import "CCLayer.h"
+#import "SimpleAudioEngine.h"
 
 
 @interface Scene_5C : CCLayer

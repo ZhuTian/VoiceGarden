@@ -72,11 +72,12 @@
         
         thriving = [CCMenuItemFont itemWithString:@"thriving" block:^(id sender){
             [GlobalVariable sharedInstance].isDesolate = false;
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_2 sceneWithVar:1] withColor:ccWHITE]];
+            [self SceneTransition];
         }];
         [thriving setFontName:fontName];
         [thriving setFontSize:_fontSize];
-        [thriving setPosition:ccp( size.width/2 - 215, size.height/2 + 50)];
+        [thriving setPosition:ccp( size.width/2 - 262, size.height/2 + 50)];
         [thriving setIsEnabled:true];
         [thriving setColor:ccc3(100, 100, 100)];
         thriving.opacity = 0;
@@ -136,7 +137,69 @@
     door.scale = 1.0f;
     [self addChild: door z:SCENE_Z];
     
+    //For Scene_2
+    desolate = [CCSprite spriteWithFile:@"desolate.png"];
+    desolate.position = ccp(size.width/2 - 50, size.height/2 + 50 - 800);
+    // desolate.scale = 0.8f;
+    desolate.opacity = 0;
+    [self addChild: desolate z:SCENE_Z];
     
+    silence = [CCSprite spriteWithFile:@"silence.png"];
+    silence.position = ccp(size.width/2 + 400, size.height/2 + 110 - 800);
+    silence.scale = 0.9f;
+    silence.opacity = 0;
+    [self addChild: silence z:SCENE_Z];
+    
+    garden = [CCSprite spriteWithFile:@"garden.png"];
+    garden.position = ccp(size.width/2, size.height/2 - 120 - 800);
+    garden.opacity = 0;
+    [self addChild: garden z:SCENE_Z];
+}
+
+-(void)SceneTransition
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    //Fade out script
+    id label1Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_1 runAction:label1Action];
+    id label2Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [label_2 runAction:label2Action];
+    
+    id thrivingAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    [thriving runAction:thrivingAction];
+    
+    //Transition Animation
+    id gardenAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2 - 120)]],
+                        [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                        nil];
+    [garden runAction:gardenAction];
+    
+    id desolateAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 50, size.height/2 + 50)]],
+                       [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                       nil];
+    [desolate runAction:desolateAction];
+    
+    id silenceAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 400, size.height/2 + 110)]],
+                         [CCFadeTo actionWithDuration:transitionTime opacity:255],
+                         nil];
+    [silence runAction:silenceAction];
+    
+    id _doorAction = [CCSpawn actions:[CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2 + 800)]],
+                      [CCFadeTo actionWithDuration:transitionTime opacity:0],
+                      [CCScaleTo actionWithDuration:transitionTime scale:1.0f],
+                      nil];
+    id doorAction = [CCSequence actions:_doorAction,
+                     [CCCallFunc actionWithTarget:self selector:@selector(nextScene)],
+                     nil];
+    [door runAction:doorAction];
+    
+}
+
+
+-(void)nextScene
+{
+    [[CCDirector sharedDirector] replaceScene:[Scene_2 sceneWithVar:1]];
 }
 
 -(void)updateScene

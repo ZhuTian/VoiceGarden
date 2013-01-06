@@ -8,6 +8,7 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 #import "SceneCommon.h"
+#import "SimpleAudioEngine.h"
 
 @interface Scene_2 : CCLayer
 {
@@ -22,6 +23,12 @@
     CCSprite *wind;
     CCSprite *background;
     CCSprite *light;
+    
+    //For final scene
+    CCSprite *garden_water;
+    CCSprite *desolate_spring;
+    CCSprite *garden_L;
+    CCSprite *garden_R;
     
     float transitionTime;
     int _nextScene;

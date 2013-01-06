@@ -115,7 +115,7 @@
         
         CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){   [self sceneTransition];   }];
         [back setFontName:fontName];
-        [back setFontSize:30];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -124,7 +124,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:30];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
@@ -176,11 +176,10 @@
         
         [self scheduleUpdate];
         
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
+        if ([GlobalVariable sharedInstance].haveKey == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key_collect.png"];
+            keySprite.position = ccp(950, 200);
+            [self addChild:keySprite z: 10 tag:20];
         }
         
 	}

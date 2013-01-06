@@ -190,11 +190,10 @@
 		// Add the menu to the layer
 		[self addChild:menu z:TEXT_Z];
         
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
+        if ([GlobalVariable sharedInstance].haveKey == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key_collect.png"];
+            keySprite.position = ccp(950, 200);
+            [self addChild:keySprite z: 10 tag:20];
         }
         
 	}
@@ -238,11 +237,11 @@
     pond_pad3.opacity = 0;
     [self addChild: pond_pad3 z:SCENE_Z];
     
-    id pad1Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    id pad1Action = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
     [pond_pad1 runAction:pad1Action];
-    id pad2Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    id pad2Action = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
     [pond_pad2 runAction:pad2Action];
-    id pad3Action = [CCFadeTo actionWithDuration:transitionTime opacity:255];
+    id pad3Action = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
     [pond_pad3 runAction:pad3Action];
     
     

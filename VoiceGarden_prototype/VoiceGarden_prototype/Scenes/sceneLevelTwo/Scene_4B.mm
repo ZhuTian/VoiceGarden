@@ -112,11 +112,11 @@
 		
 		// Add the menu to the layer
 		[self addChild:menu z:TEXT_Z];
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
+        
+        if ([GlobalVariable sharedInstance].haveKey == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key_collect.png"];
+            keySprite.position = ccp(950, 200);
+            [self addChild:keySprite z: 10 tag:20];
         }
         
 	}

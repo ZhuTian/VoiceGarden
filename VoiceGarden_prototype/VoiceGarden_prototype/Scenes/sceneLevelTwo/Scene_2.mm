@@ -114,36 +114,48 @@
         id action2 = [CCEaseOut actionWithAction:move2 rate:1];
         
         [desolate_beautiful runAction: [CCSequence actions:fadein, action, action2, nil]];
-        [desolate_beautiful runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        if([GlobalVariable sharedInstance].isDesolate || [GlobalVariable sharedInstance].isSlience)
+        {
+            
+            [desolate_beautiful runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+        }
         
         id fadein_2 = [CCFadeTo actionWithDuration:transitionTime opacity:255];
         id move_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
         id action_2 = [CCEaseIn actionWithAction:move_2 rate:1];
         id move2_2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
         id action2_2 = [CCEaseOut actionWithAction:move2_2 rate:1];
+        
         [slience_XXX runAction: [CCSequence actions:fadein_2, action_2, action2_2, nil]];
-        [slience_XXX runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
+        if([GlobalVariable sharedInstance].isSlience || [GlobalVariable sharedInstance].isDesolate)
+        {
+            
+            [slience_XXX runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action_2, action2_2, nil]]];
+        }
         
         back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            Class preScene = [[GlobalVariable sharedInstance].SceneStack lastObject];
-            [[GlobalVariable sharedInstance].SceneStack removeLastObject];
-            [[GlobalVariable sharedInstance].SceneStatusStack removeLastObject];
-            if(preScene != nil)
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[preScene scene] withColor:ccWHITE]];
+//            Class preScene = [[GlobalVariable sharedInstance].SceneStack lastObject];
+//            [[GlobalVariable sharedInstance].SceneStack removeLastObject];
+//            [[GlobalVariable sharedInstance].SceneStatusStack removeLastObject];
+//            if(preScene != nil)
+//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[preScene scene] withColor:ccWHITE]];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
+            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
         }];
         [back setFontName:fontName];
         [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
+        back.visible = false;
+        back.isEnabled = false;
         
         CCMenuItem *menu = [CCMenu menuWithItems:desolate_beautiful, slience_XXX, back, nil];
 		[menu setPosition:ccp( 0, 0)];
 		[self addChild:menu  z:TEXT_Z];
         
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
+        if ([GlobalVariable sharedInstance].haveKey == true) {
+            CCSprite* keySprite = [CCSprite spriteWithFile:@"key_collect.png"];
+            keySprite.position = ccp(950, 200);
             [self addChild:keySprite z: 10 tag:20];
         }
         
@@ -167,22 +179,46 @@
     }
     else if(self.sceneStatus == 4)
     {
-        [slience_XXX setString:@"life"];
-        [slience_XXX stopAllActions];
         [slience_XXX setIsEnabled:false];
+        [slience_XXX setString:@"life"];
         [slience_XXX setColor:ccc3(0, 0, 0)];
         
-        [desolate_beautiful setString:@"thriving"];
-        [desolate_beautiful stopAllActions];
+        
+        
         [desolate_beautiful setIsEnabled:false];
+        [desolate_beautiful setString:@"thriving"];
+        //[desolate_beautiful stopAllActions];
         [desolate_beautiful setColor:ccc3(0, 0, 0)];
         
-        [background setTexture:[[CCTextureCache sharedTextureCache] addImage:@"garden_life.png"]];
+        //[background setTexture:[[CCTextureCache sharedTextureCache] addImage:@"garden_life.png"]];
         
         CCSprite* key = (CCSprite*)[self getChildByTag:20];
         [key setVisible:false];
      
         [back setVisible:true];
+        back.isEnabled = true;
+        
+        //Final Scene Transition
+        id gardenAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:0];
+        [garden runAction:gardenAction];
+        
+        id desolateAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:0];
+        [desolate runAction:desolateAction];
+        
+        id desolateSpringAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
+        [desolate_spring runAction:desolateSpringAction];
+        
+        id gardenWaterAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
+        [garden_water runAction:gardenWaterAction];
+        
+        id gardenLAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
+        [garden_L runAction:gardenLAction];
+        
+        id gardenRAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
+        [garden_R runAction:gardenRAction];
+        
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"bird and water.mp3" loop:true];
+        
     }
 }
 
@@ -317,6 +353,11 @@
     desolate.opacity = 255;
     [self addChild: desolate z:SCENE_Z];
     
+    desolate_spring = [CCSprite spriteWithFile:@"desolate_spring.png"];
+    desolate_spring.position = ccp(size.width/2, size.height/2);
+    desolate_spring.opacity = 0;
+    [self addChild: desolate_spring z:SCENE_Z];
+    
     silence = [CCSprite spriteWithFile:@"silence.png"];
     silence.position = ccp(size.width/2 + 400, size.height/2 + 110);
     silence.scale = 0.9f;
@@ -326,6 +367,25 @@
     garden = [CCSprite spriteWithFile:@"garden.png"];
     garden.position = ccp(size.width/2, size.height/2 - 120);
     [self addChild: garden z:SCENE_Z];
+    
+    //For final scene
+    garden_water = [CCSprite spriteWithFile:@"garden_water.png"];
+    garden_water.position = ccp(size.width/2, size.height/2 - 120);
+    garden_water.opacity = 0;
+    [self addChild: garden_water z:SCENE_Z];
+    
+    
+    
+    garden_L = [CCSprite spriteWithFile:@"garden_spring_L.png"];
+    garden_L.position = ccp(size.width/2, size.height/2);
+    garden_L.opacity = 0;
+    [self addChild: garden_L z:SCENE_Z];
+    
+    garden_R = [CCSprite spriteWithFile:@"garden_spring_R.png"];
+    garden_R.position = ccp(size.width/2, size.height/2);
+    garden_R.opacity = 0;
+    [self addChild: garden_R z:SCENE_Z];
+    
 }
 
 -(void)nextScene

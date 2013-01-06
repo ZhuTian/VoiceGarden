@@ -115,7 +115,7 @@
         }];
         [open setFontName:fontName];
         [open setFontSize:_fontSize];
-        [open setPosition:ccp( size.width/2 - 395, size.height/2)];
+        [open setPosition:ccp( size.width/2 - 405, size.height/2)];
         [open setIsEnabled:false];
         [open setColor:ccc3(0, 0, 0)];
         open.opacity = 0;
@@ -264,6 +264,8 @@
         
         id _doorOpenAction = [CCFadeTo actionWithDuration:transitionTime + 1 opacity:255];
         [door_open runAction:_doorOpenAction];
+        
+        [[SimpleAudioEngine sharedEngine] playEffect:@"door sound.mp3"];
     }
     else if(_nextScene == 2)
     {

@@ -19,6 +19,11 @@
     CCSprite *background;
     CCSprite *door;
     
+    //For Scene_2
+    CCSprite *garden;
+    CCSprite *desolate;
+    CCSprite *silence;
+    
     float transitionTime;
     
 @public

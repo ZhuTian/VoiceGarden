@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 #import "SceneCommon.h"
+#import "SimpleAudioEngine.h"
 
 @interface Scene_7A : CCLayer
 {

@@ -24,6 +24,7 @@
     CGPoint spawnPosition[8];
     int spawnIndex;
     CCLabelTTF* spawnWord[8];
+    NSString* spawnContent[8];
     NSString *fontName;
     
     CCSprite *background;
