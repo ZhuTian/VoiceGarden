@@ -8,7 +8,7 @@
 #import "Scene_2.h"
 #import "Scene_6A.h"
 #import "GlobalVariable.h"
-#define _fontSize 30
+//#define _fontSize 30
 
 @implementation Scene_6A
 +(CCScene *) sceneWithVar: (int)_sceneType

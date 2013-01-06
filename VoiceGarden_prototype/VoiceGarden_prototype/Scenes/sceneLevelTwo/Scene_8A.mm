@@ -9,7 +9,7 @@
 #import "Scene_8A.h"
 #import "Scene_2.h"
 #import "GlobalVariable.h"
-#define _fontSize 30
+//#define _fontSize 30
 
 
 @implementation Scene_8A

@@ -69,10 +69,10 @@
         transitionTime = 1.0f;
         
         int yOffset = -150;
-        int _fontSize = 26;
+        //int _fontSize = 26;
         
         label_1 = [CCLabelTTF labelWithString:@"It's April." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 - 170, size.height/2 + 40 + yOffset);
+		label_1.position =  ccp( size.width /2 - 160, size.height/2 + 40 + yOffset);
         label_1.color = ccc3(0, 0, 0);
         label_1.opacity = 0;
 		[self addChild: label_1 z:TEXT_Z];
@@ -262,6 +262,15 @@
     id treeRightAction = [CCSequence actions:_treeRightAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)], nil];
     [treeRight runAction:treeRightAction];
     
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip_down.visible==true) {
+        [tip_down runAction:tipAction];
+    }
+    else{
+        [tip_up runAction:tipAction];
+    }
+
+    
 }
 
 -(void)nextScene
@@ -363,13 +372,13 @@
     CCSprite* butterfly = (CCSprite*)[self getChildByTag:10];
     CGPoint position = butterfly.position;
 
-    if(position.y == bloomPosition.y && abs(position.x - bloomPosition.x) <= 20)
+    if(position.y == bloomPosition.y && abs(position.x - bloomPosition.x) <= 80)
     {
         bloomCollected = true;
         bloomLabel.visible = false;
     }
     
-    if(position.y == swayPosition.y && abs(position.x - swayPosition.x) <= 20)
+    if(position.y == swayPosition.y && abs(position.x - swayPosition.x) <= 80)
     {
         swayCollected = true;
         swayLabel.visible = false;

@@ -11,7 +11,7 @@
 #import "GlobalVariable.h"
 #import "Scene_3A.h"
 #import "StartScene.h"
-#define _fontSize 30
+//#define _fontSize 30
 
 @implementation Scene_2
 @synthesize sceneStatus;
@@ -59,21 +59,21 @@
         [self initSprites];
    
         label_1 = [CCLabelTTF labelWithString:@"I open my eyes." fontName:fontName fontSize:_fontSize];
-		label_1.position =  ccp( size.width /2 - 250, size.height/2 - 30);
+		label_1.position =  ccp( size.width /2 - 180, size.height/2 - 50);
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
 		[self addChild: label_1 z:TEXT_Z];
         
         label_2 = [CCLabelTTF labelWithString:@"I see a              garden." fontName:fontName fontSize:_fontSize];
-		label_2.position =  ccp( size.width /2 - 250, size.height/2 - 80);
+		label_2.position =  ccp( size.width /2 - 180, size.height/2 - 100);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
 		[self addChild: label_2 z:TEXT_Z];
         
         label_3 = [CCLabelTTF labelWithString:@"I am surrounded by the sound of          ." fontName:fontName fontSize:_fontSize];
-		label_3.position =  ccp( size.width /2 - 250, size.height/2 - 130);
+		label_3.position =  ccp( size.width /2 - 180, size.height/2 - 150);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
@@ -93,25 +93,17 @@
         }];
         [desolate_beautiful setFontName:fontName];
         [desolate_beautiful setFontSize:_fontSize];
-        [desolate_beautiful setPosition:ccp( size.width/2 - 89, size.height/2 - 80)];
+        [desolate_beautiful setPosition:ccp( size.width/2 - 50, size.height/2 - 100)];
         [desolate_beautiful setColor:ccc3(100,100,100)];
         desolate_beautiful.opacity = 0;
         
         slience_XXX = [CCMenuItemFont itemWithString:@"slience" block:^(id sender){
-//            if(self.sceneStatus == 1)
-//            {
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:1] withColor:ccWHITE]];
-//            }
-//            else if(self.sceneStatus == 2)
-//            {
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Scene_3B sceneWithVar:3] withColor:ccWHITE]];
-//            }
             _nextScene = 2;
             [self SceneTransition];
         }];
         [slience_XXX setFontName:fontName];
         [slience_XXX setFontSize:_fontSize];
-        [slience_XXX setPosition:ccp( size.width/2 + 250, size.height/2 - 130)];
+        [slience_XXX setPosition:ccp( size.width/2 + 220, size.height/2 - 150)];
         [slience_XXX setColor:ccc3(100,100,100)];
         slience_XXX.opacity = 0;
         
@@ -193,47 +185,6 @@
         [back setVisible:true];
     }
 }
-
-/*-(void)initSprites
-{
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    
-    //Add common background
-    background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
-    background.position = ccp(size.width/2, size.height/2);
-    [self addChild: background z:BACKGROUND_Z];
-    
-    //Add Scene Sprites
-    
-    //For desolate scene
-    wind = [CCSprite spriteWithFile:@"wind.png"];
-    wind.position = ccp(size.width/2 - 50, size.height/2 + 250);
-    wind.scale = 0.3f;
-    wind.opacity = 0;
-    [self addChild: wind z:SCENE_Z];
-    
-    path = [CCSprite spriteWithFile:@"path.png"];
-    path.position = ccp(size.width/2 - 330, size.height/2 + 280);
-    path.scale = 0.3f;
-    path.opacity = 0;
-    [self addChild: path z:SCENE_Z];
-    
-    silence = [CCSprite spriteWithFile:@"silence.png"];
-    silence.position = ccp(size.width/2 + 50, size.height/2 + 150);
-    silence.scale = 0.8f;
-    silence.opacity = 255;
-    [self addChild: silence z:SCENE_Z];
-    
-    desolate = [CCSprite spriteWithFile:@"desolate.png"];
-    desolate.position = ccp(size.width/2 - 50, size.height/2 + 150);
-    desolate.scale = 0.8f;
-    desolate.opacity = 255;
-    [self addChild: desolate z:SCENE_Z];
-    
-    garden = [CCSprite spriteWithFile:@"garden.png"];
-    garden.position = ccp(size.width/2, size.height/2 - 50);
-    [self addChild: garden z:SCENE_Z];
-}*/
 
 -(void)SceneTransition
 {

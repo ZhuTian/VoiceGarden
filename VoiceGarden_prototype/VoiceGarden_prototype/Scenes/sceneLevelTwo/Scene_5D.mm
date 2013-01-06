@@ -75,7 +75,7 @@
         enablePond = true;
         
         
-        int _fontSize = 30;
+       // int _fontSize = 30;
         
         label_1 = [CCLabelTTF labelWithString:@"     make my own choices." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 150, size.height/2 + 300);
@@ -317,6 +317,15 @@
                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
                      nil];
     [door runAction:doorAction];
+    
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip_down.visible==true) {
+        [tip_down runAction:tipAction];
+    }
+    else{
+        [tip_up runAction:tipAction];
+    }
+
     
 }
 

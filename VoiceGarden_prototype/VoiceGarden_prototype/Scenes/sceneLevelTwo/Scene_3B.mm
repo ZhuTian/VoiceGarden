@@ -10,7 +10,7 @@
 #import "Scene_3B.h"
 #import "AudioManager.h"
 #import "GlobalVariable.h"
-#define _fontSize 30
+//#define _fontSize 30
 
 
 @implementation Scene_3B
@@ -105,7 +105,7 @@
         }];
         [withered setFontName:fontName];
         [withered setFontSize:_fontSize];
-        [withered setPosition:ccp( size.width/2 + 140, size.height/2 + 200)];
+        [withered setPosition:ccp( size.width/2 + 100, size.height/2 + 200)];
         [withered setIsEnabled:false];
         [withered setColor:ccc3(0,0,0)];
         withered.opacity = 0;
@@ -115,7 +115,7 @@
         }];
         [waiting setFontName:fontName];
         [waiting setFontSize:_fontSize];
-        [waiting setPosition:ccp( size.width/2 + 80, size.height/2 + 150)];
+        [waiting setPosition:ccp( size.width/2 + 50, size.height/2 + 150)];
         [waiting setIsEnabled:false];
         [waiting setColor:ccc3(0,0,0)];
         waiting.opacity = 0;
@@ -175,7 +175,7 @@
         spawnPosition[6].x = size.width/2 + 220;
         spawnPosition[6].y = size.height/2 - 100;
         
-        spawnPosition[7].x = size.width/2 + 80;
+        spawnPosition[7].x = size.width/2 + 50;
         spawnPosition[7].y = size.height/2 + 150;
         
         if ([GlobalVariable sharedInstance].keyInThePocket == true) {
@@ -298,6 +298,15 @@
                      nil];
     
     [silence runAction:silenceAction];
+    
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip.visible==true) {
+        [tip runAction:tipAction];
+    }
+    else{
+        [tipSilence runAction:tipAction];
+    }
+    
     
     id _treeAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)]],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],

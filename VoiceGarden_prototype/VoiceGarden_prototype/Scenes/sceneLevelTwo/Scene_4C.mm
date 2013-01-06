@@ -10,7 +10,7 @@
 #import "Scene_5B.h"
 #import "Scene_5C.h"
 #import "GlobalVariable.h"
-#define _fontSize 30
+//#define _fontSize 30
 
 #define SCENE_5B 1
 #define SCENE_5C 2
@@ -88,7 +88,7 @@
         }];
         [spring setFontName:fontName];
         [spring setFontSize:_fontSize];
-        [spring setPosition:ccp( size.width/2 - 10, size.height/2 - 300)];
+        [spring setPosition:ccp( size.width/2 - 90, size.height/2 - 300)];
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
         spring.opacity = 0;
@@ -108,7 +108,7 @@
         }];
         [key setFontName:fontName];
         [key setFontSize:_fontSize];
-        [key setPosition:ccp( size.width/2 - 230, size.height/2 - 250)];
+        [key setPosition:ccp( size.width/2 - 260, size.height/2 - 250)];
         [key setIsEnabled:false];
         [key setColor:ccc3(0,0,0)];
         key.opacity = 0;
@@ -184,7 +184,7 @@
     [self addChild:springBottom];
     
     keyTreeLeft = [CCSprite spriteWithFile:@"finalSpring_tree_L.png"];
-    keyTreeLeft.position = ccp(size.width/2, size.height/2+ 100);
+    keyTreeLeft.position = ccp(size.width/2 - 200, size.height/2);
     keyTreeLeft.opacity = 0;
     [self addChild:keyTreeLeft];    
 }

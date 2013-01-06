@@ -71,7 +71,7 @@
         [self initSprites];
         transitionTime = 1.0f;
         
-        int _fontSize = 30;
+        //int _fontSize = 30;
         
         
         label_1 = [CCLabelTTF labelWithString:@"The fear of unknown " fontName:fontName fontSize:_fontSize];
@@ -119,7 +119,7 @@
         }];
         [my setFontName:fontName];
         [my setFontSize:_fontSize];
-        [my setPosition:ccp( size.width/2 + 330, size.height/2 + 200)];
+        [my setPosition:ccp( size.width/2 + 265, size.height/2 + 200)];
         [my setIsEnabled:false];
         [my setColor:ccc3(100,100,100)];
         my.opacity = 0;
@@ -133,7 +133,7 @@
         }];
         [company setFontName:fontName];
         [company setFontSize:_fontSize];
-        [company setPosition:ccp( size.width/2 + 370, size.height/2 + 150)];
+        [company setPosition:ccp( size.width/2 + 290, size.height/2 + 150)];
         [company setIsEnabled:false];
         [company setColor:ccc3(100,100,100)];
         company.opacity = 0;
@@ -280,12 +280,21 @@
     id label4Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [label_4 runAction:label4Action];
     
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip_down.visible==true) {
+        [tip_down runAction:tipAction];
+    }
+    else{
+        [tip_up runAction:tipAction];
+    }
+    
     if(sceneStatus == 2)
     {
         id myButtonAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
         [my runAction:myButtonAction];
         id companyAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
         [company runAction:companyAction];
+        
     }
     
     if(_nextScene == -1) // Back

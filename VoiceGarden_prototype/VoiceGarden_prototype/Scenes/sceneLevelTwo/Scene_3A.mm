@@ -11,7 +11,6 @@
 #import "Scene_4B.h"
 #import "AudioManager.h"
 #import "GlobalVariable.h"
-#define sceneFontSize 24
 
 @implementation Scene_3A
 @synthesize sceneStatus;
@@ -49,42 +48,42 @@ extern bool haveKey;
         
         [self initSprites];
         
-        label_1 = [CCLabelTTF labelWithString:@"I look to my left." fontName:fontName fontSize:sceneFontSize];
+        label_1 = [CCLabelTTF labelWithString:@"I look to my left." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 120, size.height/2+200);
         label_1.color = ccc3(0, 0, 0);
         label_1.anchorPoint = ccp(0, 0.5);
         label_1.opacity = 0;
 		[self addChild: label_1 z:TEXT_Z];
         
-        label_6 = [CCLabelTTF labelWithString:@"There is a         sightly concealed by a tangle of shrubs." fontName:fontName fontSize:sceneFontSize];
+        label_6 = [CCLabelTTF labelWithString:@"There is a         sightly concealed by a tangle of shrubs." fontName:fontName fontSize:_fontSize];
 		label_6.position =  ccp( size.width /2 - 120, size.height/2+150);
         label_6.color = ccc3(0, 0, 0);
         label_6.anchorPoint = ccp(0, 0.5);
         label_6.opacity = 0;
 		[self addChild: label_6 z:TEXT_Z];
         
-        label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:sceneFontSize];
+        label_2 = [CCLabelTTF labelWithString:@"I look to my right." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 120, size.height/2 + 100);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
         label_2.opacity = 0;
 		[self addChild: label_2 z:TEXT_Z];
         
-        label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face," fontName:fontName fontSize:sceneFontSize];
+        label_3 = [CCLabelTTF labelWithString:@"Feeling the         graze my face," fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 - 120, size.height/2 + 50);
         label_3.color = ccc3(0, 0, 0);
         label_3.anchorPoint = ccp(0, 0.5);
         label_3.opacity = 0;
 		[self addChild: label_3 z:TEXT_Z];
         
-        label_4 = [CCLabelTTF labelWithString:@"whispering to me in an unfamiliar language." fontName:fontName fontSize:sceneFontSize];
+        label_4 = [CCLabelTTF labelWithString:@"whispering to me in an unfamiliar language." fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 - 120, size.height/2 + 0);
         label_4.color = ccc3(0, 0, 0);
         label_4.anchorPoint = ccp(0, 0.5);
         label_4.opacity = 0;
 		[self addChild: label_4 z:TEXT_Z];
         
-        label_5 = [CCLabelTTF labelWithString:@"I start to run to chase its word." fontName:fontName fontSize:sceneFontSize];
+        label_5 = [CCLabelTTF labelWithString:@"I start to run to chase its word." fontName:fontName fontSize:_fontSize];
 		label_5.position =  ccp( size.width /2 - 120, size.height/2 - 50);
         label_5.color = ccc3(0, 0, 0);
         label_5.anchorPoint = ccp(0, 0.5);
@@ -110,7 +109,7 @@ extern bool haveKey;
             [self SceneTransition];
         }];
         [road setFontName:fontName];
-        [road setFontSize:sceneFontSize];
+        [road setFontSize:_fontSize];
         [road setPosition:ccp( size.width/2 + 20, size.height/2 + 150)];
         [road setIsEnabled:true];
         [road setColor:ccc3(100,100,100)];
@@ -129,7 +128,7 @@ extern bool haveKey;
             [self SceneTransition];
         }];
         [wind_button setFontName:fontName];
-        [wind_button setFontSize:sceneFontSize];
+        [wind_button setFontSize:_fontSize];
         [wind_button setPosition:ccp( size.width/2 + 35, size.height/2 + 50)];
         [wind_button setIsEnabled:false];
         [wind_button setColor:ccc3(0,0,0)];
@@ -143,7 +142,7 @@ extern bool haveKey;
             
         }];
         [back setFontName:fontName];
-        [back setFontSize:sceneFontSize];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -156,7 +155,7 @@ extern bool haveKey;
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:sceneFontSize];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         

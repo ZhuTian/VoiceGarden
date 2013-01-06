@@ -39,7 +39,7 @@
         CCSprite* background = [CCSprite spriteWithFile:@"start_bg.png"];
         background.position = ccp(size.width/2, size.height/2);
         
-        int _fontSize = 32;
+        //int _fontSize = 32;
         
         // add the label as a child to this Layer
         [self addChild: background];

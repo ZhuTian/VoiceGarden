@@ -74,7 +74,7 @@
         [self initSprites];
         transitionTime = 1.0f;
         
-        int _fontSize = 30;
+        //int _fontSize = 30;
         
         
         label_1 = [CCLabelTTF labelWithString:@"I reach the end of the path." fontName:fontName fontSize:_fontSize];
@@ -128,7 +128,7 @@
         }];
         [secret setFontName:fontName];
         [secret setFontSize:_fontSize];
-        [secret setPosition:ccp( size.width/2 - 310, size.height/2)];
+        [secret setPosition:ccp( size.width/2 - 340, size.height/2)];
         [secret setIsEnabled:false];
         [secret setColor:ccc3(100, 100, 100)];
         secret.visible = false;
@@ -237,6 +237,14 @@
     id label3Action = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [label_3 runAction:label3Action];
     
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip_down.visible==true) {
+        [tip_down runAction:tipAction];
+    }
+    else{
+        [tip_up runAction:tipAction];
+    }
+
     id openAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [open runAction:openAction];
     id secretAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];

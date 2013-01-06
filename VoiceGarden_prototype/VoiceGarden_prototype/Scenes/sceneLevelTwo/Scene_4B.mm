@@ -46,7 +46,7 @@
         
         // add the label as a child to this Layer
         
-        int _fontSize = 30;
+        //int _fontSize = 30;
         
         label_1 = [CCLabelTTF labelWithString:@"The wind tells me of the promise that lay ahead." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 250, size.height/2 + 50);

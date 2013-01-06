@@ -10,7 +10,7 @@
 #import "GlobalVariable.h"
 #import "Scene_7A.h"
 #import "AudioManager.h"
-#define sceneFontSize 30
+//#define sceneFontSize 30
 
 @implementation Scene_6B
 @synthesize sceneStatus;
@@ -68,28 +68,28 @@
         [self initSprites];
         transitionTime = 1.0f;
         
-        label_1 = [CCLabelTTF labelWithString:@"I see a shimmering reflection of myself." fontName:fontName fontSize:sceneFontSize];
+        label_1 = [CCLabelTTF labelWithString:@"I see a shimmering reflection of myself." fontName:fontName fontSize:_fontSize];
 		label_1.position =  ccp( size.width /2 - 50, size.height/2 + 300);
         label_1.anchorPoint = ccp(0,0.5);
         label_1.color = ccc3(0, 0, 0);
         label_1.opacity = 0;
 		[self addChild: label_1 z:TEXT_Z];
         
-        label_3 = [CCLabelTTF labelWithString:@"A little bit more confidently." fontName:fontName fontSize:sceneFontSize];
+        label_3 = [CCLabelTTF labelWithString:@"A little bit more confidently." fontName:fontName fontSize:_fontSize];
 		label_3.position =  ccp( size.width /2 - 50, size.height/2 + 250);
         label_3.anchorPoint = ccp(0,0.5);
         label_3.color = ccc3(0, 0, 0);
         label_3.opacity = 0;
 		[self addChild: label_3 z:TEXT_Z];
         
-        label_4 = [CCLabelTTF labelWithString:@"I step forward with the power of voice." fontName:fontName fontSize:sceneFontSize];
+        label_4 = [CCLabelTTF labelWithString:@"I step forward with the power of voice." fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 - 50, size.height/2 + 200);
         label_4.anchorPoint = ccp(0,0.5);
         label_4.color = ccc3(0, 0, 0);
         label_4.opacity = 0;
 		[self addChild: label_4 z:TEXT_Z];
         
-        label_2 = [CCLabelTTF labelWithString:@"I am ready to               ." fontName:fontName fontSize:sceneFontSize];
+        label_2 = [CCLabelTTF labelWithString:@"I am ready to               ." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 - 50, size.height/2 + 150);
         label_2.color = ccc3(0, 0, 0);
         label_2.anchorPoint = ccp(0, 0.5);
@@ -110,8 +110,8 @@
             [self SceneTransition];
         }];
         [go setFontName:fontName];
-        [go setFontSize:sceneFontSize];
-        [go setPosition:ccp( size.width/2 + 200, size.height/2 + 150)];
+        [go setFontSize:_fontSize];
+        [go setPosition:ccp( size.width/2 + 150, size.height/2 + 150)];
         [go setIsEnabled:false];
         [go setColor:ccc3(0,0,0)];
         go.opacity = 0;
@@ -123,7 +123,7 @@
             ;
         }];
         [back setFontName:fontName];
-        [back setFontSize:sceneFontSize];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -132,7 +132,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:sceneFontSize];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
@@ -266,6 +266,15 @@
                      [CCFadeTo actionWithDuration:transitionTime opacity:255],
                      nil];
     [door runAction:doorAction];
+    
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip_down.visible==true) {
+        [tip_down runAction:tipAction];
+    }
+    else{
+        [tip_up runAction:tipAction];
+    }
+
 }
 
 -(void)nextScene

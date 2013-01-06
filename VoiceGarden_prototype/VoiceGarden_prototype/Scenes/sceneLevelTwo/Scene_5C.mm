@@ -11,7 +11,6 @@
 #import "Scene_5C.h"
 #import "GlobalVariable.h"
 #import "AudioManager.h"
-#define sceneFontSize 30
 #define SCENEBACK -1
 #define SCENE_6A 1
 
@@ -69,27 +68,27 @@
         transitionTime = 1.0f;
         [self initSprites];
         
-        label_1 = [CCLabelTTF labelWithString:@"It looks like autumn in the garden." fontName:fontName fontSize:sceneFontSize];
-		label_1.position =  ccp( size.width /2 - 15 , size.height/2+200);
+        label_1 = [CCLabelTTF labelWithString:@"It looks like autumn in the garden." fontName:fontName fontSize:_fontSize];
+		label_1.position =  ccp( size.width /2 + 15, size.height/2+200);
         label_1.color = ccc3(0, 0, 0);
         label_1.opacity = 0;
 		[self addChild: label_1];
         
-        label_2 = [CCLabelTTF labelWithString:@"The bird will not return while the garden is still in rest." fontName:fontName fontSize:sceneFontSize];
+        label_2 = [CCLabelTTF labelWithString:@"The bird will not return while the garden is still in rest." fontName:fontName fontSize:_fontSize];
 		label_2.position =  ccp( size.width /2 + 130, size.height/2+150);
         label_2.color = ccc3(0, 0, 0);
         label_2.opacity = 0;
 		[self addChild: label_2];
         
-        label_3 = [CCLabelTTF labelWithString:@" " fontName:fontName fontSize:sceneFontSize];
-		label_3.position =  ccp( size.width /2 - 60, size.height/2 + 150);
+        label_3 = [CCLabelTTF labelWithString:@" " fontName:fontName fontSize:_fontSize];
+		label_3.position =  ccp( size.width /2 - 25, size.height/2 + 150);
         label_3.color = ccc3(0, 0, 0);
         label_3.opacity = 0;
         label_3.visible = false;
         [self addChild: label_3];
         
-        label_4 = [CCLabelTTF labelWithString:@" " fontName:fontName fontSize:sceneFontSize];
-		label_4.position =  ccp( size.width /2 +315, size.height/2 + 150);
+        label_4 = [CCLabelTTF labelWithString:@" " fontName:fontName fontSize:_fontSize];
+		label_4.position =  ccp( size.width /2 +260, size.height/2 + 150);
         label_4.color = ccc3(0, 0, 0);
         label_4.opacity = 0;
         label_4.visible = false;
@@ -100,7 +99,7 @@
             [self sceneTransition];
         }];
         [spring setFontName:fontName];
-        [spring setFontSize:sceneFontSize];
+        [spring setFontSize:_fontSize];
         [spring setPosition:ccp( size.width/2 + 20, size.height/2 + 250)];
         [spring setIsEnabled:true];
         [spring setColor:ccc3(100,100,100)];
@@ -112,7 +111,7 @@
         }];
         
         [key_button setFontName:fontName];
-        [key_button setFontSize:sceneFontSize];
+        [key_button setFontSize:_fontSize];
         [key_button setPosition:ccp( size.width/2 + 75, size.height/2 + 50)];
         [key_button setIsEnabled:true];
         [key_button setColor:ccc3(100,100,100)];
@@ -124,7 +123,7 @@
             [self sceneTransition];
         }];
         [back setFontName:fontName];
-        [back setFontSize:sceneFontSize];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -133,7 +132,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:sceneFontSize];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
@@ -236,6 +235,7 @@
     tip_up.position = ccp(size.width/2, size.height/2 - 250);
     tip_up.visible = false;
     [self addChild:tip_up z:3];
+    
 }
 
 -(void)sceneTransition
@@ -252,6 +252,14 @@
     [label_4 runAction:label4Action];
     id springAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
     [spring runAction:springAction];
+    
+    id tipAction = [CCFadeTo actionWithDuration:transitionTime opacity:0];
+    if (tip_down.visible==true) {
+        [tip_down runAction:tipAction];
+    }
+    else{
+        [tip_up runAction:tipAction];
+    }
     
     if(_nextScene == SCENEBACK){
         CCSprite* flowerSprite1 = (CCSprite*)[self getChildByTag:51];
@@ -277,7 +285,7 @@
         [treeRight runAction:treeNestAction];
         
         id _keyTreeLeftAction = [CCSpawn actions:   [CCFadeTo actionWithDuration:transitionTime opacity:0],
-                                 [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2, size.height/2+ 100)]],nil];
+                                 [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 - 200, size.height/2)]],nil];
         id keyTreeLeftAction = [CCSequence actions:_keyTreeLeftAction,[CCCallFunc actionWithTarget:self selector:@selector(nextScene)],nil];
         
         [treeLeft runAction:keyTreeLeftAction];
@@ -353,7 +361,7 @@
         
         label_1.string = @"It's         .";
         label_2.string = @"The bird remembers the garden with blooming flowers.";
-        label_3.string = @"She is back with the key  .";
+        label_3.string = @"She is back with the key.";
         label_4.string = @"I need to save the garden.";
         label_3.visible = true;
         label_4.visible = true;
@@ -428,22 +436,22 @@
         dominantnote = 1;
     }
     else if ([noteString isEqualToString:@"Mi"]){
-        dominantnote = 2;
+        dominantnote = 1;
     }
     else if ([noteString isEqualToString:@"Fa"]){
-        dominantnote = 3;
+        dominantnote = 4;
     }
     else if ([noteString isEqualToString:@"So"]){
         dominantnote = 4;
     }
     else if ([noteString isEqualToString:@"La"]){
-        dominantnote = 5;
+        dominantnote = 6;
     }
     else if ([noteString isEqualToString:@"Si"]){
         dominantnote = 6;
     }
     else
-        dominantnote = 7;
+        dominantnote = 6;
     
     switch (dominantnote) {
         case 1: //Re - flower_1

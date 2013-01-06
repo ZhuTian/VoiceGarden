@@ -8,7 +8,7 @@
 
 #import "Scene_1.h"
 #import "Scene_2.h"
-#define _fontSize 30
+//#define _fontSize 30
 
 @implementation Scene_1
 
@@ -53,7 +53,7 @@
         }];
         [button_garden setFontName:fontName];
         [button_garden setFontSize:_fontSize];
-        [button_garden setPosition:ccp( size.width/2 + 85, size.height/2 - 50)];
+        [button_garden setPosition:ccp( size.width/2 + 45, size.height/2 - 80)];
         [button_garden setColor:ccc3(100,100,100)];
         button_garden.opacity = 0;
         
@@ -74,7 +74,7 @@
         [back setColor:ccc3(100,100,100)];
         
         CCMenuItem *menu = [CCMenu menuWithItems:button_garden, back, nil];
-		[menu setPosition:ccp( 0, - 30)];
+		[menu setPosition:ccp( 0, 0)];
 		[self addChild:menu  z:TEXT_Z];
         
 	}

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define _fontSize 24
 
 @interface GlobalVariable : NSObject
 {

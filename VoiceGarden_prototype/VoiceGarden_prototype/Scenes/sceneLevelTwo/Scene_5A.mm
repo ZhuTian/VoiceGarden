@@ -54,7 +54,7 @@
         
         
         int xOffset = 150, yOffset = 250;
-        int _fontSize = 30;
+        //int _fontSize = 30;
         
         
         label_1 = [CCLabelTTF labelWithString:@"I follow the footprint." fontName:fontName fontSize:_fontSize];
@@ -123,7 +123,7 @@
             //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
         }];
         [back setFontName:fontName];
-        [back setFontSize:48];
+        [back setFontSize:_fontSize];
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
@@ -132,7 +132,7 @@
             [self updateScene];
         }];
         [action setFontName:fontName];
-        [action setFontSize:48];
+        [action setFontSize:_fontSize];
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
@@ -141,7 +141,7 @@
             [self detectCollision];
         }];
         [middle setFontName:fontName];
-        [middle setFontSize:48];
+        [middle setFontSize:_fontSize];
         [middle setPosition:ccp( size.width - 400, 30)];
         [middle setColor:ccc3(100,100,100)];
         
@@ -150,7 +150,7 @@
             [self detectCollision];
         }];
         [low setFontName:fontName];
-        [low setFontSize:48];
+        [low setFontSize:_fontSize];
         [low setPosition:ccp( size.width - 200, 30)];
         [low setColor:ccc3(100,100,100)];
         
@@ -159,7 +159,7 @@
             [self detectCollision];
         }];
         [high setFontName:fontName];
-        [high setFontSize:48];
+        [high setFontSize:_fontSize];
         [high setPosition:ccp( size.width - 600, 30)];
         [high setColor:ccc3(100,100,100)];
         
@@ -189,19 +189,19 @@
         friendshipCollected = false;
         
         faithPosition = CGPointMake(500, footprintManager->midY),
-        faithLabel = [CCLabelTTF labelWithString:@"faith" fontName:fontName fontSize:40];
+        faithLabel = [CCLabelTTF labelWithString:@"faith" fontName:fontName fontSize:_fontSize];
 		faithLabel.position =  faithPosition;
         faithLabel.color = ccc3(0, 0, 0);
 		[self addChild: faithLabel z:SCENE_Z];
         
         couragePosition = CGPointMake(1200, footprintManager->lowY),
-        courageLabel = [CCLabelTTF labelWithString:@"courage" fontName:fontName fontSize:40];
+        courageLabel = [CCLabelTTF labelWithString:@"courage" fontName:fontName fontSize:_fontSize];
 		courageLabel.position =  couragePosition;
         courageLabel.color = ccc3(0, 0, 0);
 		[self addChild: courageLabel z:SCENE_Z];
         
         friendshipPosition = CGPointMake(1900, footprintManager->highY),
-        friendshipLabel = [CCLabelTTF labelWithString:@"friendship" fontName:fontName fontSize:40];
+        friendshipLabel = [CCLabelTTF labelWithString:@"friendship" fontName:fontName fontSize:_fontSize];
 		friendshipLabel.position =  friendshipPosition;
         friendshipLabel.color = ccc3(0, 0, 0);
 		[self addChild: friendshipLabel z:SCENE_Z];
