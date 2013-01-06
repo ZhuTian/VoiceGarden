@@ -215,7 +215,7 @@
 }
 
 - (void)levelTimerCallback:(NSTimer *)timer {
-    NSLog([[AudioManager sharedInstance] getNote]);
+    //NSLog([[AudioManager sharedInstance] getNote]);
     if(enableFootprint == true)
     {
         NSString* note = [[AudioManager sharedInstance] getNote];
