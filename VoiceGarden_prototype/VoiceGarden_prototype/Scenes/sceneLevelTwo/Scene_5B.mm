@@ -371,13 +371,13 @@
     CCSprite* butterfly = (CCSprite*)[self getChildByTag:10];
     CGPoint position = butterfly.position;
 
-    if(position.y == bloomPosition.y && abs(position.x - bloomPosition.x) <= 80)
+    if(abs(position.y - bloomPosition.y) <= 30 && abs(position.x - bloomPosition.x) <= 80)
     {
         bloomCollected = true;
         bloomLabel.visible = false;
     }
     
-    if(position.y == swayPosition.y && abs(position.x - swayPosition.x) <= 80)
+    if(abs(position.y - swayPosition.y) <= 30 && abs(position.x - swayPosition.x) <= 80)
     {
         swayCollected = true;
         swayLabel.visible = false;

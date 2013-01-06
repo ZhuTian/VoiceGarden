@@ -140,7 +140,8 @@
 //            if(preScene != nil)
 //                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[preScene scene] withColor:ccWHITE]];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
-            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+            //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+            [[AudioManager sharedInstance] stopSoundEffect];
         }];
         [back setFontName:fontName];
         [back setFontSize:_fontSize];
@@ -217,8 +218,8 @@
         id gardenRAction = [CCFadeTo actionWithDuration:transitionTime + 2 opacity:255];
         [garden_R runAction:gardenRAction];
         
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"bird and water.mp3" loop:true];
-        
+        //[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"bird and water.mp3" loop:true];
+        [[AudioManager sharedInstance] playEndingSound];
     }
 }
 

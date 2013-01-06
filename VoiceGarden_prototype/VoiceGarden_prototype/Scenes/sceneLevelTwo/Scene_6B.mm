@@ -307,8 +307,8 @@
 {
     float volume = [[AudioManager sharedInstance] getAverageVolume];
     //NSLog(@"%f",volume);
-    if (volume>-100&&status !=7) {
-        timer-=2;
+    if (volume>-30&&status !=7) {
+        timer-=1;
         
         if(timer == 0)
         {

@@ -110,12 +110,12 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
-        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
-            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
-            keySprite.scale = 0.3;
-            keySprite.position = ccp(900, 100);
-            [self addChild:keySprite];
-        }
+//        if ([GlobalVariable sharedInstance].keyInThePocket == true) {
+//            CCSprite* keySprite = [CCSprite spriteWithFile:@"key.png"];
+//            keySprite.scale = 0.3;
+//            keySprite.position = ccp(900, 100);
+//            [self addChild:keySprite];
+//        }
         
 	}
 	return self;

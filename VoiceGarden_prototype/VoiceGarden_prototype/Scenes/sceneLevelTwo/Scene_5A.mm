@@ -376,6 +376,7 @@
 
 -(void)updateFootOpacity:(ccTime)dt
 {
+    
     [footprintManager updateOpacity:dt];
 }
 

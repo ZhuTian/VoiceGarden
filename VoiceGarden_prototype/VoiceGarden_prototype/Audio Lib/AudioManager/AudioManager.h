@@ -34,6 +34,12 @@ static const char *note[8] =
     FMOD::System   *system;
     FMOD::Sound    *sound;
     FMOD::Channel  *channel;
+    FMOD::Channel  *sound_effect_channel;
+    
+    FMOD::Sound    *keySound;
+    FMOD::Sound    *doorSound;
+    FMOD::Sound    *endingSound;
+    
     
     int dominantnote;
     
@@ -42,5 +48,10 @@ static const char *note[8] =
 -(float)getAverageVolume;
 - (NSString*)getNote;
 -(float)getFundamentalFrequency;
+
+-(void)playKeySound;
+-(void)playDoorSound;
+-(void)playEndingSound;
+-(void)stopSoundEffect;
 
 @end

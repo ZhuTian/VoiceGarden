@@ -380,6 +380,8 @@
     CGSize size = [[CCDirector sharedDirector] winSize];
     float volumn = [[AudioManager sharedInstance] getAverageVolume];
     
+    NSLog(@"%f",volumn);
+    
     if(volumn > maxVolumn)
         volumn = maxVolumn;
     else if(volumn < minVolumn)
@@ -394,7 +396,7 @@
     if(preFactor == -1)
         preFactor = interFactor;
     
-    NSLog(@"%f", preFactor - interFactor);
+    //NSLog(@"%f", preFactor - interFactor);
     
     //Smooth the transition
     float thresholod = 0.000001f;

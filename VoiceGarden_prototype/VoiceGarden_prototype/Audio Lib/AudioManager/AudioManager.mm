@@ -107,7 +107,7 @@ void ERRCHECK(FMOD_RESULT result)
     memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
     
     exinfo.cbsize           = sizeof(FMOD_CREATESOUNDEXINFO);
-    exinfo.numchannels      = 1;
+    exinfo.numchannels      = 2;
     exinfo.format           = FMOD_SOUND_FORMAT_PCM16;
     exinfo.defaultfrequency = OUTPUTRATE;
     exinfo.length           = exinfo.defaultfrequency * sizeof(short) * exinfo.numchannels * 5;
@@ -127,6 +127,20 @@ void ERRCHECK(FMOD_RESULT result)
     result = channel->setVolume(0);
     ERRCHECK(result);
     
+    //Init sound effect
+    char          buffer[200]   = {0};
+    
+    [[NSString stringWithFormat:@"%@/key.mp3", [[NSBundle mainBundle] resourcePath]] getCString:buffer maxLength:200 encoding:NSASCIIStringEncoding];
+    result = system->createSound(buffer, FMOD_SOFTWARE, NULL, &keySound);
+    ERRCHECK(result);
+    
+    [[NSString stringWithFormat:@"%@/door sound.mp3", [[NSBundle mainBundle] resourcePath]] getCString:buffer maxLength:200 encoding:NSASCIIStringEncoding];
+    result = system->createSound(buffer, FMOD_SOFTWARE, NULL, &doorSound);
+    ERRCHECK(result);
+    
+    [[NSString stringWithFormat:@"%@/bird and water.mp3", [[NSBundle mainBundle] resourcePath]] getCString:buffer maxLength:200 encoding:NSASCIIStringEncoding];
+    result = system->createSound(buffer, FMOD_SOFTWARE, NULL, &endingSound);
+    ERRCHECK(result);
 }
 
 -(float)getFundamentalFrequency
@@ -219,5 +233,36 @@ void ERRCHECK(FMOD_RESULT result)
     return [[NSString alloc] initWithFormat:@"%s",note[dominantnote]];
 }
 
+-(void)playKeySound
+{
+    FMOD_RESULT result = FMOD_OK;
+    
+    result = system->playSound(FMOD_CHANNEL_FREE, keySound, false, &sound_effect_channel);
+    ERRCHECK(result);
+    
+}
+
+-(void)playDoorSound
+{
+    FMOD_RESULT result = FMOD_OK;
+    
+    result = system->playSound(FMOD_CHANNEL_FREE, doorSound, false, &sound_effect_channel);
+    ERRCHECK(result);
+    
+}
+
+-(void)playEndingSound
+{
+    FMOD_RESULT result = FMOD_OK;
+    
+    result = system->playSound(FMOD_CHANNEL_FREE, endingSound, false, &sound_effect_channel);
+    ERRCHECK(result);
+    
+}
+
+-(void)stopSoundEffect
+{
+    sound_effect_channel->stop();
+}
 
 @end

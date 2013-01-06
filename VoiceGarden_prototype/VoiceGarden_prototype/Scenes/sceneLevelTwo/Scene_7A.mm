@@ -265,7 +265,8 @@
         id _doorOpenAction = [CCFadeTo actionWithDuration:transitionTime + 1 opacity:255];
         [door_open runAction:_doorOpenAction];
         
-        [[SimpleAudioEngine sharedEngine] playEffect:@"door sound.mp3"];
+        //[[SimpleAudioEngine sharedEngine] playEffect:@"door sound.mp3"];
+        [[AudioManager sharedInstance] playDoorSound];
     }
     else if(_nextScene == 2)
     {
