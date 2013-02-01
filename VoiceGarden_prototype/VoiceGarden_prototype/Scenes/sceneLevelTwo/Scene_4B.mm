@@ -69,7 +69,7 @@
         label_3.opacity = 0;
 		[self addChild:label_3 z:TEXT_Z];
         
-        label_4 = [CCLabelTTF labelWithString:@"But you need to back to find a key. \"" fontName:fontName fontSize:_fontSize];
+        label_4 = [CCLabelTTF labelWithString:@"But you need to go back to find a key. \"" fontName:fontName fontSize:_fontSize];
 		label_4.position =  ccp( size.width /2 - 250, size.height/2 - 100);
         label_4.color = ccc3(0, 0, 0);
         label_4.anchorPoint = ccp(0, 0.5);

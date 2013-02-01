@@ -171,7 +171,7 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
+        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
             self.sceneStatus = 2;
             [self updateScene];
         }];
@@ -181,7 +181,7 @@
         [action setColor:ccc3(100,100,100)];
         
         
-        CCMenuItem *menu = [CCMenu menuWithItems:I_1, I_2, action, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:action, I_1, I_2, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];

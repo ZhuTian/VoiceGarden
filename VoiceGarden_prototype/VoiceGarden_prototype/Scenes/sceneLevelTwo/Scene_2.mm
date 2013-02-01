@@ -134,13 +134,7 @@
         }
         
         back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-//            Class preScene = [[GlobalVariable sharedInstance].SceneStack lastObject];
-//            [[GlobalVariable sharedInstance].SceneStack removeLastObject];
-//            [[GlobalVariable sharedInstance].SceneStatusStack removeLastObject];
-//            if(preScene != nil)
-//                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[preScene scene] withColor:ccWHITE]];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
-            //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
             [[AudioManager sharedInstance] stopSoundEffect];
         }];
         [back setFontName:fontName];

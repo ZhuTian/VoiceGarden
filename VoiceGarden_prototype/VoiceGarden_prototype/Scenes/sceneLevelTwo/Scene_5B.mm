@@ -119,21 +119,21 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
+        CCMenuItemFont *action_button = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
             self.sceneStatus = 2;
             [self updateScene];
         }];
-        [action setFontName:fontName];
-        [action setFontSize:_fontSize];
-        [action setPosition:ccp( size.width - 100, 30)];
-        [action setColor:ccc3(100,100,100)];
+        [action_button setFontName:fontName];
+        [action_button setFontSize:_fontSize];
+        [action_button setPosition:ccp( size.width - 100, 30)];
+        [action_button setColor:ccc3(100,100,100)];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:back, action, keep, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:action_button, back, keep, nil];
         
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menu z:TEXT_Z];
         
         bloomLabel = [CCLabelTTF labelWithString:@"blooming." fontName:fontName fontSize:_fontSize];
 		bloomLabel.position =  ccp(500, 600);
@@ -171,6 +171,15 @@
         CCSprite* butterflySprite = [CCSprite spriteWithSpriteFrameName:@"butterfly.png"];
         butterflySprite.position = ccp(100, 500);
         [butterflySprite runAction:animAction];
+        
+        //Particle Effect
+        CCParticleSystemQuad *particleSystem = [CCParticleSystemQuad particleWithFile:@"SmallSun.plist"];
+        particleSystem.position = ccp(40, 20);
+        particleSystem.scale = 0.5f;
+        //particleSystem.life = 0.7f;
+        //particleSystem.speed = 100.0f;
+        
+        //[butterflySprite addChild:particleSystem z:-1];
         
         [self addChild:butterflySprite z:10 tag:10];
         
@@ -309,7 +318,7 @@
     
     if (volume>-40) {
     
-        if (fre>0&&fre<300) {
+        if (fre>0&&fre<200) {
             if (position.y> 500) {
                 position.y -= 3;
             }
@@ -317,7 +326,7 @@
                 position.y = 500;
             }
         }
-        else if(fre >= 300&&fre<700){
+        else if(fre >= 200&&fre<500){
             if (position.y>600) {
                 position.y-=3;
             }
@@ -325,7 +334,7 @@
                 position.y+=10;
             }
         }
-        else if(fre >= 700){
+        else if(fre >= 500){
             if (position.y<700) {
                 position.y+=3;
             }

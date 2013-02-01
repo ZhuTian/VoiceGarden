@@ -134,9 +134,32 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
-            self.sceneStatus = 2;
-            [self updateScene];
+        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
+            //self.sceneStatus = 2;
+            //[self updateScene];
+            
+            spawnIndex = 7;
+            spawnWord[spawnIndex] = [CCLabelTTF labelWithString:@"openning" fontName:fontName fontSize:_fontSize];
+            spawnWord[spawnIndex].position =  spawnPosition[spawnIndex];
+            spawnWord[spawnIndex].color = ccc3(0, 0, 0);
+            [self addChild: spawnWord[spawnIndex]];
+            spawnIndex++;
+            hasSpawn = true;
+            
+            [waiting runAction:[CCFadeOut actionWithDuration:0.01]];
+            spawnWord[7].opacity = 0;
+            [spawnWord[7] runAction:[CCFadeTo actionWithDuration:transitionTime opacity:255]];
+            
+            [withered setIsEnabled:true];
+            [withered setColor:ccc3(100,100,100)];
+            id move = [CCMoveBy actionWithDuration:0.35 position:ccp(0, 5)];
+            id action = [CCEaseIn actionWithAction:move rate:1];
+            id move2 = [CCMoveBy actionWithDuration:0.35 position:ccp(0, -5)];
+            id action2 = [CCEaseOut actionWithAction:move2 rate:1];
+            
+            [withered runAction: [CCSequence actions:action, action2, nil]];
+            [withered runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
+
         }];
         [action setFontName:fontName];
         [action setFontSize:_fontSize];
@@ -182,9 +205,9 @@
         spawnContent[1] = @"Op";
         spawnContent[2] = @"Ope";
         spawnContent[3] = @"Open";
-        spawnContent[4] = @"Openi";
-        spawnContent[5] = @"Openin";
-        spawnContent[6] = @"Opening";
+        spawnContent[4] = @"Openni";
+        spawnContent[5] = @"Opennin";
+        spawnContent[6] = @"Openning";
         
         if ([GlobalVariable sharedInstance].haveKey == true) {
             CCSprite* keySprite = [CCSprite spriteWithFile:@"key_collect.png"];
@@ -197,7 +220,6 @@
 	}
 	return self;
 }
-
 
 - (void)levelTimerCallback:(NSTimer *)timer {
     float currentVolume = [[AudioManager sharedInstance] getAverageVolume];
@@ -263,8 +285,7 @@
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
     
-    
-    //Add common background
+ //Add common background
     background = [CCSprite spriteWithFile:@"tutorial_bg.png"];
     background.position = ccp(size.width/2, size.height/2);
     [self addChild: background z:BACKGROUND_Z];
@@ -324,7 +345,6 @@
         [tipSilence runAction:tipAction];
     }
     
-    
     id _treeAction = [CCSpawn actions: [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:transitionTime position:ccp(size.width/2 + 250, size.height/2 - 100)]],
                       [CCFadeTo actionWithDuration:transitionTime opacity:255],
                       [CCScaleTo actionWithDuration:transitionTime scale:0.9f],
@@ -354,7 +374,6 @@
     }
     else if(self.sceneStatus == 2 || self.sceneStatus == 3)
     {
-        //NSLog(@"Bounce");
         
     }
 }

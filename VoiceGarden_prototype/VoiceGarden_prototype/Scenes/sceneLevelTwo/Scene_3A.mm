@@ -146,7 +146,7 @@ extern bool haveKey;
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
+        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
             if(self.sceneStatus == 1)
             {
                 self.sceneStatus = 2;
@@ -159,7 +159,7 @@ extern bool haveKey;
         [action setPosition:ccp( size.width - 100, 30)];
         [action setColor:ccc3(100,100,100)];
         
-        CCMenuItem *menu = [CCMenu menuWithItems:road, action, wind_button, back, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:road, wind_button, action, nil];
 		[menu setPosition:ccp( 0, 0)];
         [self addChild:menu z:TEXT_Z];
         

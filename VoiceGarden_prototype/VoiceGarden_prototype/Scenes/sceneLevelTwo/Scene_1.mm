@@ -65,15 +65,7 @@
         [button_garden runAction: [CCSequence actions:gardenButtonAction,action, action2, nil]];
         [button_garden runAction:[CCRepeatForever actionWithAction:[CCSequence actions:action, action2, nil]]];
         
-        CCMenuItemFont *back = [CCMenuItemFont itemWithString:@"Back" block:^(id sender){
-            //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[StartScene scene] withColor:ccWHITE]];
-        }];
-        [back setFontName:fontName];
-        [back setFontSize:_fontSize];
-        [back setPosition:ccp(100, 30)];
-        [back setColor:ccc3(100,100,100)];
-        
-        CCMenuItem *menu = [CCMenu menuWithItems:button_garden, back, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:button_garden, nil];
 		[menu setPosition:ccp( 0, 0)];
 		[self addChild:menu  z:TEXT_Z];
         

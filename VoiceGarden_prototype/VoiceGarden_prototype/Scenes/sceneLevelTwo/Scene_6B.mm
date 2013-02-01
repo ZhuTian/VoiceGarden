@@ -127,7 +127,7 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
+        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
             self.sceneStatus = 2;
             [self updateScene];
         }];
@@ -211,7 +211,7 @@
     tip_down.position = ccp(size.width/2 - 100, size.height/2 - 250);
     [self addChild:tip_down z:3];
     
-    tip_up = [CCSprite spriteWithFile:@"tip_footprint.png"];
+    tip_up = [CCSprite spriteWithFile:@"tip_footstep.png"];
     tip_up.position = ccp(size.width/2 - 100, size.height/2 - 250);
     tip_up.visible = false;
     [self addChild:tip_up z:3];

@@ -146,7 +146,7 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
+        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
             sceneStatus = 2;
             [self updateScene];
         }];

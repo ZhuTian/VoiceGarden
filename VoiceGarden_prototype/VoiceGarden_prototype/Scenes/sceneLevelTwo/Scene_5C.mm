@@ -127,9 +127,34 @@
         [back setPosition:ccp( 70, 30)];
         [back setColor:ccc3(100,100,100)];
         
-        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Action" block:^(id sender){
-            self.sceneStatus = 2;
-            [self updateScene];
+        CCMenuItemFont *action = [CCMenuItemFont itemWithString:@"Skip" block:^(id sender){
+            //self.sceneStatus = 2;
+            //[self updateScene];
+            if(self.sceneStatus == 2)
+            {
+                CCSprite *key_bg = [CCSprite spriteWithFile:@"key_bg.png"];
+                key_bg.opacity = 0;
+                key_bg.position = ccp(950, 200);
+                id keyBgAction = [CCFadeTo actionWithDuration:3.0f opacity:255];
+                [key_bg runAction:keyBgAction];
+                [self addChild:key_bg z:TEXT_Z];
+                
+                CCSprite* keySprite =[CCSprite spriteWithFile:@"key.png"];
+                keySprite.position = ccp(320, 400);
+                keySprite.scale = 1.0f;
+                
+                [self addChild:keySprite z:TEXT_Z];
+                
+                id moveKey = [CCMoveTo actionWithDuration:3.0f position:ccp(950, 200)];
+                [keySprite runAction:moveKey];
+                
+                key.visible = false;
+                [GlobalVariable sharedInstance].keyInThePocket = true;
+                [GlobalVariable sharedInstance].haveKey = true;
+                
+                //[[SimpleAudioEngine sharedEngine] playEffect:@"key.mp3"];
+                [[AudioManager sharedInstance] playKeySound];
+            }
         }];
         [action setFontName:fontName];
         [action setFontSize:_fontSize];
@@ -176,7 +201,7 @@
             [key setPosition:ccp(320, 400)];
         }
         
-        CCMenuItem *menu = [CCMenu menuWithItems:spring, back, key, key_button, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:spring, back, key, key_button, action, nil];
 		[menu setPosition:ccp( 0, 0)];
 		
 		// Add the menu to the layer

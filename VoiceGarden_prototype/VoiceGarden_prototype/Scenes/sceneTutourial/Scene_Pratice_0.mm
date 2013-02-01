@@ -83,7 +83,7 @@
         talkBubble.position = ccp(size.width/2, size.height/2 + 50);
         [self addChild:talkBubble];
         
-        CCLabelTTF* label_5 = [CCLabelTTF labelWithString:@"Expirement with your voice. Any sound will do." fontName:fontName fontSize:17];
+        CCLabelTTF* label_5 = [CCLabelTTF labelWithString:@"Experiment with your voice. Any sound will do." fontName:fontName fontSize:17];
 		label_5.position =  ccp(size.width /2 , size.height/2 - 175);
         label_5.color = ccc3(0, 0, 0);
 		[self addChild: label_5];

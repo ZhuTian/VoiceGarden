@@ -167,7 +167,7 @@
         [back setColor:ccc3(100,100,100)];
         
         
-        CCMenuItem *menu = [CCMenu menuWithItems:back, my, company, nil];
+        CCMenuItem *menu = [CCMenu menuWithItems:my, company, back, nil];
         //		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		//[menu alignItemsHorizontallyWithPadding:20];
@@ -255,15 +255,6 @@
     pond.scale = 0.5f;
     [self addChild: pond z:SCENE_Z];
     
-    
-    tip_down = [CCSprite spriteWithFile:@"tip_down_L.png"];
-    tip_down.position = ccp(size.width/2 - 100, size.height/2 - 250);
-    [self addChild:tip_down z:3];
-    
-    tip_up = [CCSprite spriteWithFile:@"tip_door_noKey.png"];
-    tip_up.position = ccp(size.width/2 - 100, size.height/2 - 250);
-    tip_up.visible = false;
-    [self addChild:tip_up z:3];
 }
 
 -(void)SceneTransition
